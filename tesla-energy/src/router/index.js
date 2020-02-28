@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../components/Login.vue'
+import err404 from '../components/err404.vue'
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,15 @@ export default new VueRouter({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '*',
+      redirect: '/'
+    },
+    {
+      path: '/404',
+      name: 'err404',
+      component: err404
     },
     {
       path: '/login',
