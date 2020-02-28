@@ -1,10 +1,10 @@
 <template>
-  <v-container text-center>
+    <v-container text-center>
         <v-row >
-          <v-col cols="12">
-              <h1>Welcome to Tesla Energy </h1>
-            </v-col>
             <v-col cols="12" >
+                <h1>
+                    Oh no, Eddison did it again, that page doesn't be here..
+                </h1>
                 <img :src="require('../assets/tesla_coil.png')">
             </v-col>
         </v-row>
@@ -12,12 +12,11 @@
 </template>
 
 <script>
-// @ is an alias to /src
 export default {
-  name: 'Home',
-  components: {},
-  data: () => ({
-    drawer: false
-  })
+  name: 'err404'
 }
 </script>
+
+<style>
+
+</style>

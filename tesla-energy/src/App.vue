@@ -34,6 +34,15 @@
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <div class="d-flex align-center">
+          <v-img
+          :src="require('./assets/tesla_coil.svg')"
+          contain
+          transition="scale-transition"
+          max-width="45"
+          min-width="45"
+        />
+    </div>
       <v-toolbar-title>Tesla Energy</v-toolbar-title>
     </v-app-bar>
 
