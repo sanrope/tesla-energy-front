@@ -11,7 +11,7 @@
                 </v-toolbar>
                 <v-card-text>
                   <v-form @submit.prevent="login()">
-                    <v-text-field v-model="user.cedula" prepend-icon="person" name="login" label="Login" type="text" required></v-text-field>
+                    <v-text-field v-model="user.username" prepend-icon="person" name="login" label="Login" type="text" required></v-text-field>
                     <v-text-field v-model="user.password" prepend-icon="lock" name="password" label="Password" id="password" type="password" required></v-text-field>
                     <v-card-actions>
                       <v-spacer></v-spacer>
@@ -32,7 +32,7 @@ export default {
   data () {
     return {
       user: {
-        cedula: null,
+        username: null,
         password: null
       }
     }

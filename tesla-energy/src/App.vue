@@ -9,7 +9,7 @@
       temporary
     >
       <v-list dense>
-        <v-list-item link>
+        <v-list-item to="Home" link>
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
@@ -19,10 +19,10 @@
         </v-list-item>
         <v-list-item link>
           <v-list-item-action>
-            <v-icon>mdi-contact-mail</v-icon>
+            <v-icon>portrait</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Contact</v-list-item-title>
+            <v-list-item-title>Login</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -34,6 +34,15 @@
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <div class="d-flex align-center">
+          <v-img
+          :src="require('./assets/tesla_coil.svg')"
+          contain
+          transition="scale-transition"
+          max-width="40"
+          min-width="40"
+        />
+    </div>
       <v-toolbar-title>Tesla Energy</v-toolbar-title>
     </v-app-bar>
 
