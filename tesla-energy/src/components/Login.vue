@@ -12,7 +12,7 @@
                 <v-card-text>
                   <v-form @submit.prevent="login()">
                     <v-text-field v-model="user.username" prepend-icon="person" name="login" label="Login" type="text" required></v-text-field>
-                    <v-text-field v-model="user.password" prepend-icon="lock" name="password" label="Password" id="password" type="password" required></v-text-field>
+                    <v-text-field :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" v-model="user.password" prepend-icon="lock" name="password" label="Password" id="password" :type="show ? 'text' : 'password'" required @click:append="show = !show"></v-text-field>
                     <v-card-actions>
                       <v-spacer></v-spacer>
                       <v-btn type="submit" color="pink">Login</v-btn>
@@ -34,7 +34,8 @@ export default {
       user: {
         username: null,
         password: null
-      }
+      },
+      show: false
     }
   },
   methods: {

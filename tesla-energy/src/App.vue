@@ -9,7 +9,7 @@
       temporary
     >
       <v-list dense>
-        <v-list-item to="Home" link>
+        <v-list-item to="/" link>
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
@@ -17,12 +17,20 @@
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item to="/login" link>
           <v-list-item-action>
             <v-icon>portrait</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Login</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item to="/register" link>
+          <v-list-item-action>
+            <v-icon>how_to_reg</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>User Register</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>

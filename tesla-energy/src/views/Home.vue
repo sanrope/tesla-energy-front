@@ -1,5 +1,5 @@
 <template>
-  <v-container text-center>
+  <v-container text-center >
         <v-row >
           <v-col cols="12">
               <h1>Welcome to Tesla Energy </h1>

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../components/Login.vue'
 import err404 from '../components/err404.vue'
+import Register from '../components/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ export default new VueRouter({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
     {
       path: '/about',
