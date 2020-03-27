@@ -28,6 +28,4 @@ npm run serve
 
 Notas:
 
-    1. Se deben tener instaladas las siguientes dependencias: python3, python3-venv, PostgreSQL 11.7
-    2. Tener la BD instanciada en PostgreSQL con la configuración que aparecen en el apartado
-       'DATABASES' del archivo '\tesla-energy-api\teslaenergy\teslaenergy\settings.py'
+    1. 
