@@ -25,9 +25,9 @@ export default new Vuex.Store({
   actions: {
     login (context, user) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/rest-auth/login/', user)
+        axios.post(URL_API + 'rest-auth/login/', user)
           .then(res => {
-            const token = res.token
+            const token = res.data.token
             if (token) {
               localStorage.setItem('access_token', token)
               this.commit('setToken', token)
