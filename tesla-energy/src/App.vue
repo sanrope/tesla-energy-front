@@ -87,7 +87,18 @@ export default {
   },
   data: () => ({
     drawer: null
-  })
+  }),
+  methods: {
+    logout () {
+      this.$store.dispatch('logout', this.$store.state.token)
+        .then(response => {
+          this.$router.push({ path: '/login' })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
 }
 </script>
 

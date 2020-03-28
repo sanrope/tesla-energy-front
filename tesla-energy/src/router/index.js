@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../components/Login.vue'
 import err404 from '../components/err404.vue'
 import Register from '../components/Register.vue'
+import Profile from '../components/Profile.vue'
 
 Vue.use(VueRouter)
 
@@ -15,10 +16,10 @@ export default new VueRouter({
       name: 'Home',
       component: Home
     },
-    {
-      path: '*',
-      redirect: '/404'
-    },
+    // {
+    // path: '*',
+    // redirect: '/404'
+    // },
     {
       path: '/404',
       name: 'err404',
@@ -27,12 +28,26 @@ export default new VueRouter({
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      meta: {
+        requiresVisitor: true
+      }
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/register',
       name: 'Register',
-      component: Register
+      component: Register,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/about',

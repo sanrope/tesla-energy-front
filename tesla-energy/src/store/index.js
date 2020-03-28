@@ -15,24 +15,29 @@ export default new Vuex.Store({
     profile: {}
   },
   getters: {
-
+    isAuthenticated (state) {
+      return state.token !== null
+    }
   },
   mutations: {
     setToken (state, token) {
       state.token = token
+    },
+    setProfile (state, profile) {
+      state.profile = profile
     }
   },
   actions: {
     login (context, user) {
       return new Promise((resolve, reject) => {
-        axios.post(URL_API + 'rest-auth/login/', user)
+        axios.post(URL_API + 'api/v1/auth-jwt/', user)
           .then(res => {
-            const token = res.data.key
+            const token = res.data.token
             console.log(res)
             if (token) {
               localStorage.setItem('access_token', token)
               this.commit('setToken', token)
-              // alert(token)
+              axios.defaults.headers.Authorization = 'JWT ' + token
               resolve(res)
             } else {
               console.log(res)
@@ -44,12 +49,11 @@ export default new Vuex.Store({
           })
       })
     },
-    logout (tokentologout) {
+    getProfile (context, username) {
       return new Promise((resolve, reject) => {
-        axios.post(URL_API + 'rest-auth/logout/', tokentologout)
+        axios.get(URL_API + 'api/v1/usuarios/byUsername/' + username)
           .then(res => {
-            localStorage.setItem('access_token', null)
-            this.commit('setToken', null)
+            console.log(res.data)
             resolve(res)
           })
           .catch(err => {
