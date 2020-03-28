@@ -27,15 +27,30 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios.post(URL_API + 'rest-auth/login/', user)
           .then(res => {
-            const token = res.data.token
+            const token = res.data.key
+            console.log(res)
             if (token) {
               localStorage.setItem('access_token', token)
               this.commit('setToken', token)
-              alert(token)
+              // alert(token)
               resolve(res)
             } else {
               console.log(res)
             }
+          })
+          .catch(err => {
+            console.log(err)
+            reject(err)
+          })
+      })
+    },
+    logout (tokentologout) {
+      return new Promise((resolve, reject) => {
+        axios.post(URL_API + 'rest-auth/logout/', tokentologout)
+          .then(res => {
+            localStorage.setItem('access_token', null)
+            this.commit('setToken', null)
+            resolve(res)
           })
           .catch(err => {
             console.log(err)
