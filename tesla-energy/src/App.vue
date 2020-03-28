@@ -9,7 +9,7 @@
       temporary
     >
       <v-list dense>
-        <v-list-item to="/" link>
+        <v-list-item to="/" link ripple>
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
@@ -17,7 +17,7 @@
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item to="/login" link>
+        <v-list-item v-if="token == null" to="/login" link ripple>
           <v-list-item-action>
             <v-icon>portrait</v-icon>
           </v-list-item-action>
@@ -25,12 +25,20 @@
             <v-list-item-title>Login</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item to="/register" link>
+        <v-list-item v-if="token != null" to="/register" link ripple>
           <v-list-item-action>
             <v-icon>how_to_reg</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>User Register</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item v-if="token != null" @click="logout" link ripple>
+          <v-list-item-action>
+            <v-icon>eject</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Log out</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -65,6 +73,9 @@
         >
           <v-col class="text-center">
             <router-view></router-view>
+            <v-snackbar :value="message ? true : false" color="blue" :timeout="time_snack">
+           {{message}}
+          </v-snackbar>
           </v-col>
         </v-row>
       </v-container>
@@ -86,8 +97,27 @@ export default {
   components: {
   },
   data: () => ({
-    drawer: null
-  })
+    drawer: null,
+    message: null,
+    time_snack: 5500
+  }),
+  methods: {
+    logout () {
+      this.$store.dispatch('logout', this.$store.state.token)
+        .then(response => {
+          this.message = response.data.detail
+          this.$router.push({ path: '/login' })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  },
+  computed: {
+    token () {
+      return this.$store.state.token
+    }
+  }
 }
 </script>
 

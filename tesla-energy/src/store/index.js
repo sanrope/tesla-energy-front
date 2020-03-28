@@ -28,7 +28,6 @@ export default new Vuex.Store({
         axios.post(URL_API + 'rest-auth/login/', user)
           .then(res => {
             const token = res.data.key
-            console.log(res)
             if (token) {
               localStorage.setItem('access_token', token)
               this.commit('setToken', token)
