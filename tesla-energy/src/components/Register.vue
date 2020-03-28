@@ -8,11 +8,12 @@
           <v-card
             :elevation="hover ? 24 : 0"
             class="mx-auto pa-6"
+            :color="box_value === 'Operador' ? 'indigo' : box_value === 'Cliente' ? '#42b983' : 'white'"
             >
            <v-form>
               <v-row>
                 <v-col>
-                  <v-combobox :v-mode="box_value" :items="items_box"></v-combobox>
+                  <v-select v-model="box_value" :items="items_box"></v-select>
                   <v-divider></v-divider>
                   <v-text-field
                   v-model="user.name"
