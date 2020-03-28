@@ -16,19 +16,16 @@
                     <v-card-actions>
                       <v-spacer></v-spacer>
                       <v-btn :disabled="token ? true : false" type="submit" color="pink">Login</v-btn>
-                      <v-btn v-if="token != null" color="red" v-on:click="logout"> unlog</v-btn>
+                     <!--  <v-btn v-if="token != null" color="red" v-on:click="logout"> unlog</v-btn> -->
                     </v-card-actions>
                   </v-form>
                 </v-card-text>
               </v-card>
             </v-flex>
           </v-layout>
-          <v-alert v-if="token != null" type="success" transition="scaled-transition">
+          <v-snackbar :value="token ? true : false" color="green" :timeout="time_snack">
             You login success!
-          </v-alert>
-          <v-alert v-if="token == null && message != null" type="success" transition="scaled-transition">
-           {{message}}
-          </v-alert>
+          </v-snackbar>
         </v-container>
       <!-- </v-content> -->
     </v-app>
@@ -43,7 +40,8 @@ export default {
         password: null
       },
       show: false,
-      message: null
+      message: null,
+      time_snack: 5500
     }
   },
   methods: {
