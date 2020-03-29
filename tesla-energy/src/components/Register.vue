@@ -8,12 +8,20 @@
           <v-card
             :elevation="hover ? 24 : 0"
             class="mx-auto pa-6"
-            :color="box_value === 'Operador' ? 'indigo' : box_value === 'Cliente' ? '#42b983' : 'white'"
+            :color="box_value === 'Operador' ? 'indigo' : box_value === 'Cliente' ? '#757de8' : 'white'"
             >
-           <v-form>
+            <v-card-text >
+              <p class="display-1 text--primary">
+                Register
+              </p>
+            </v-card-text>
+           <v-form v-model="valid">
               <v-row>
                 <v-col>
-                  <v-select v-model="box_value" :items="items_box"></v-select>
+                  <v-select
+                   v-model="box_value"
+                   :rules="[rules.required]"
+                   :items="items_box"></v-select>
                   <v-divider></v-divider>
                   <v-text-field
                   v-model="user.name"
@@ -50,7 +58,7 @@
                   type="password"
                   solo
                   required
-                  :rules="[rules.required]"></v-text-field>
+                  :rules="[rules.required, rules.min_pass]"></v-text-field>
                   <v-text-field
                   v-model="user.password2"
                   prepend-inner-icon="https"
@@ -60,7 +68,8 @@
                   solo
                   hint="Repeat your password"
                   required
-                  :rules="[rules.required, rules.password_val]"></v-text-field>
+                  :rules="[rules.required, rules.password_val, rules.min_pass]"></v-text-field>
+                  <v-btn :disabled="!valid">send</v-btn>
                 </v-col>
               </v-row>
             </v-form>
@@ -96,8 +105,10 @@ export default {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           return pattern.test(value) || 'Invalid e-mail.'
         },
-        password_val: value => this.user.password === value || 'Password not coincedence'
-      }
+        password_val: value => this.user.password === value || 'Password not coincedence',
+        min_pass: value => value.length >= 6 || 'Min 6 characters'
+      },
+      valid: true
     }
   },
   methods: {

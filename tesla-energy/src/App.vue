@@ -9,6 +9,7 @@
       temporary
     >
       <v-list dense>
+        <v-list-item-group mandatory color="indigo">
         <v-list-item to="/" link ripple>
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
@@ -38,15 +39,16 @@
             <v-icon>eject</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Log out</v-list-item-title>
+            <v-list-item-subtitle>Log out</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
+      </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
 
     <v-app-bar
       app
-      color="indigo"
+      :color="color_app"
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
@@ -72,7 +74,9 @@
           justify="center"
         >
           <v-col class="text-center">
-            <router-view></router-view>
+            <v-fab-transition>
+              <router-view></router-view>
+            </v-fab-transition>
             <v-snackbar :value="message ? true : false" color="blue" :timeout="time_snack">
            {{message}}
           </v-snackbar>
@@ -81,7 +85,7 @@
       </v-container>
     </v-content>
     <v-footer
-      color="indigo"
+      :color="color_app"
       app
     >
       <span class="white--text">&copy; Tesla Energy 2020</span>
@@ -99,7 +103,8 @@ export default {
   data: () => ({
     drawer: null,
     message: null,
-    time_snack: 5500
+    time_snack: 5500,
+    color_app: '#002984'
   }),
   methods: {
     logout () {
