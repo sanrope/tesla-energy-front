@@ -1,5 +1,4 @@
 <template>
-    <v-app id="inspire">
       <!-- <v-content> -->
         <v-container class="text-xs-center" style="min-height: 100vh" fluid>
           <v-layout align-center justify-center >
@@ -10,12 +9,29 @@
                   <v-spacer></v-spacer>
                 </v-toolbar>
                 <v-card-text>
-                  <v-form @submit.prevent="login()">
-                    <v-text-field v-model="user.username" prepend-icon="person" name="login" label="Login" :disabled="token ? true : false" type="text" required></v-text-field>
-                    <v-text-field :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" v-model="user.password" prepend-icon="lock" :disabled="token ? true : false" name="password" label="Password" id="password" :type="show ? 'text' : 'password'" required @click:append="show = !show"></v-text-field>
+                  <v-form
+                  v-model="valid"
+                  @submit.prevent="login()">
+                    <v-text-field
+                     v-model="user.username"
+                     prepend-icon="person"
+                     name="login" label="Login"
+                     :disabled="token ? true : false" type="text"
+                     :rules="[rules.required]"
+                     required></v-text-field>
+                    <v-text-field
+                     :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                     v-model="user.password" prepend-icon="lock"
+                     :disabled="token ? true : false" name="password"
+                     label="Password"
+                     id="password"
+                     :type="show ? 'text' : 'password'"
+                     required
+                     :rules="[rules.required]"
+                     @click:append="show = !show"></v-text-field>
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                      <v-btn :disabled="token ? true : false" type="submit" color="pink">Login</v-btn>
+                      <v-btn :disabled="!valid" type="submit" color="pink">Login</v-btn>
                      <!--  <v-btn v-if="token != null" color="red" v-on:click="logout"> unlog</v-btn> -->
                     </v-card-actions>
                   </v-form>
@@ -28,7 +44,6 @@
           </v-snackbar>
         </v-container>
       <!-- </v-content> -->
-    </v-app>
 </template>
 
 <script>
@@ -40,8 +55,12 @@ export default {
         password: null
       },
       show: false,
+      valid: true,
       message: null,
-      time_snack: 5500
+      time_snack: 5500,
+      rules: {
+        required: val => !!val || 'This is required'
+      }
     }
   },
   methods: {
