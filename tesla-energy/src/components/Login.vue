@@ -67,7 +67,7 @@ export default {
     login () {
       this.$store.dispatch('login', this.user)
         .then(response => {
-          this.$store.dispatch('getProfile', this.user.username)
+          this.$store.dispatch('getProfile')
           this.$router.push({ path: '/profile' })
         })
         .catch(err => {

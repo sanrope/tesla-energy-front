@@ -24,10 +24,19 @@
                    :items="items_box"></v-select>
                   <v-divider></v-divider>
                   <v-text-field
-                  v-model="user.name"
+                  v-model="user.first_name"
                   prepend-inner-icon="assignment_ind"
-                  name="name"
+                  name="first_name"
                   label="Name"
+                  type="text"
+                  solo
+                  required
+                  :rules="[rules.required]"></v-text-field>
+                  <v-text-field
+                  v-model="user.last_name"
+                  prepend-inner-icon="assignment_ind"
+                  name="last_name"
+                  label="Last Name"
                   type="text"
                   solo
                   required
@@ -91,12 +100,14 @@ export default {
     return {
       user: {
         username: null,
-        name: null,
+        first_name: null,
+        last_name: null,
         email: null,
         password: null,
-        password_validate: null
+        password_validate: null,
+        rol: null
       },
-      items_box: ['Operador', 'Cliente'],
+      items_box: ['Gerente', 'Operador', 'Cliente'],
       box_value: null,
       rules: {
         required: value => !!value || 'Required.',
@@ -118,6 +129,16 @@ export default {
       } else {
         return false
       }
+    },
+    register () {
+      if (this.box_value === 'Operador') {
+        this.rol = 'OP'
+      } else if (this.box_value === 'Gerente') {
+        this.rol = 'GR'
+      } else if (this.box_value === 'Cliente') {
+        this.rol = 'CL'
+      }
+      console.log(this.user.rol)
     }
   }
 }

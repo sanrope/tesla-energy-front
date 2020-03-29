@@ -4,10 +4,14 @@ import axios from 'axios'
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN'
+axios.defaults.headers.common.Acept = 'aplication/json'
 const headers = {
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Methods': 'POST, GET, PUT, OPTIONS, DELETE',
+    'Access-Control-Allow-Credentials': '*',
+    'Access-Control-Allow-Headers': 'origin, content-type',
     Authorization: null
   }
 }
@@ -68,6 +72,20 @@ export default new Vuex.Store({
             console.log(err)
             reject(err)
           })
+      })
+    },
+    registerUser (context, user) {
+      return new Promise((resolve, reject) => {
+        axios.post(URL_API + 'api/v1/usuarios/create/', user, headers)
+          .then(res => {
+            console.log(res.data)
+            resolve(res)
+          })
+          .catch(err => {
+            console.log(err)
+            reject(err)
+          }
+          )
       })
     }
   },
