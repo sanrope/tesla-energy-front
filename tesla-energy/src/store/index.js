@@ -4,6 +4,13 @@ import axios from 'axios'
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN'
+const headers = {
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
+    Authorization: null
+  }
+}
 
 Vue.use(Vuex)
 
@@ -35,9 +42,9 @@ export default new Vuex.Store({
             const token = res.data.token
             console.log(res)
             if (token) {
+              headers.headers.Authorization = 'JWT ' + token
               localStorage.setItem('access_token', token)
               this.commit('setToken', token)
-              axios.defaults.headers.Authorization = 'JWT ' + token
               resolve(res)
             } else {
               console.log(res)
@@ -51,9 +58,10 @@ export default new Vuex.Store({
     },
     getProfile (context, username) {
       return new Promise((resolve, reject) => {
-        axios.get(URL_API + 'api/v1/usuarios/byUsername/' + username)
+        axios.get(URL_API + 'api/v1/usuarios/', headers)
           .then(res => {
             console.log(res.data)
+            this.commit('setProfile', res.data)
             resolve(res)
           })
           .catch(err => {
