@@ -8,7 +8,7 @@
           <v-card
             :elevation="hover ? 24 : 0"
             class="mx-auto pa-6"
-            :color="user.rol === 'OP' ? 'indigo' : user.rol === 'CL' ? '#757de8' : 'white'"
+            :color="user.rol === 'OP' ? 'indigo' : user.rol === 'GE' ? '#757de8' : 'white'"
             >
             <v-card-text >
               <p class="display-1 text--primary">
@@ -108,18 +108,16 @@ export default {
         password_validate: null,
         rol: null
       },
-      items_box: [{ text: 'Gerente', value: 'GR' },
-        { text: 'Operador', value: 'OP' },
-        { text: 'Cliente', value: 'CL' }],
+      items_box: [{ text: 'Gerente', value: 'GE' },
+        { text: 'Operador', value: 'OP' }],
       rules: {
         required: value => !!value || 'Required.',
-        counter: value => value.length <= 20 || 'Max 20 characters',
         email: value => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           return pattern.test(value) || 'Invalid e-mail.'
         },
         password_val: value => this.user.password === value || 'Password not coincedence',
-        min_pass: value => value.length >= 6 || 'Min 6 characters'
+        min_pass: value => value.length >= 8 || 'Min 8 characters'
       },
       valid: true
     }
