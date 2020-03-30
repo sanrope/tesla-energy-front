@@ -8,7 +8,7 @@
           <v-card
             :elevation="hover ? 24 : 0"
             class="mx-auto pa-6"
-            :color="box_value === 'Operador' ? 'indigo' : box_value === 'Cliente' ? '#757de8' : 'white'"
+            :color="user.rol === 'OP' ? 'indigo' : user.rol === 'CL' ? '#757de8' : 'white'"
             >
             <v-card-text >
               <p class="display-1 text--primary">
@@ -19,9 +19,10 @@
               <v-row>
                 <v-col>
                   <v-select
-                   v-model="box_value"
+                   v-model="user.rol"
                    :rules="[rules.required]"
                    :items="items_box"></v-select>
+                   <div class="display-4">{{user.rol}}</div>
                   <v-divider></v-divider>
                   <v-text-field
                   v-model="user.first_name"
@@ -78,7 +79,7 @@
                   hint="Repeat your password"
                   required
                   :rules="[rules.required, rules.password_val, rules.min_pass]"></v-text-field>
-                  <v-btn :disabled="!valid">send</v-btn>
+                  <v-btn @click="register" :disabled="!valid">send</v-btn>
                 </v-col>
               </v-row>
             </v-form>
@@ -107,8 +108,9 @@ export default {
         password_validate: null,
         rol: null
       },
-      items_box: ['Gerente', 'Operador', 'Cliente'],
-      box_value: null,
+      items_box: [{ text: 'Gerente', value: 'GR' },
+        { text: 'Operador', value: 'OP' },
+        { text: 'Cliente', value: 'CL' }],
       rules: {
         required: value => !!value || 'Required.',
         counter: value => value.length <= 20 || 'Max 20 characters',
@@ -131,13 +133,14 @@ export default {
       }
     },
     register () {
-      if (this.box_value === 'Operador') {
+      // Esto ya no es necesario pana
+      /* if (this.box_value === 'Operador') {
         this.rol = 'OP'
       } else if (this.box_value === 'Gerente') {
         this.rol = 'GR'
       } else if (this.box_value === 'Cliente') {
         this.rol = 'CL'
-      }
+      } */
       console.log(this.user.rol)
     }
   }
