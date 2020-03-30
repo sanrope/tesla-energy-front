@@ -5,6 +5,7 @@ import Login from '../components/Login.vue'
 import err404 from '../components/err404.vue'
 import Register from '../components/Register.vue'
 import Profile from '../components/Profile.vue'
+import Users from '../components/Users.vue'
 
 Vue.use(VueRouter)
 
@@ -37,6 +38,14 @@ export default new VueRouter({
       path: '/profile',
       name: 'Profile',
       component: Profile,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/users',
+      name: 'Users',
+      component: Users,
       meta: {
         requiresAuth: true
       }

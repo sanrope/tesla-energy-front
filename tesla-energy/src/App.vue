@@ -34,6 +34,14 @@
             <v-list-item-title>User Register</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item v-if="token != null" to="/users" link ripple>
+          <v-list-item-action>
+            <v-icon>supervisor_account</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-subtitle>Users</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item v-if="token != null" @click="logout" link ripple>
           <v-list-item-action>
             <v-icon>eject</v-icon>

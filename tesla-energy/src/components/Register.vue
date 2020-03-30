@@ -24,8 +24,6 @@
                    :items="items_box"></v-select>
                    <div class="display-4">{{user.rol}}</div>
                   <v-divider></v-divider>
-                  <h1>{{box_value}}</h1>
-                  <h1>{{rol}}</h1>
                   <v-text-field
                   v-model="user.first_name"
                   prepend-inner-icon="assignment_ind"
@@ -120,7 +118,7 @@ export default {
           return pattern.test(value) || 'Invalid e-mail.'
         },
         password_val: value => this.user.password === value || 'Password not coincedence',
-        min_pass: value => value.length >= 8 || 'Min 8 characters'
+        min_pass: value => value ? null : value.length >= 8 || 'Min 8 characters'
       },
       valid: true
     }
