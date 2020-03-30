@@ -23,6 +23,8 @@
                    :rules="[rules.required]"
                    :items="items_box"></v-select>
                   <v-divider></v-divider>
+                  <h1>{{box_value}}</h1>
+                  <h1>{{rol}}</h1>
                   <v-text-field
                   v-model="user.first_name"
                   prepend-inner-icon="assignment_ind"
@@ -78,7 +80,7 @@
                   hint="Repeat your password"
                   required
                   :rules="[rules.required, rules.password_val, rules.min_pass]"></v-text-field>
-                  <v-btn :disabled="!valid">send</v-btn>
+                  <v-btn @click="register" :disabled="!valid">send</v-btn>
                 </v-col>
               </v-row>
             </v-form>
@@ -107,7 +109,7 @@ export default {
         password_validate: null,
         rol: null
       },
-      items_box: ['Gerente', 'Operador', 'Cliente'],
+      items_box: ['GERENTE', 'OPERADOR', 'CLIENTE'],
       box_value: null,
       rules: {
         required: value => !!value || 'Required.',
@@ -131,14 +133,20 @@ export default {
       }
     },
     register () {
-      if (this.box_value === 'Operador') {
-        this.rol = 'OP'
-      } else if (this.box_value === 'Gerente') {
-        this.rol = 'GR'
-      } else if (this.box_value === 'Cliente') {
-        this.rol = 'CL'
-      }
-      console.log(this.user.rol)
+      this.user.rol = this.box_value[0] + this.box_value[1]
+      this.$store.dispatch('registerUser', this.user)
+        .then(res => {
+          alert('Usuario registrado con éxito')
+          this.user.username = null
+          this.user.first_name = null
+          this.user.last_name = null
+          this.user.email = null
+          this.user.password = null
+          this.user.password_validate = null
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
