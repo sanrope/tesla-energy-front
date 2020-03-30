@@ -8,7 +8,7 @@
           <v-card
             :elevation="hover ? 24 : 0"
             class="mx-auto pa-6"
-            :color="box_value === 'Operador' ? 'indigo' : box_value === 'Cliente' ? '#757de8' : 'white'"
+            :color="user.rol === 'OP' ? 'indigo' : user.rol === 'GE' ? '#757de8' : 'white'"
             >
             <v-card-text >
               <p class="display-1 text--primary">
@@ -19,9 +19,10 @@
               <v-row>
                 <v-col>
                   <v-select
-                   v-model="box_value"
+                   v-model="user.rol"
                    :rules="[rules.required]"
                    :items="items_box"></v-select>
+                   <div class="display-4">{{user.rol}}</div>
                   <v-divider></v-divider>
                   <h1>{{box_value}}</h1>
                   <h1>{{rol}}</h1>
@@ -109,17 +110,17 @@ export default {
         password_validate: null,
         rol: null
       },
-      items_box: ['GERENTE', 'OPERADOR', 'CLIENTE'],
-      box_value: null,
+      items_box: [{ text: 'Gerente', value: 'GE' },
+        { text: 'Operador', value: 'OP' }],
+
       rules: {
         required: value => !!value || 'Required.',
-        counter: value => value.length <= 20 || 'Max 20 characters',
         email: value => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           return pattern.test(value) || 'Invalid e-mail.'
         },
         password_val: value => this.user.password === value || 'Password not coincedence',
-        min_pass: value => value.length >= 6 || 'Min 6 characters'
+        min_pass: value => value.length >= 8 || 'Min 8 characters'
       },
       valid: true
     }
@@ -133,7 +134,6 @@ export default {
       }
     },
     register () {
-      this.user.rol = this.box_value[0] + this.box_value[1]
       this.$store.dispatch('registerUser', this.user)
         .then(res => {
           alert('Usuario registrado con éxito')

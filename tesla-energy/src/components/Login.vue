@@ -69,6 +69,7 @@ export default {
         .then(response => {
           this.$store.dispatch('getProfile')
           this.$router.push({ path: '/profile' })
+          console.log(this.$store.state.token)
         })
         .catch(err => {
           console.log(err)

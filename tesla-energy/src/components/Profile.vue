@@ -22,10 +22,32 @@
           <v-container grid-list-xs,sm,md,lg,xl>
             <h1>CLIENT PROFILE</h1>
             <v-form>
-              <v-text-field v-model="user.cliusuario" prepend-icon="person" name="name" label="Username" type="text" disabled></v-text-field>
-              <v-text-field v-model="user.clinombre" prepend-icon="person" name="name" label="Name" type="text" required></v-text-field>
-              <v-text-field v-model="user.clicorreo" prepend-icon="email" name="email" label="email" type="email" required></v-text-field>
-              <v-text-field v-model="user.clifechanac" prepend-icon="add_location" name="birthday" label="birthday" type="date" required></v-text-field>
+              <v-text-field
+                v-model="user.cliusuario" prepend-icon="person"
+                name="name"
+                label="Username"
+                type="text"
+                disabled></v-text-field>
+              <v-text-field
+                v-model="user.clinombre"
+                prepend-icon="person"
+                name="name"
+                label="Name"
+                type="text"
+                required></v-text-field>
+              <v-text-field
+                v-model="user.clicorreo"
+                prepend-icon="email"
+                name="email"
+                label="email"
+                type="email"
+                required></v-text-field>
+              <v-text-field
+                v-model="user.clifechanac"
+                prepend-icon="add_location"
+                name="birthday" label="birthday"
+                type="date"
+                required></v-text-field>
             </v-form>
             <v-btn color="pink" @click="updateProfile">Update</v-btn>
           </v-container>
