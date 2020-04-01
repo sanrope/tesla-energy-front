@@ -51,8 +51,8 @@ export default {
   data () {
     return {
       user: {
-        username: null,
-        password: null
+        username: '',
+        password: ''
       },
       show: false,
       valid: true,
@@ -66,20 +66,9 @@ export default {
   methods: {
     login () {
       this.$store.dispatch('login', this.user)
-        .then(response => {
+        .then(() => {
           this.$store.dispatch('getProfile')
-          this.$router.push({ path: '/profile' })
-          console.log(this.$store.state.token)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
-    logout () {
-      this.$store.dispatch('logout', this.$store.state.token)
-        .then(response => {
-          this.message = response.data.detail
-          // this.$router.push({ path: '/register' })
+          this.$router.push('/profile')
         })
         .catch(err => {
           console.log(err)
