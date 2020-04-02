@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Store from '../store/index.js'
 import Home from '../views/Home.vue'
+import Err404 from '../components/Err404.vue'
 import Login from '../components/Login.vue'
-import err404 from '../components/err404.vue'
-import Register from '../components/Register.vue'
 import Profile from '../components/Profile.vue'
+import Register from '../components/Register.vue'
 import Users from '../components/Users.vue'
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const router = new VueRouter({
   // mode: 'history',
   routes: [
     {
@@ -17,14 +18,10 @@ export default new VueRouter({
       name: 'Home',
       component: Home
     },
-    // {
-    // path: '*',
-    // redirect: '/404'
-    // },
     {
       path: '/404',
-      name: 'err404',
-      component: err404
+      name: 'Err404',
+      component: Err404
     },
     {
       path: '/login',
@@ -68,3 +65,30 @@ export default new VueRouter({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (!Store.getters.isAuthenticated) {
+      next({
+        name: 'Login'
+      })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+    // Si esta logueado, no lo deja entrar a la ruta login
+    if (Store.getters.isAuthenticated) {
+      next({
+        name: 'Profile'
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // make sure to always call next()!
+  }
+})
+
+export default router
