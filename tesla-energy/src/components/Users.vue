@@ -100,8 +100,8 @@ export default {
         email: '',
         is_active: '',
         rol: ''
-      },
-      users: []
+      }
+      // users: []
     }
   },
   watch: {
@@ -128,6 +128,14 @@ export default {
     },
     save () {
     }
+  },
+  computed: {
+    users () {
+      return this.$store.getters.getUsers
+    }
+  },
+  beforeCreate () {
+    this.$store.dispatch('obtainUsers')
   }
 }
 </script>
