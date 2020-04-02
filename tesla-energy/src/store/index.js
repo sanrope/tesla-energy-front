@@ -11,34 +11,30 @@ export default new Vuex.Store({
   state: {
     token: localStorage.getItem('token_access') || null,
     status: '', // loading, success or error
-    user: {},
     auth: { headers: null },
-    profile: {},
+    profile: {}, // Loggedin user
     users: []
   },
   mutations: {
-    setToken (state, token) {
-      state.token = token
-    },
     set_profile (state, profile) {
       state.profile = profile
     },
-    setUsers (state, users) {
+    set_users (state, users) {
       state.users = users
     },
     logout (state) {
+      localStorage.removeItem('token_access')
+      localStorage.removeItem('vuex')
       state.status = null
       state.token = null
-      state.user = null
       state.auth.headers = null
     },
     auth_request (state) {
       state.status = 'loading'
     },
-    auth_success (state, token, user) {
+    auth_success (state, token) {
       state.status = 'success'
       state.token = token
-      state.user = user
       state.auth.headers = { Authorization: 'JWT ' + token }
     },
     auth_error (state) {
@@ -52,10 +48,10 @@ export default new Vuex.Store({
         axios.post(API_URL + 'api/v1/auth-jwt/', user)
           .then(res => {
             const token = res.data.token
-            const user = res.data.user
+            console.log(user)
             if (token) {
               localStorage.setItem('token_access', token) // Saves token in localStorage
-              context.commit('auth_success', token, user) // Saves data in storate state
+              context.commit('auth_success', token) // Saves data in storate state
               resolve(res)
             } else {
               console.log('login token null error' + res)
@@ -97,7 +93,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios.get(API_URL + 'api/v1/usuarios/', context.getters.getAuth)
           .then(res => {
-            context.commit('setUsers', res.data.results)
+            context.commit('set_users', res.data.results)
             resolve(res)
           })
           .catch(err => {
@@ -107,18 +103,7 @@ export default new Vuex.Store({
       })
     },
     logout (context) {
-      return new Promise((resolve, reject) => {
-        axios.post(API_URL + 'api/v1/api-auth/logout/', context.state.user, context.state.token)
-          .then(res => {
-            console.log('Hola: ' + res)
-            // context.commit('logout')
-            // localStorage.removeItem('token_access')
-            resolve(res)
-          })
-          .catch(err => {
-            reject(err)
-          })
-      })
+      context.commit('logout')
     }
   },
   getters: {
@@ -129,6 +114,7 @@ export default new Vuex.Store({
       return state.users
     },
     getAuth (state) {
+      console.log(state.auth)
       return state.auth
     }
   },

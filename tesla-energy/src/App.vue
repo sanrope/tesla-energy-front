@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <v-app id="inspire">
+
       <!-- Navigation drawer (left column)-->
       <v-navigation-drawer v-model="drawer" app fixed temporary>
         <v-list dense>
@@ -37,6 +38,14 @@
               <v-list-item-title>Users</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item v-if="token != null" to="/profile" link ripple>
+            <v-list-item-action>
+              <v-icon>perm_identity</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Profile</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
           <v-list-item v-if="token != null" @click="logout" link ripple>
             <v-list-item-action>
               <v-icon>eject</v-icon>
@@ -70,7 +79,7 @@
           <v-row align="center" justify="center">
             <v-col class="text-center">
               <v-fab-transition>
-                <router-view></router-view>
+                <router-view></router-view> <!-- To show the routed views -->
               </v-fab-transition>
               <v-snackbar :value="message ? true : false" color="blue" :timeout="time_snack">
              {{message}}
@@ -101,18 +110,17 @@ export default {
   }),
   methods: {
     logout () {
-      this.$store.dispatch('logout', this.$store.state.token)
+      this.$store.dispatch('logout')
         .then(() => {
-          // this.message = response.data.detail
-          this.$router.push('/login')
+          this.$router.push('/')
         })
         .catch(err => {
-          console.log(err)
+          console.log('logout error: ' + err)
         })
     }
   },
   computed: {
-    token () {
+    token () { // To validate if login
       return this.$store.state.token
     }
   }
