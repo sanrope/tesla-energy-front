@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Store from '../store/index.js'
 import Home from '../views/Home.vue'
-import Err404 from '../components/err404.vue'
+import Err404 from '../components/errors/Err404.vue'
 import Login from '../components/Login.vue'
 import Profile from '../components/Profile.vue'
 import Register from '../components/Register.vue'
@@ -19,7 +19,7 @@ const router = new VueRouter({
       component: Home
     },
     {
-      path: '/404',
+      path: '/err404',
       name: 'Err404',
       component: Err404
     },
@@ -57,7 +57,7 @@ const router = new VueRouter({
     },
     {
       path: '*',
-      redirect: '/404'
+      redirect: '/err404'
     },
     {
       path: '/about',
