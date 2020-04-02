@@ -18,12 +18,11 @@
         :items="users"
         :search="search"
         >
-          <v-dialog v-model="dialog" max-width="500px">
+          <v-dialog v-slot:top v-model="dialog" max-width="500px">
             <v-card>
               <v-card-title>
-                <span class="headline">{{ formTitle }}</span>
+                <span class="headline">One Title</span>
               </v-card-title>
-
               <v-card-text>
                 <v-container>
                   <v-row>
@@ -84,7 +83,7 @@ export default {
   data () {
     return {
       search: '',
-      dialog: false,
+      dialog: true,
       headers: [
         { text: 'Username', value: 'username' },
         { text: 'Name', value: 'first_name' },
@@ -105,6 +104,11 @@ export default {
       users: []
     }
   },
+  watch: {
+    dialog (val) {
+      val || this.close()
+    }
+  },
   methods: {
     getUsers () {
       this.$store.dispatch('obtainUsers')
@@ -119,6 +123,10 @@ export default {
     },
     deleteUser (item) {
       console.log(item)
+    },
+    close () {
+    },
+    save () {
     }
   }
 }

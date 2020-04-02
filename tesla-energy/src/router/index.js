@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Store from '../store/index.js'
 import Home from '../views/Home.vue'
-import Err404 from '../components/Err404.vue'
+import Err404 from '../components/err404.vue'
 import Login from '../components/Login.vue'
 import Profile from '../components/Profile.vue'
 import Register from '../components/Register.vue'
@@ -54,6 +54,10 @@ const router = new VueRouter({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '*',
+      redirect: '/404'
     },
     {
       path: '/about',
