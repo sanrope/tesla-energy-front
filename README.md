@@ -8,7 +8,7 @@
     - JUAN FELIPE OROZCO ESCOBAR	1426244
     - VALENCIA VELASCO SAMIR FARID	1629607
     - DAVID CRESPO MUÑOZ            1623100
-    - CRISTIAN MANOSALVA BELTRAN    1628397 
+    - CRISTIAN MANOSALVA BELTRAN    1628397
 
 ## Asignatura:
     - Aplicaciones en el WEB y redes inalámbricas
@@ -21,11 +21,11 @@ En este repositorio se presenta la implementación del front-end del proyecto
 Clonar el repositorio, ingresar al directorio 'tesla-energy-front/teslaenergy' y ejecutar las siguientes líneas en la terminal:
 
 ```
-npm i
+npm install
 npm run serve
 ```
-    
+
 
 Notas:
 
-    1. 
+    1. Se deben tener instaladas las siguientes dependencias: node.js, npm, vue-cli
