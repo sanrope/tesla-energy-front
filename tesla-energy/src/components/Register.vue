@@ -78,7 +78,7 @@
                     solo
                     hint="Repeat your password"
                     required
-                    :rules="[rules.required, rules.password_val, rules.min_pass]"></v-text-field>
+                    :rules="[rules.required, rules.password_val]"></v-text-field>
                     <v-btn @click="register" :disabled="!valid">send</v-btn>
                   </v-col>
                 </v-row>
@@ -120,7 +120,7 @@ export default {
           return pattern.test(value) || 'Invalid e-mail.'
         },
         password_val: value => this.user.password === value || 'Password not coincedence',
-        min_pass: value => value ? null : value.length >= 8 || 'Min 8 characters'
+        min_pass: value => !value ? '' : value.length >= 8 || 'Min 8 characters'
       },
       valid: true
     }

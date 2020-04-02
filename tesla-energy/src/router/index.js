@@ -44,7 +44,7 @@ const router = new VueRouter({
       name: 'Users',
       component: Users,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
@@ -54,6 +54,10 @@ const router = new VueRouter({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '*',
+      redirect: '/err404'
     },
     {
       path: '/about',
