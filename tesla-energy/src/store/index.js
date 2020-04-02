@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
+import jwtDecode from 'jwt-decode'
 
 Vue.use(Vuex)
 
@@ -66,7 +67,9 @@ export default new Vuex.Store({
     },
     getProfile (context) {
       return new Promise((resolve, reject) => {
-        axios.get(API_URL + 'api/v1/usuarios/', context.getters.getAuth)
+        const username = jwtDecode(localStorage.getItem('token_access')).username
+        console.log(username)
+        axios.get(API_URL + 'api/v1/usuarios/byusername/' + username + '/', context.getters.getAuth)
           .then(res => {
             context.commit('set_profile', res.data)
             resolve(res)
@@ -104,6 +107,19 @@ export default new Vuex.Store({
     },
     logout (context) {
       context.commit('logout')
+    },
+    updateUser (context, user) {
+      return new Promise((resolve, reject) => {
+        axios.put(API_URL + 'api/v1/usuarios/byusername/' + user.username + '/', user, context.getters.getAuth)
+          .then(res => {
+            console.log('Usuario actualizado con éxito')
+            resolve(res)
+          })
+          .catch(err => {
+            console.log('No se pudo actualizar el usuario')
+            reject(err)
+          })
+      })
     }
   },
   getters: {
@@ -116,6 +132,9 @@ export default new Vuex.Store({
     getAuth (state) {
       console.log(state.auth)
       return state.auth
+    },
+    getProfile (state) {
+      return state.profile
     }
   },
   plugins: [createPersistedState()]

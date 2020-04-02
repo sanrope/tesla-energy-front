@@ -101,8 +101,8 @@ export default {
         email: '',
         is_active: '',
         rol: ''
-      },
-      users: []
+      }
+      // users: []
     }
   },
   methods: {
@@ -120,6 +120,14 @@ export default {
     deleteUser (item) {
       console.log(item)
     }
+  },
+  computed: {
+    users () {
+      return this.$store.getters.getUsers
+    }
+  },
+  beforeCreate () {
+    this.$store.dispatch('obtainUsers')
   }
 }
 </script>
