@@ -47,7 +47,7 @@ export default new VueRouter({
       name: 'Users',
       component: Users,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
