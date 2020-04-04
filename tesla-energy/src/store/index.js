@@ -11,10 +11,11 @@ export const API_URL = 'http://localhost:8000/'
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem('token_access') || null,
-    status: '', // loading, success or error
+    status: null, // loading, success or error
     auth: { headers: null },
     profile: {}, // Loggedin user
-    users: []
+    users: [],
+    substations: []
   },
   mutations: {
     set_profile (state, profile) {
@@ -26,9 +27,12 @@ export default new Vuex.Store({
     logout (state) {
       localStorage.removeItem('token_access')
       localStorage.removeItem('vuex')
-      state.status = null
       state.token = null
+      state.status = null
       state.auth.headers = null
+      state.profile = {}
+      state.users = []
+      state.substations = []
     },
     auth_request (state) {
       state.status = 'loading'
@@ -40,6 +44,9 @@ export default new Vuex.Store({
     },
     auth_error (state) {
       state.status = 'error'
+    },
+    set_substations (state, substations) {
+      state.substations = substations
     }
   },
   actions: {
@@ -49,7 +56,6 @@ export default new Vuex.Store({
         axios.post(API_URL + 'api/v1/auth-jwt/', user)
           .then(res => {
             const token = res.data.token
-            console.log(user)
             if (token) {
               localStorage.setItem('token_access', token) // Saves token in localStorage
               context.commit('auth_success', token) // Saves data in storate state
@@ -68,7 +74,6 @@ export default new Vuex.Store({
     getProfile (context) {
       return new Promise((resolve, reject) => {
         const username = jwtDecode(localStorage.getItem('token_access')).username
-        console.log(username)
         axios.get(API_URL + 'api/v1/usuarios/byusername/' + username + '/', context.getters.getAuth)
           .then(res => {
             context.commit('set_profile', res.data)
@@ -92,7 +97,7 @@ export default new Vuex.Store({
           })
       })
     },
-    obtainUsers (context) {
+    getUsers (context) {
       return new Promise((resolve, reject) => {
         axios.get(API_URL + 'api/v1/usuarios/', context.getters.getAuth)
           .then(res => {
@@ -120,6 +125,20 @@ export default new Vuex.Store({
             reject(err)
           })
       })
+    },
+    getSubstations (context) {
+      return new Promise((resolve, reject) => {
+        axios.get(API_URL + 'api/v1/usuarios/substation/', context.getters.getAuth)
+          .then(res => {
+            console.log(res.data.results)
+            // context.commit('set_substations', res.data.results)
+            resolve(res)
+          })
+          .catch(err => {
+            console.log(err)
+            reject(err)
+          })
+      })
     }
   },
   getters: {
@@ -130,7 +149,6 @@ export default new Vuex.Store({
       return state.users
     },
     getAuth (state) {
-      console.log(state.auth)
       return state.auth
     },
     getProfile (state) {

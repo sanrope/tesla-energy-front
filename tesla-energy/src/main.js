@@ -6,6 +6,7 @@ import vuetify from '@/plugins/vuetify'
 import './registerServiceWorker'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import 'leaflet/dist/leaflet.css'
 
 Vue.config.productionTip = false
 
