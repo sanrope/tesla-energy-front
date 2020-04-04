@@ -5,8 +5,11 @@ import Home from '../views/Home.vue'
 import Err404 from '../components/errors/Err404.vue'
 import Login from '../components/Login.vue'
 import Profile from '../components/Profile.vue'
-import Register from '../components/Register.vue'
+import Register from '../components/RegisterUsers.vue'
 import Users from '../components/Users.vue'
+import Clients from '../components/Clients.Vue'
+import RegisterClients from '../components/RegisterClient.Vue'
+
 
 Vue.use(VueRouter)
 
@@ -48,12 +51,30 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/register',
-      name: 'Register',
-      component: Register,
+      path: '/register-users',
+      name: 'RegisterUsers',
+      component: RegisterUsers,
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/clients',
+      name: 'Clients',
+      component: Clients,
+      meta: {
+        requiresAuth: false
+      }
+      
+    },
+    {
+      path: '/register-clients',
+      name: 'Register-Clients',
+      component: RegisterClients,
+      meta: {
+        requiresAuth: false
+      }
+      
     },
     {
       path: '*',
