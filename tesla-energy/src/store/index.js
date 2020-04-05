@@ -154,7 +154,8 @@ export default new Vuex.Store({
             console.log(err)
             reject(err)
           })
-      })},
+      })
+    },
     getSubstations (context) {
       return new Promise((resolve, reject) => {
         axios.get(API_URL + 'api/v1/usuarios/substation/', context.getters.getAuth)
@@ -181,7 +182,6 @@ export default new Vuex.Store({
             reject(err)
           })
       })
-
     }
   },
   getters: {
