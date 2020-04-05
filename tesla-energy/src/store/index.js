@@ -15,6 +15,8 @@ export default new Vuex.Store({
     auth: { headers: null },
     profile: {}, // Loggedin user
     users: [],
+
+    clients: [],
     substations: []
   },
   mutations: {
@@ -23,6 +25,9 @@ export default new Vuex.Store({
     },
     set_users (state, users) {
       state.users = users
+    },
+    set_clients (state, clients) {
+      state.clients = clients
     },
     logout (state) {
       localStorage.removeItem('token_access')
@@ -126,6 +131,31 @@ export default new Vuex.Store({
           })
       })
     },
+    registerClient (context, user) {
+      return new Promise((resolve, reject) => {
+        axios.post(API_URL + 'api/v1/clientes/create/', user, context.getters.getAuth)
+          .then(res => {
+            resolve(res)
+          })
+          .catch(err => {
+            console.log('registerClients error: ' + err)
+            reject(err)
+          })
+      })
+    },
+    obtainClients (context) {
+      return new Promise((resolve, reject) => {
+        axios.get(API_URL + 'api/v1/clientes/list/', context.getters.getAuth)
+          .then(res => {
+            context.commit('set_clients', res.data.results)
+            resolve(res)
+          })
+          .catch(err => {
+            console.log(err)
+            reject(err)
+          })
+      })
+    },
     getSubstations (context) {
       return new Promise((resolve, reject) => {
         axios.get(API_URL + 'api/v1/usuarios/substation/', context.getters.getAuth)
@@ -136,6 +166,19 @@ export default new Vuex.Store({
           })
           .catch(err => {
             console.log(err)
+            reject(err)
+          })
+      })
+    },
+    updateClients (context, user) {
+      return new Promise((resolve, reject) => {
+        axios.put(API_URL + 'api/v1/clietes/bycedula/' + user.cedula + '/', user, context.getters.getAuth)
+          .then(res => {
+            console.log('Cliente actualizado con éxito')
+            resolve(res)
+          })
+          .catch(err => {
+            console.log('No se pudo actualizar el Cliente')
             reject(err)
           })
       })
@@ -153,6 +196,9 @@ export default new Vuex.Store({
     },
     getProfile (state) {
       return state.profile
+    },
+    getClients (state) {
+      return state.clients
     }
   },
   plugins: [createPersistedState()]

@@ -22,7 +22,7 @@
               <v-list-item-title>Login</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-if="token != null" to="/register" link ripple>
+          <v-list-item v-if="token != null" to="/register-user" link ripple>
             <v-list-item-action>
               <v-icon>how_to_reg</v-icon>
             </v-list-item-action>
@@ -36,6 +36,22 @@
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Users</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item v-if="token != null" to="/register-client" link ripple>
+            <v-list-item-action>
+              <v-icon>perm_identity</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title> Client Register</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item v-if="token != null" to="/clients" link ripple>
+            <v-list-item-action>
+              <v-icon>perm_identity</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>clients</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null" to="/profile" link ripple>

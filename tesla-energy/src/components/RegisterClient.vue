@@ -8,7 +8,6 @@
             <v-card
               :elevation="hover ? 24 : 0"
               class="mx-auto pa-6"
-              :color="user.rol === 'OP' ? 'indigo' : user.rol === 'GE' ? '#757de8' : 'white'"
             >
               <v-card-text >
                 <p class="display-1 text--primary">User registration</p>
@@ -16,16 +15,9 @@
               <v-form v-model="valid">
                 <v-row>
                   <v-col>
-                    <v-select outlined
-                     label="User type"
-                     v-model="user.rol"
-                     :rules="[rules.required]"
-                     :items="items_box"></v-select
-                    >
-                    <div class="display-4">{{user.rol}}</div>
                     <v-divider></v-divider>
                     <v-text-field
-                    v-model="user.first_name"
+                    v-model="client.first_name"
                     prepend-inner-icon="assignment_ind"
                     name="first_name"
                     label="Name"
@@ -34,7 +26,7 @@
                     required
                     :rules="[rules.required]"></v-text-field>
                     <v-text-field
-                    v-model="user.last_name"
+                    v-model="client.last_name"
                     prepend-inner-icon="assignment_ind"
                     name="last_name"
                     label="Last Name"
@@ -43,16 +35,16 @@
                     required
                     :rules="[rules.required]"></v-text-field>
                     <v-text-field
-                    v-model="user.username"
-                    prepend-inner-icon="person"
-                    name="username"
-                    label="Username"
-                    type="text"
+                    v-model="client.cedula"
+                    prepend-inner-icon="recent_actors"
+                    name="cedula"
+                    label="ID"
+                    type="number"
                     solo
                     required
                     :rules="[rules.required]"></v-text-field>
                     <v-text-field
-                    v-model="user.email"
+                    v-model="client.email"
                     prepend-inner-icon="email"
                     name="email"
                     label="Email"
@@ -60,25 +52,6 @@
                     solo
                     required
                     :rules="[rules.required, rules.email]"></v-text-field>
-                    <v-text-field
-                    v-model="user.password"
-                    prepend-inner-icon="https"
-                    name="password"
-                    label="Password"
-                    type="password"
-                    solo
-                    required
-                    :rules="[rules.required, rules.min_pass]"></v-text-field>
-                    <v-text-field
-                    v-model="user.password2"
-                    prepend-inner-icon="https"
-                    name="password2"
-                    label="Password Again"
-                    type="password"
-                    solo
-                    hint="Repeat your password"
-                    required
-                    :rules="[rules.required, rules.password_val]"></v-text-field>
                     <v-btn @click="register" :disabled="!valid">send</v-btn>
                   </v-col>
                 </v-row>
@@ -96,45 +69,25 @@ export default {
   name: 'Register',
   data () {
     return {
-      user: {
-        username: null,
+      client: {
+        cedula: null,
         first_name: null,
         last_name: null,
-        email: null,
-        password: null,
-        password_validate: null,
-        rol: null
+        email: null
       },
-      items_box: [
-        {
-          text: 'Manager', value: 'GE'
-        },
-        {
-          text: 'Operator', value: 'OP'
-        }
-      ],
       rules: {
         required: value => !!value || 'Required.',
         email: value => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           return pattern.test(value) || 'Invalid e-mail.'
-        },
-        password_val: value => this.user.password === value || 'Password not coincedence',
-        min_pass: value => !value ? '' : value.length >= 8 || 'Min 8 characters'
+        }
       },
       valid: true
     }
   },
   methods: {
-    pass_comparison () {
-      if (this.user.password === this.user.password_validate) {
-        return true
-      } else {
-        return false
-      }
-    },
     register () {
-      this.$store.dispatch('registerUser', this.user)
+      this.$store.dispatch('registerClient', this.client)
         .then(res => {
           alert('User registered successfully')
           this.clearForm()
@@ -144,31 +97,14 @@ export default {
         })
     },
     clearForm () {
-      this.user.username = null
-      this.user.first_name = null
-      this.user.last_name = null
-      this.user.email = null
-      this.user.password = null
-      this.user.password_validate = null
-      this.user.rol = null
+      this.client.username = null
+      this.client.first_name = null
+      this.client.last_name = null
+      this.client.email = null
+      this.client.password = null
+      this.client.password_validate = null
+      this.client.rol = null
     }
   }
 }
 </script>
-
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
