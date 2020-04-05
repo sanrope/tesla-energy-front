@@ -7,6 +7,7 @@ import Login from '../components/Login.vue'
 import Profile from '../components/Profile.vue'
 import Register from '../components/Register.vue'
 import Users from '../components/Users.vue'
+import Map from '../components/Map.vue'
 
 Vue.use(VueRouter)
 
@@ -44,7 +45,7 @@ const router = new VueRouter({
       name: 'Users',
       component: Users,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -58,6 +59,11 @@ const router = new VueRouter({
     {
       path: '*',
       redirect: '/err404'
+    },
+    {
+      path: '/map',
+      name: 'Map',
+      component: Map
     },
     {
       path: '/about',
