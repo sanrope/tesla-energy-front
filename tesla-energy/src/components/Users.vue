@@ -115,7 +115,7 @@ export default {
   },
   methods: {
     getUsers () {
-      this.$store.dispatch('obtainUsers')
+      this.$store.dispatch('getUsers')
         .then(res => {
           this.users = this.$store.getters.getUsers
         })
@@ -143,7 +143,7 @@ export default {
         is_active: this.editedItem.is_active
       }
       await this.$store.dispatch('updateUser', newUser)
-      this.$store.dispatch('obtainUsers')
+      this.$store.dispatch('getUsers')
       this.close()
     }
   },
@@ -153,7 +153,7 @@ export default {
     }
   },
   beforeCreate () {
-    this.$store.dispatch('obtainUsers')
+    this.$store.dispatch('getUsers')
   }
 }
 </script>
