@@ -15,7 +15,6 @@ export default new Vuex.Store({
     auth: { headers: null },
     profile: {}, // Loggedin user
     users: [],
-
     clients: [],
     substations: []
   },
@@ -145,7 +144,7 @@ export default new Vuex.Store({
     },
     obtainClients (context) {
       return new Promise((resolve, reject) => {
-        axios.get(API_URL + 'api/v1/clientes/list/', context.getters.getAuth)
+        axios.get(API_URL + 'api/v1/clientes/', context.getters.getAuth)
           .then(res => {
             context.commit('set_clients', res.data.results)
             resolve(res)

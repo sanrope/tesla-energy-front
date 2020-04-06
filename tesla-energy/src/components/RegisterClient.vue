@@ -66,7 +66,7 @@
 
 <script>
 export default {
-  name: 'Register',
+  name: 'RegisterClient',
   data () {
     return {
       client: {

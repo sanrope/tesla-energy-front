@@ -74,6 +74,7 @@
 </template>
 <script>
 export default {
+  name: 'Profile',
   data () {
     return {
       confirm: null,
