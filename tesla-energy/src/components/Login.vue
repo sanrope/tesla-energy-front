@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-container class="text-xs-center" style="min-height: 80vh" fluid>
     <v-layout align-center justify-center >
       <v-flex xs12 sm10 md6 >
@@ -39,6 +40,10 @@
       </v-flex>
     </v-layout>
   </v-container>
+  <v-alert :value="error ? true : false" mode="in-out" type="error" transition="scale-transition" :timeout="4000" outlined>
+      {{error}}
+  </v-alert>
+  </div>
 </template>
 
 <script>
@@ -53,7 +58,8 @@ export default {
       valid: true,
       rules: {
         required: val => !!val || 'This is required'
-      }
+      },
+      error: null
     }
   },
   methods: {
@@ -61,10 +67,12 @@ export default {
       this.$store.dispatch('login', this.user)
         .then(() => {
           // this.$store.dispatch('getProfile')
-          this.$router.push('/')
+          this.$router.push('/profile')
         })
         .catch(err => {
-          console.log(err)
+          console.error(err)
+          this.error = err
+          setTimeout(() => { this.error = null }, 4000)
         })
     }
   },
