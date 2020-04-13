@@ -92,7 +92,7 @@
 
 <script>
 export default {
-  name: 'RegisterUsers',
+  name: 'RegisterUser',
   data () {
     return {
       user: {
