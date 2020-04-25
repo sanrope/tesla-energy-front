@@ -132,6 +132,7 @@ export default {
         })
         .catch(err => {
           console.log('logout error: ' + err)
+          this.message = err
         })
     }
   },

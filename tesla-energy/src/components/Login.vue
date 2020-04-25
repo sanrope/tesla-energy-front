@@ -38,6 +38,10 @@
       </v-flex>
     </v-layout>
   </v-container>
+  <v-alert :value="error ? true : false" mode="in-out" type="error" transition="scale-transition" :timeout="4000" outlined>
+      {{error}}
+  </v-alert>
+  </div>
 </template>
 
 <script>
@@ -56,7 +60,8 @@ export default {
       recaptcha: false,
       rules: {
         required: val => !!val || 'This is required'
-      }
+      },
+      error: null
     }
   },
   components: {
@@ -71,6 +76,9 @@ export default {
           })
           .catch(err => {
             console.log('login error: ' + err)
+            console.error(err)
+            this.error = err
+            setTimeout(() => { this.error = null }, 4000)
           })
       } else {
         alert('reCAPTCHA not validated')

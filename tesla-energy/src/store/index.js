@@ -155,20 +155,6 @@ export default new Vuex.Store({
           })
       })
     },
-    getSubstations (context) {
-      return new Promise((resolve, reject) => {
-        axios.get(API_URL + 'api/v1/usuarios/substation/', context.getters.getAuth)
-          .then(res => {
-            console.log(res.data.results)
-            // context.commit('set_substations', res.data.results)
-            resolve(res)
-          })
-          .catch(err => {
-            console.log(err)
-            reject(err)
-          })
-      })
-    },
     updateClients (context, user) {
       return new Promise((resolve, reject) => {
         axios.put(API_URL + 'api/v1/clietes/bycedula/' + user.cedula + '/', user, context.getters.getAuth)
@@ -178,6 +164,32 @@ export default new Vuex.Store({
           })
           .catch(err => {
             console.log('No se pudo actualizar el Cliente')
+            reject(err)
+          })
+      })
+    },
+    getSubstations (context) {
+      return new Promise((resolve, reject) => {
+        axios.get(API_URL + 'api/v1/assets/substation/', context.getters.getAuth)
+          .then(res => {
+            /* console.log(res.data) */
+            context.commit('set_substations', res.data)
+            resolve(res)
+          })
+          .catch(err => {
+            console.log(err)
+            reject(err)
+          })
+      })
+    },
+    registerSubstation (context, sub) {
+      return new Promise((resolve, reject) => {
+        axios.post(API_URL + 'api/v1/assets/substation/create/', sub, context.getters.getAuth)
+          .then(res => {
+            resolve(res)
+          })
+          .catch(err => {
+            console.log('registerSubstation error: ' + err)
             reject(err)
           })
       })
@@ -198,6 +210,9 @@ export default new Vuex.Store({
     },
     getClients (state) {
       return state.clients
+    },
+    getSubstations (state) {
+      return state.substations
     }
   },
   plugins: [createPersistedState()]
