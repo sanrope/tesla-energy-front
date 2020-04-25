@@ -24,7 +24,7 @@
           </v-list-item>
           <v-list-item v-if="token != null" to="/register-user" link ripple>
             <v-list-item-action>
-              <v-icon>how_to_reg</v-icon>
+              <v-icon>person_add</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>User Registration</v-list-item-title>
@@ -32,7 +32,7 @@
           </v-list-item>
           <v-list-item v-if="token != null" to="/users" link ripple>
             <v-list-item-action>
-              <v-icon>supervisor_account</v-icon>
+              <v-icon>group</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Users</v-list-item-title>
@@ -40,18 +40,18 @@
           </v-list-item>
           <v-list-item v-if="token != null" to="/register-client" link ripple>
             <v-list-item-action>
-              <v-icon>perm_identity</v-icon>
+              <v-icon>person_add</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title> Client Register</v-list-item-title>
+              <v-list-item-title> Client Registration</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null" to="/clients" link ripple>
             <v-list-item-action>
-              <v-icon>perm_identity</v-icon>
+              <v-icon>supervisor_account</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>clients</v-list-item-title>
+              <v-list-item-title>Clients</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null" to="/profile" link ripple>
