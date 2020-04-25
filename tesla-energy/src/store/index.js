@@ -6,7 +6,7 @@ import jwtDecode from 'jwt-decode'
 
 Vue.use(Vuex)
 
-export const API_URL = 'http://localhost:8000/'
+export const API_URL = 'http://34.221.98.21:8000/'
 
 export default new Vuex.Store({
   state: {
@@ -17,7 +17,9 @@ export default new Vuex.Store({
     users: [],
 
     clients: [],
-    substations: []
+    substations: [],
+    transformers: [],
+    meters: []
   },
   mutations: {
     set_profile (state, profile) {
@@ -52,6 +54,12 @@ export default new Vuex.Store({
     },
     set_substations (state, substations) {
       state.substations = substations
+    },
+    set_transformers (state, transformers) {
+      state.transformers = transformers
+    },
+    set_meters (state, meters) {
+      state.meters = meters
     }
   },
   actions: {
@@ -194,6 +202,58 @@ export default new Vuex.Store({
             reject(err)
           })
       })
+    },
+    getTransformers (context) {
+      return new Promise((resolve, reject) => {
+        axios.get(API_URL + 'api/v1/assets/transformer/', context.getters.getAuth)
+          .then(res => {
+            /* console.log(res.data) */
+            context.commit('set_transformers', res.data)
+            resolve(res)
+          })
+          .catch(err => {
+            console.log(err)
+            reject(err)
+          })
+      })
+    },
+    registerTransformer (context, trans) {
+      return new Promise((resolve, reject) => {
+        axios.post(API_URL + 'api/v1/assets/transformer/create/', trans, context.getters.getAuth)
+          .then(res => {
+            resolve(res)
+          })
+          .catch(err => {
+            console.log('registerTransformer error: ' + err)
+            reject(err)
+          })
+      })
+    },
+    getMeters (context) {
+      return new Promise((resolve, reject) => {
+        axios.get(API_URL + 'api/v1/assets/electricmeter/', context.getters.getAuth)
+          .then(res => {
+            /* console.log(res.data) */
+            context.commit('set_meters', res.data)
+            resolve(res)
+          })
+          .catch(err => {
+            console.log(err)
+            reject(err)
+          })
+      })
+    },
+    registerMeter (context, meter) {
+      return new Promise((resolve, reject) => {
+        axios.post(API_URL + 'api/v1/assets/electricmeter/create/', meter, context.getters.getAuth)
+          .then(res => {
+            resolve(res)
+          })
+          .catch(err => {
+            console.log('register Meter error: ' + err)
+            reject(err)
+          })
+      })
     }
   },
   getters: {
@@ -214,6 +274,12 @@ export default new Vuex.Store({
     },
     getSubstations (state) {
       return state.substations
+    },
+    getTransformers (state) {
+      return state.transformers
+    },
+    getMeters (state) {
+      return state.meters
     }
   },
   plugins: [createPersistedState()]

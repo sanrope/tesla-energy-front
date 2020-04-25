@@ -9,40 +9,124 @@
         width="100vw"
         style="z-index: 1"
       >
-                <l-map
-                  :zoom="zoom"
-                  :center="center"
-                  :options="mapOptions"
-                  @update:center="centerUpdate"
-                  @update:zoom="zoomUpdate"
-                  @click="selectSite"
-                >
-                  <l-tile-layer
-                    :url="url"
-                    :attribution="attribution"
-                  />
-                  <l-marker v-for="(substation,i) in substations" :key="i"
-                  :icon="iconSubstation"
-                  :lat-lng="latLng2(substation.latitude, substation.longitude)"
-                  >
-                    <l-popup>
-                      <div @click="innerClick">
-                        Substation, Transformer or Electric Meter: {{substation.name}}
+        <l-map
+          :zoom="zoom"
+          :center="center"
+          :options="mapOptions"
+          @update:center="centerUpdate"
+          @update:zoom="zoomUpdate"
+          @click="selectSite"
+        >
+          <l-tile-layer
+            :url="url"
+            :attribution="attribution"
+          />
+          <l-marker v-for="(substation,i) in substations" :key="i"
+          :icon="iconSubstation"
+          :lat-lng="latLng2(substation.latitude, substation.longitude)"
+          >
+            <l-popup>
+              <v-row>
+                <v-col cols="12">
+                  <v-menu center>
+                    <template v-slot:activator="{ on }">
+                      <div v-on="on">
+                      Substation, Transformer or Electric Meter: {{substation.name}}
                         <p v-show="showParagraph">
-                          Latitude:  <br>
-                          Longitude:
+                          Latitude:  {{substation.latitude}}<br>
+                          Longitude:  {{substation.longitude}}
                         </p>
                       </div>
-                    </l-popup>
-                  </l-marker>
-                </l-map>
+                    </template>
+                    <v-list>
+                      <v-list-item>
+                        <v-list-item-title>one item menu</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
+                </v-col>
+              </v-row>
+            </l-popup>
+          </l-marker>
+
+          <l-marker v-for="(transformer,x) in transformers" :key="x"
+          :icon="iconTransformator"
+          :lat-lng="latLng2(transformer.latitude, transformer.longitude)"
+          >
+            <l-popup>
+              <v-row>
+                <v-col cols="12">
+                  <v-menu center>
+                    <template v-slot:activator="{ en }">
+                      <div v-on="en">
+                      Substation, Transformer or Electric Meter: {{transformer.name}}
+                        <p v-show="showParagraph">
+                          Latitude:  {{transformer.latitude}}<br>
+                          Longitude:  {{transformer.longitude}}
+                        </p>
+                      </div>
+                    </template>
+                    <v-list>
+                      <v-list-item>
+                        <v-list-item-title>one item menu</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
+                </v-col>
+              </v-row>
+            </l-popup>
+          </l-marker>
+<!-- Marker drawing when a point on map its selected -->
+          <l-marker
+          :icon="active_type === 'S' ? iconSubstation : active_type === 'T' ? iconTransformator : active_type === 'E' ? iconEMeter : null"
+          width="30vw"
+          :visible="positionPopup ? true : false"
+          :lat-lng="positionPopup"
+          >
+            <l-popup width="30vw">
+                  <v-card elevation="0" width="45vw">
+                  <v-container width="55vw">
+
+                  <v-form v-model="valid" >
+                    <v-col cols="12">
+                      <v-row>
+                    <v-select outlined
+                     label="Active type"
+                     :items="actives"
+                     v-model="active_type"
+                     width="30vw"
+                     :rules="[rules.required]"></v-select>
+                      </v-row>
+                      <v-row>
+                     <v-text-field :disabled="active_type ? false : true"
+                     label="NAME"
+                     v-model="active_name"
+                     :rules="[rules.required]"></v-text-field>
+                      </v-row>
+                      <v-row>
+                        <v-select v-model="active_bind" :disabled="active_type === 'S' ? true : false" :items="active_type === 'T' ? substations.map(a => a.name) : active_type === 'E' ? transformers.map(a => a.name) : null "
+                        label="comming soon..."
+                        :rules="[rules.required]"></v-select>
+                      </v-row>
+                      <v-row justify="center">
+                    <v-btn outlined :disabled="!valid" @click="register">register</v-btn>
+                      </v-row>
+                    </v-col>
+                  </v-form>
+
+                  </v-container>
+                  </v-card>
+            </l-popup>
+          </l-marker>
+        </l-map>
       </v-card>
      </v-col>
   </v-row>
 </template>
 
 <script>
-import L from 'leaflet'
+/* eslint-disable */
+//import L from 'leaflet'
 import { LMap, LTileLayer, LMarker, LPopup/*, LTooltip */ } from 'vue2-leaflet'
 
 // To solve missing icons
@@ -69,18 +153,47 @@ export default {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      positionPopup: L.latLng(3.4516, -76.5320),
+      positionPopup: L.latLng(0, 0),
       withTooltip: L.latLng(47.41422, -1.250482),
       currentZoom: 11.5,
       currentCenter: L.latLng(3.4516, -76.5320),
+      valid: null,
+      active: null,
+      actives: [
+        { text: 'Substation', value: 'S'
+        },
+        { text: 'Transformer' , value: 'T' },
+        { text: 'Electric Meter', value: 'E' }],
+        active_type: null,
+        active_name: null,
+        active_bind: null,
       showParagraph: true,
       iconSubstation: L.icon({
-        iconUrl: 'static/substation.png',
+        iconUrl: /* 'https://lh3.googleusercontent.com/ADBp5lqoyDlVEH6XtOLw55Bv-HYn4zzNjwY2CGaWd3C565Rbdp_0uOyETZfy4ppV1GdvN1GydR-fxNFYn_rB=w1920-h1008' */ require('../assets/substation.png') ,
+        shadowUrl: /* 'https://lh3.googleusercontent.com/mGCdckEPv5TII-w_j1K1wcLiNUIaWCkHEVVW6tODBL0w94OQKLIE8lyqPI-xTFQ3P0_y1lRMyYAmG1riWanE=w1920-h1008' */ require('../assets/substation_shadow.png'),
+        iconSize: [50, 45],
+        iconAnchor: [40, 37],
+        shadowSize: [50, 45],
+        shadowAnchor: [29, 37]
+      }),
+      iconTransformator: L.icon({
+        iconUrl: /* 'https://lh4.googleusercontent.com/pFHh5jBrMEQzCaaq60KORJewL_UPQ92HK-QPQjmrFwxEUzqPpYyb5uQ1h8Fnoh9Ke4RWImRbWP3Q1A6cILPX=w952-h991' */require('../assets/tranformer.png'),
+        shadowUrl:/* 'https://lh4.googleusercontent.com/vKcAc0AjLbvlA2upY6-SWebeE1GACLO6CJ2nlh-12WcMB_uyCGhChUEpd2QJwIXCTDfjoY56awhebumeWIRZ=w952-h991' */require('../assets/tranformer-shadow.png'),
+        iconSize: [50, 45],
+        iconAnchor: [40, 37],
+        shadowSize: [50, 45],
+        shadowAnchor: [35, 37]
+      }),
+      iconEMeter: L.icon({
+        iconUrl: require('../assets/meter.png'),
         iconSize: [50, 45],
         iconAnchor: [40, 37]
       }),
       mapOptions: {
         zoomSnap: 0.5
+      },
+      rules: {
+        required: value => !!value || 'Required.'
       }
     }
   },
@@ -106,26 +219,75 @@ export default {
       var sub = { name: nam, latitude: e.latlng.lat, longitude: e.latlng.lng } */
       /* console.log(sub) */
       /* this.register(sub) */
-      console.log(this.substations)
-      console.log(this.iconSubstation)
     },
-    register (sub) {
-      this.$store.dispatch('registerSubstation', sub)
+    getActiveNames () {
+      var actnames;
+      if (this.active_type === 'T') {
+        for (i=0;i<substations.length;i++) {
+          actnames.push(subs[i].name)
+        }
+        return actnames
+      }else if (this.active_type === 'E') {
+        for (i=0;i<transformers.length;i++) {
+          actnames.push(subs[i].name)
+        }
+        return actnames
+      }
+    },
+    register () {
+      console.log(this.transformers)
+      switch (this.active_type) {
+        case 'S':
+          this.active= {name: this.active_name, latitude: this.positionPopup.lat, longitude: this.positionPopup.lng }
+          this.$store.dispatch('registerSubstation', this.active)
         .then(res => {
-          alert('sub registered successfully')
+          alert('sub registered successfully', this.active.name)
         })
         .catch(err => {
-          console.log('register error: ' + err)
+          console.log('register Active error: ' + err)
         })
+          break;
+        case 'T':
+          this.active= {name: this.active_name, latitude: this.positionPopup.lat, longitude: this.positionPopup.lng, substation: 1/* this.active_bind */ }
+          console.log(this.substations)
+          this.$store.dispatch('registerTransformer', this.active)
+        .then(res => {
+          alert('transformer registered successfully', this.active.name)
+        })
+        .catch(err => {
+          console.log('register Active error: ' + err)
+        })
+          break;
+        case 'E':
+          this.active= {name: this.active_name, latitude: this.positionPopup.lat, longitude: this.positionPopup.lng, transformer: this.active_bind }
+          this.$store.dispatch('registerMeter', this.active)
+        .then(res => {
+          alert('meter registered successfully', this.active.name)
+        })
+        .catch(err => {
+          console.log('register Active error: ' + err)
+        })
+          break;
+      
+        default:
+          break;
+      }
     }
   },
   beforeCreate () {
     this.$store.dispatch('getSubstations')
-    console.log(this.substations)
+    this.$store.dispatch('getTransformers')
+    this.$store.dispatch('getMeters')
   },
   computed: {
     substations () {
       return this.$store.getters.getSubstations
+    },
+    transformers () {
+      return this.$store.getters.getTransformers
+    },
+    meters () {
+      return this.$store.getters.getMeters
     }
   }
 }

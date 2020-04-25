@@ -13,7 +13,7 @@
               <v-card-text >
                 <p class="display-1 text--primary">User registration</p>
               </v-card-text>
-              <v-form v-model="valid">
+              <v-form ref="UserRegistrationForm" v-model="valid">
                 <v-row>
                   <v-col>
                     <v-select outlined
@@ -136,13 +136,16 @@ export default {
         })
     },
     clearForm () {
-      this.user.username = null
+      this.$refs.UserRegistrationForm.reset()
+      this.$refs.UserRegistrationForm.resetValidaton()
+      //  Esta es una manera mas comoda de hacerlo look up.
+      /* this.user.username = null
       this.user.first_name = null
       this.user.last_name = null
       this.user.email = null
       this.user.password = null
       this.user.password_validate = null
-      this.user.rol = null
+      this.user.rol = null */
     }
   }
 }

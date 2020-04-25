@@ -10,9 +10,9 @@
               class="mx-auto pa-6"
             >
               <v-card-text >
-                <p class="display-1 text--primary">User registration</p>
+                <p class="display-1 text--primary">Client registration</p>
               </v-card-text>
-              <v-form v-model="valid">
+              <v-form ref="ClientRegistrationForm" v-model="valid">
                 <v-row>
                   <v-col>
                     <v-divider></v-divider>
@@ -97,13 +97,16 @@ export default {
         })
     },
     clearForm () {
-      this.client.username = null
+      this.$refs.ClientRegistrationForm.reset()
+      this.$refs.ClientRegistrationForm.resetValidaton()
+      //  Esta es una manera mas comoda de hacerlo look up.
+      /* this.client.username = null
       this.client.first_name = null
       this.client.last_name = null
       this.client.email = null
       this.client.password = null
       this.client.password_validate = null
-      this.client.rol = null
+      this.client.rol = null */
     }
   }
 }
