@@ -15,7 +15,6 @@ export default new Vuex.Store({
     auth: { headers: null },
     profile: {}, // Loggedin user
     users: [],
-
     clients: [],
     substations: []
   },
