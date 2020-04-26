@@ -62,7 +62,8 @@
                       Substation, Transformer or Electric Meter: {{transformer.name}}
                         <p v-show="showParagraph">
                           Latitude:  {{transformer.latitude}}<br>
-                          Longitude:  {{transformer.longitude}}
+                          Longitude:  {{transformer.longitude}}<br>
+                          substation-id:  {{transformer.substation}}
                         </p>
                       </div>
                     </template>
@@ -104,7 +105,9 @@
                      :rules="[rules.required]"></v-text-field>
                       </v-row>
                       <v-row>
-                        <v-select v-model="active_bind" :disabled="active_type === 'S' ? true : false" :items="active_type === 'T' ? substations.map(a => a.name) : active_type === 'E' ? transformers.map(a => a.name) : null "
+                        <v-select v-if="active_type === 'T' || active_type === 'E' " v-model="active_bind" :disabled="active_type === 'S' ? true : false"
+                        :items="active_type === 'T' ? substations.map((s, indexS) => {var indexS=indexS +1
+                        return {text: s.name, value: indexS}} ) : active_type === 'E' ? transformers.map(a => a.name) : null "
                         label="comming soon..."
                         :rules="[rules.required]"></v-select>
                       </v-row>
@@ -223,19 +226,18 @@ export default {
     getActiveNames () {
       var actnames;
       if (this.active_type === 'T') {
-        for (i=0;i<substations.length;i++) {
-          actnames.push(subs[i].name)
-        }
-        return actnames
+        actnames = substations
+        actnames.map((a, index)=> {
+          
+          return { text: a.name,  value: index}
+        })
       }else if (this.active_type === 'E') {
-        for (i=0;i<transformers.length;i++) {
-          actnames.push(subs[i].name)
-        }
-        return actnames
+        
       }
     },
     register () {
-      console.log(this.transformers)
+      console.log(this.active_bind)
+     /*  if (this.active_bind) { */
       switch (this.active_type) {
         case 'S':
           this.active= {name: this.active_name, latitude: this.positionPopup.lat, longitude: this.positionPopup.lng }
@@ -248,8 +250,8 @@ export default {
         })
           break;
         case 'T':
-          this.active= {name: this.active_name, latitude: this.positionPopup.lat, longitude: this.positionPopup.lng, substation: 1/* this.active_bind */ }
-          console.log(this.substations)
+          this.active= {name: this.active_name, latitude: this.positionPopup.lat, longitude: this.positionPopup.lng, substation: this.active_bind/* this.active_bind */ }
+          console.log(this.active)
           this.$store.dispatch('registerTransformer', this.active)
         .then(res => {
           alert('transformer registered successfully', this.active.name)
@@ -272,6 +274,7 @@ export default {
         default:
           break;
       }
+    /* } */
     }
   },
   beforeCreate () {

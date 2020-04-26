@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-container class="text-xs-center" style="min-height: 60vh;" fluid>
     <v-layout align-center justify-center >
       <v-flex xs12 sm10 md6>
@@ -85,7 +86,7 @@ export default {
       }
     },
     getRecaptchaToken (recaptchaResponse) {
-      axios.post('http://127.0.0.1:8000/api/v1/usuarios/verifyrecaptcha/', { recaptcha: recaptchaResponse })
+      axios.post('http://34.221.98.21:8000/api/v1/usuarios/verifyrecaptcha/', { recaptcha: recaptchaResponse })
         .then(res => {
           this.recaptcha = res.data.success
         })
