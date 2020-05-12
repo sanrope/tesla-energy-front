@@ -21,6 +21,7 @@
             :url="url"
             :attribution="attribution"
           />
+         <!-- Marker loop for substations -->
           <l-marker v-for="(substation,i) in substations" :key="i"
           :icon="iconSubstation"
           :lat-lng="latLng2(substation.latitude, substation.longitude)"
@@ -49,7 +50,7 @@
             </l-popup>
           </l-marker>
 
-          <l-marker v-for="(transformer,x) in transformers" :key="x"
+          <l-marker ref="TranformersMarker" v-for="(transformer,x) in transformers" :key="'x'+ x"
           :icon="iconTransformator"
           :lat-lng="latLng2(transformer.latitude, transformer.longitude)"
           >
@@ -79,6 +80,7 @@
           </l-marker>
 <!-- Marker drawing when a point on map its selected -->
           <l-marker
+          ref="ClickMarker"
           :icon="active_type === 'S' ? iconSubstation : active_type === 'T' ? iconTransformator : active_type === 'E' ? iconEMeter : null"
           width="30vw"
           :visible="positionPopup ? true : false"
@@ -88,7 +90,7 @@
                   <v-card elevation="0" width="45vw">
                   <v-container width="55vw">
 
-                  <v-form v-model="valid" >
+                  <v-form ref="ClickPopupForm" v-model="valid" >
                     <v-col cols="12">
                       <v-row>
                     <v-select outlined
@@ -237,7 +239,6 @@ export default {
     },
     register () {
       console.log(this.active_bind)
-     /*  if (this.active_bind) { */
       switch (this.active_type) {
         case 'S':
           this.active= {name: this.active_name, latitude: this.positionPopup.lat, longitude: this.positionPopup.lng }
@@ -246,18 +247,18 @@ export default {
           alert('sub registered successfully', this.active.name)
         })
         .catch(err => {
-          console.log('register Active error: ' + err)
+          console.log('register Substation error: ' + err)
         })
           break;
         case 'T':
-          this.active= {name: this.active_name, latitude: this.positionPopup.lat, longitude: this.positionPopup.lng, substation: this.active_bind/* this.active_bind */ }
+          this.active= {name: this.active_name, latitude: this.positionPopup.lat, longitude: this.positionPopup.lng, substation: this.active_bind }
           console.log(this.active)
           this.$store.dispatch('registerTransformer', this.active)
         .then(res => {
           alert('transformer registered successfully', this.active.name)
         })
         .catch(err => {
-          console.log('register Active error: ' + err)
+          console.log('register Transformer error: ' + err)
         })
           break;
         case 'E':
@@ -267,14 +268,22 @@ export default {
           alert('meter registered successfully', this.active.name)
         })
         .catch(err => {
-          console.log('register Active error: ' + err)
+          console.log('register ElectricMeter error: ' + err)
         })
           break;
       
         default:
           break;
-      }
-    /* } */
+      } 
+    this.$refs.ClickPopupForm.reset()
+    this.$refs.ClickPopupForm.resetValidation()
+    // this.$refs.ClickMarker.setVisible(false)
+    this.$store.dispatch('getSubstations')
+    this.$store.dispatch('getTransformers')
+    this.$store.dispatch('getMeters')
+    /* this.$forceUpdate() */
+    console.log(this.$refs.TranformersMarker)
+    // this.$forceUpdate
     }
   },
   beforeCreate () {
