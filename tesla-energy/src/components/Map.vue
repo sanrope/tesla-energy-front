@@ -71,7 +71,7 @@
                 label="Avaible?"></v-switch>
               </v-row>
                <v-row>
-                  <v-icon color="blue">open_with</v-icon>
+                  <v-icon @click="EditPositionMode" color="blue">open_with</v-icon>
               </v-row>
                 </v-col>
             </v-form>
