@@ -337,6 +337,7 @@ export default {
     this.$refs.ClickPopupForm.resetValidation()
     this.$refs.ClickMarker.setVisible(false)
     this.$refs.Map.$forceUpdate()
+    this.$forceUpdate()
     this.$store.dispatch('getSubstations')
     this.$store.dispatch('getTransformers')
     this.$store.dispatch('getMeters')
