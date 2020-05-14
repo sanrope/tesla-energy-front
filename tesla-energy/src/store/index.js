@@ -202,6 +202,19 @@ export default new Vuex.Store({
           })
       })
     },
+    updateSubstation (context, sub) {
+      return new Promise((resolve, reject) => {
+        axios.put(API_URL + 'api/v1/assets/substation/byid/' + sub.id + '/', sub, context.getters.getAuth)
+          .then(res => {
+            console.log('subestacion actualizado con éxito')
+            resolve(res)
+          })
+          .catch(err => {
+            console.log('No se pudo actualizar el subestacion')
+            reject(err)
+          })
+      })
+    },
     getTransformers (context) {
       return new Promise((resolve, reject) => {
         axios.get(API_URL + 'api/v1/assets/transformer/', context.getters.getAuth)

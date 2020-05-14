@@ -51,14 +51,14 @@
               </v-row>
             </l-popup>
           </l-marker>
-
-          <l-marker ref="TranformersMarker" v-for="(transformer,x) in transformers" :key="'x'+ x"
+            <!-- Marker loop for transformers -->
+          <l-marker v-for="(transformer,x) in transformers" :key="'x'+ x"
           :icon="iconTransformator"
           :lat-lng="latLng2(transformer.latitude, transformer.longitude)"
           >
           <l-tooltip>{{transformer.name}}</l-tooltip>
             <l-popup >
-                <v-card width="15vw">
+                <v-card elevation="0" width="20vw">
               <v-container>
             <v-form>
                 <v-col cols="12">
@@ -67,8 +67,39 @@
                   label="Name"></v-text-field>
               </v-row>
               <v-row>
-                <v-text-field
-                label="Pos"></v-text-field>
+                <v-switch
+                label="Avaible?"></v-switch>
+              </v-row>
+               <v-row>
+                  <v-icon color="blue">open_with</v-icon>
+              </v-row>
+                </v-col>
+            </v-form>
+              </v-container>
+                </v-card>
+            </l-popup>
+          </l-marker>
+           <!-- Marker loop for meters -->
+           <l-marker  v-for="(meter,x) in meters" :key="'e'+ x"
+          :icon="iconEMeter"
+          :lat-lng="latLng2(meter.latitude, meter.longitude)"
+          >
+          <l-tooltip>{{meter.name}}</l-tooltip>
+            <l-popup >
+                <v-card elevation="0" width="20vw">
+              <v-container>
+            <v-form>
+                <v-col cols="12">
+              <v-row>
+                  <v-text-field
+                  label="Name"></v-text-field>
+              </v-row>
+              <v-row>
+                <v-switch
+                label="Avaible?"></v-switch>
+              </v-row>
+               <v-row>
+                <v-btn><v-icon>open_with</v-icon></v-btn>
               </v-row>
                 </v-col>
             </v-form>
@@ -107,13 +138,12 @@
                       </v-row>
                       <v-row>
                         <v-select v-if="active_type === 'T' || active_type === 'E' " v-model="active_bind" :disabled="active_type === 'S' ? true : false"
-                        :items="active_type === 'T' ? substations.map((s, indexS) => {var indexS=indexS +1
-                        return {text: s.name, value: indexS}} ) : active_type === 'E' ? transformers.map(a => a.name) : null "
-                        label="comming soon..."
+                        :items="active_type === 'T' ? substations.map(a => {return {text: a.name, value: a.id}}) : active_type === 'E' ? transformers.map(a => {return {text: a.name, value: a.id}}) : null "
+                        label="Select Active"
                         :rules="[rules.required]"></v-select>
                       </v-row>
                       <v-row justify="center">
-                    <v-btn outlined :disabled="!valid" @click="register">register</v-btn>
+                    <v-btn outlined :disabled="!valid" @click="registerActives">register</v-btn>
                       </v-row>
                     </v-col>
                   </v-form>
@@ -152,7 +182,7 @@ export default {
   },
   data () {
     return {
-      zoom: 14,
+      zoom: 11,
       center: L.latLng(3.4516, -76.5320),
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
@@ -180,26 +210,29 @@ export default {
       }),
       iconSubstation: L.icon({
         iconUrl: require('../assets/substation.png') ,
-        shadowUrl: require('../assets/substation_shadow.png'),
+      //  shadowUrl: require('../assets/substation_shadow.png'),
         iconSize: [50, 45],
         // iconAnchor: [40, 37],
-        shadowSize: [50, 45],
+       // shadowSize: [50, 45],
         // shadowAnchor: [29, 37],
          tooltipAnchor: [10,0]
       }),
       iconTransformator: L.icon({
         iconUrl: require('../assets/tranformer.png'),
-        shadowUrl: require('../assets/tranformer-shadow.png'),
+       // shadowUrl: require('../assets/tranformer-shadow.png'),
         iconSize: [50, 45],
       //  iconAnchor: [20, 37],
-        shadowSize: [50, 45],
+        //shadowSize: [50, 45],
        // shadowAnchor: [20, 37],
         tooltipAnchor: [7,0]
       }),
       iconEMeter: L.icon({
         iconUrl: require('../assets/meter.png'),
-        iconSize: [50, 45]
+        //shadowUrl: require('../assets/meter_shadow.png'),
+       // shadowSize: [50, 45],
+        iconSize: [50, 45],
         //iconAnchor: [40, 37]
+        tooltipAnchor: [10,0]
       }),
       mapOptions: {
         zoomSnap: 0.5
@@ -262,7 +295,7 @@ export default {
         
       }
     },
-    register () {
+    registerActives () {
       console.log(this.active_bind)
        switch (this.active_type) {
         case 'S':
@@ -299,7 +332,7 @@ export default {
       
         default:
           break;
-      } 
+      }
     this.$refs.ClickPopupForm.reset()
     this.$refs.ClickPopupForm.resetValidation()
     this.$refs.ClickMarker.setVisible(false)
