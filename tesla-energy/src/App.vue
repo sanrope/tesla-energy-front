@@ -62,6 +62,14 @@
               <v-list-item-title>Profile</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item v-if="token != null" to="/map" link ripple>
+            <v-list-item-action>
+              <v-icon>map</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Actives</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
           <v-list-item v-if="token != null" @click="logout" link ripple>
             <v-list-item-action>
               <v-icon>eject</v-icon>
