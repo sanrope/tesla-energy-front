@@ -11,6 +11,7 @@ export const API_URL = 'http://34.221.98.21:8000/'
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem('token_access') || null,
+    rol: localStorage.getItem('rol') || null,
     status: null, // loading, success or error
     auth: { headers: null },
     profile: {}, // Loggedin user
@@ -59,6 +60,9 @@ export default new Vuex.Store({
     },
     set_meters (state, meters) {
       state.meters = meters
+    },
+    set_rol (state, rol) {
+      state.rol = rol
     }
   },
   actions: {
@@ -71,6 +75,7 @@ export default new Vuex.Store({
             if (token) {
               localStorage.setItem('token_access', token) // Saves token in localStorage
               context.commit('auth_success', token) // Saves data in storate state
+              context.dispatch('getRol', user.username)
               resolve(res)
             } else {
               console.log('login token null error' + res)
@@ -263,6 +268,25 @@ export default new Vuex.Store({
           })
           .catch(err => {
             console.log('register Meter error: ' + err)
+            reject(err)
+          })
+      })
+    },
+    getRol (context, username) {
+      return new Promise((resolve, reject) => {
+        axios.get(API_URL + 'api/v1/usuarios/rolbyusername/' + username + '/')
+          .then(res => {
+            const rol = res.data.rol
+            if (rol) {
+              console.log('rol puesto')
+              localStorage.setItem('rol', rol)
+              context.commit('set_rol', rol)
+            } else {
+              console.log('login token null error' + res)
+            }
+            resolve(res)
+          })
+          .catch(err => {
             reject(err)
           })
       })
