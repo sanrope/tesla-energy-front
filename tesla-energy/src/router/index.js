@@ -9,7 +9,7 @@ import RegisterUser from '../components/RegisterUser.vue'
 import Users from '../components/Users.vue'
 import RegisterClient from '../components/RegisterClient.vue'
 import Clients from '../components/Clients.vue'
-import Map from '../components/Map.vue'
+import Mapita from '../components/Map.vue'
 
 Vue.use(VueRouter)
 
@@ -47,7 +47,8 @@ const router = new VueRouter({
       name: 'Users',
       component: Users,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        requiresAD: true
       }
     },
     {
@@ -55,7 +56,8 @@ const router = new VueRouter({
       name: 'RegisterUsers',
       component: RegisterUser,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        requiresAD: true
       }
     },
     {
@@ -63,7 +65,8 @@ const router = new VueRouter({
       name: 'Clients',
       component: Clients,
       meta: {
-        requiresAuth: false
+        requiresAuth: true,
+        requiresOP: true
       }
     },
     {
@@ -71,7 +74,8 @@ const router = new VueRouter({
       name: 'Register-Client',
       component: RegisterClient,
       meta: {
-        requiresAuth: false
+        requiresAuth: true,
+        requiresOP: true
       }
     },
     {
@@ -81,7 +85,7 @@ const router = new VueRouter({
     {
       path: '/map',
       name: 'Map',
-      component: Map
+      component: Mapita
     },
     {
       path: '/about',
@@ -96,15 +100,41 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
+    // if Require AD and its not AD go to errr
+    if (!Store.getters.isAuthenticated) {
+      next({
+        name: 'Login'
+      })
+    } else if (to.matched.some(record => record.meta.requiresAD)) {
+      if (!Store.getters.isAD) {
+        next({ name: 'Err404' })
+      } else {
+        next()
+      }
+    } else if (to.matched.some(record => record.meta.requiresGE)) {
+      if (!Store.getters.isGE) {
+        next({ name: 'Err404' })
+      } else {
+        next()
+      }
+    } else if (to.matched.some(record => record.meta.requiresOP)) {
+      if (!Store.getters.isOP) {
+        next({ name: 'Err404' })
+      } else {
+        next()
+      }
+    } else {
+      next()
+    }
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    if (!Store.getters.isAuthenticated) {
+    /* if (!Store.getters.isAuthenticated) {
       next({
         name: 'Login'
       })
     } else {
       next()
-    }
+    } */
   } else if (to.matched.some(record => record.meta.requiresVisitor)) {
     // Si esta logueado, no lo deja entrar a la ruta login
     if (Store.getters.isAuthenticated) {

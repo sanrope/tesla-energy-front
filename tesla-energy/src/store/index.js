@@ -296,6 +296,15 @@ export default new Vuex.Store({
     isAuthenticated (state) {
       return state.token !== null
     },
+    isOP (state) {
+      return state.rol === 'OP'
+    },
+    isAD (state) {
+      return state.rol === 'AD'
+    },
+    isGE (state) {
+      return state.rol === 'GE'
+    },
     getUsers (state) {
       return state.users
     },

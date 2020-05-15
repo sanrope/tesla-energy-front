@@ -22,7 +22,7 @@
               <v-list-item-title>Login</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-if="token != null" to="/register-user" link ripple>
+          <v-list-item v-if="token != null && rol == 'AD'" to="/register-user" link ripple>
             <v-list-item-action>
               <v-icon>person_add</v-icon>
             </v-list-item-action>
@@ -30,7 +30,7 @@
               <v-list-item-title>User Registration</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-if="token != null" to="/users" link ripple>
+          <v-list-item v-if="token != null && rol == 'AD'" to="/users" link ripple>
             <v-list-item-action>
               <v-icon>group</v-icon>
             </v-list-item-action>
@@ -38,7 +38,7 @@
               <v-list-item-title>Users</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-if="token != null" to="/register-client" link ripple>
+          <v-list-item v-if="token != null && rol == 'OP'" to="/register-client" link ripple>
             <v-list-item-action>
               <v-icon>person_add</v-icon>
             </v-list-item-action>
@@ -46,7 +46,7 @@
               <v-list-item-title> Client Registration</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-if="token != null" to="/clients" link ripple>
+          <v-list-item v-if="token != null && rol == 'OP'" to="/clients" link ripple>
             <v-list-item-action>
               <v-icon>supervisor_account</v-icon>
             </v-list-item-action>
@@ -62,7 +62,7 @@
               <v-list-item-title>Profile</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-if="token != null" to="/map" link ripple>
+          <v-list-item v-if="token != null && rol== 'AD'" to="/map" link ripple>
             <v-list-item-action>
               <v-icon>map</v-icon>
             </v-list-item-action>
@@ -147,6 +147,9 @@ export default {
   computed: {
     token () { // To validate if login
       return this.$store.state.token
+    },
+    rol () {
+      return this.$store.state.rol
     }
   }
 }

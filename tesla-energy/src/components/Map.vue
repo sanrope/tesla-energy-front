@@ -283,6 +283,9 @@ export default {
       else {
         this.ClickMarkerIcon= L.Marker.prototype.options.icon}
     },
+    EditPositionMode(){
+      
+    },
     getActiveNames () {
       var actnames;
       if (this.active_type === 'T') {
