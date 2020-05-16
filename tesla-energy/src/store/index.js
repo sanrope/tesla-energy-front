@@ -247,6 +247,19 @@ export default new Vuex.Store({
           })
       })
     },
+    updateTransformer (context, trans) {
+      return new Promise((resolve, reject) => {
+        axios.put(API_URL + 'api/v1/assets/transformer/byid/' + trans.id + '/', trans, context.getters.getAuth)
+          .then(res => {
+            console.log('transformador actualizado con éxito')
+            resolve(res)
+          })
+          .catch(err => {
+            console.log('No se pudo actualizar el transformador')
+            reject(err)
+          })
+      })
+    },
     getMeters (context) {
       return new Promise((resolve, reject) => {
         axios.get(API_URL + 'api/v1/assets/electricmeter/', context.getters.getAuth)
@@ -269,6 +282,19 @@ export default new Vuex.Store({
           })
           .catch(err => {
             console.log('register Meter error: ' + err)
+            reject(err)
+          })
+      })
+    },
+    updateMeter (context, meter) {
+      return new Promise((resolve, reject) => {
+        axios.put(API_URL + 'api/v1/assets/electricmeter/byid/' + meter.id + '/', meter, context.getters.getAuth)
+          .then(res => {
+            console.log('medidor actualizado con éxito')
+            resolve(res)
+          })
+          .catch(err => {
+            console.log('No se pudo actualizar el medidor')
             reject(err)
           })
       })
@@ -296,6 +322,15 @@ export default new Vuex.Store({
   getters: {
     isAuthenticated (state) {
       return state.token !== null
+    },
+    isOP (state) {
+      return state.rol === 'OP'
+    },
+    isAD (state) {
+      return state.rol === 'AD'
+    },
+    isGE (state) {
+      return state.rol === 'GE'
     },
     getUsers (state) {
       return state.users

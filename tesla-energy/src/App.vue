@@ -3,7 +3,29 @@
     <v-app id="inspire">
 
       <!-- Navigation drawer (left column)-->
-      <v-navigation-drawer v-model="drawer" app fixed temporary>
+      <!-- v-model="drawer" -->
+      <v-navigation-drawer v-model="drawer" mobile-break-point="1000" app fixed>
+        <v-row>
+          <v-col cols="6">
+              <v-img
+              :src="require('./assets/tesla_coil.svg')"
+              contain
+              transition="scale-transition"
+              max-width="40"
+              min-width="40"
+              />
+          </v-col>
+          <v-col cols="6">
+            <v-img
+              :src="require('./assets/tesla_firm.png')"
+              contain
+              transition="scale-transition"
+              max-width="500"
+              min-width="100"
+              />
+          </v-col>
+        </v-row>
+        <v-divider></v-divider>
         <v-list dense>
           <v-list-item-group mandatory color="indigo">
           <v-list-item to="/" link ripple>
@@ -22,7 +44,7 @@
               <v-list-item-title>{{ $t("home.login") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-if="token != null" to="/register-user" link ripple>
+          <v-list-item v-if="token != null && rol == 'AD'" to="/register-user" link ripple>
             <v-list-item-action>
               <v-icon>person_add</v-icon>
             </v-list-item-action>
@@ -30,7 +52,7 @@
               <v-list-item-title>{{ $t("menu.userRegistration") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-if="token != null" to="/users" link ripple>
+          <v-list-item v-if="token != null && rol == 'AD'" to="/users" link ripple>
             <v-list-item-action>
               <v-icon>group</v-icon>
             </v-list-item-action>
@@ -38,7 +60,7 @@
               <v-list-item-title>{{ $t("menu.users") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-if="token != null" to="/register-client" link ripple>
+          <v-list-item v-if="token != null && rol == 'OP'" to="/register-client" link ripple>
             <v-list-item-action>
               <v-icon>person_add</v-icon>
             </v-list-item-action>
@@ -46,7 +68,7 @@
               <v-list-item-title>{{ $t("menu.clientRegistration") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-if="token != null" to="/clients" link ripple>
+          <v-list-item v-if="token != null && rol == 'OP'" to="/clients" link ripple>
             <v-list-item-action>
               <v-icon>supervisor_account</v-icon>
             </v-list-item-action>
@@ -62,7 +84,7 @@
               <v-list-item-title>{{ $t("menu.profile") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-if="token != null" to="/map" link ripple>
+          <v-list-item v-if="token != null && rol== 'AD'" to="/map" link ripple>
             <v-list-item-action>
               <v-icon>map</v-icon>
             </v-list-item-action>
@@ -151,6 +173,9 @@ export default {
   computed: {
     token () { // To validate if login
       return this.$store.state.token
+    },
+    rol () {
+      return this.$store.state.rol
     }
   }
 }
