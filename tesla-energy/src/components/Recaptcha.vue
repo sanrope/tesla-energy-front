@@ -13,7 +13,7 @@
       sitekey="6Lewz-YUAAAAAA5_K5TwntsVncsJzm3XaUgDDadO">
     </vue-recaptcha>
     <v-card-actions>
-      <v-btn text v-on:click="resetRecaptcha">Reset reCAPTCHA</v-btn>
+      <v-btn text v-on:click="resetRecaptcha">{{ $t("recaptcha.reset") }}</v-btn>
     </v-card-actions>
   </v-card>
 </template>

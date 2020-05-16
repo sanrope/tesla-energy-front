@@ -10,7 +10,7 @@
               class="mx-auto pa-6"
             >
               <v-card-text >
-                <p class="display-1 text--primary">Client registration</p>
+                <p class="display-1 text--primary">{{ $t("registerClient.title") }}</p>
               </v-card-text>
               <v-form ref="ClientRegistrationForm" v-model="valid">
                 <v-row>
@@ -20,7 +20,7 @@
                     v-model="client.first_name"
                     prepend-inner-icon="assignment_ind"
                     name="first_name"
-                    label="Name"
+                    :label="$t('registerClient.name')"
                     type="text"
                     solo
                     required
@@ -29,7 +29,7 @@
                     v-model="client.last_name"
                     prepend-inner-icon="assignment_ind"
                     name="last_name"
-                    label="Last Name"
+                    :label="$t('registerClient.lastName')"
                     type="text"
                     solo
                     required
@@ -38,7 +38,7 @@
                     v-model="client.cedula"
                     prepend-inner-icon="recent_actors"
                     name="cedula"
-                    label="ID"
+                    :label="$t('registerClient.id')"
                     type="number"
                     solo
                     required
@@ -47,12 +47,12 @@
                     v-model="client.email"
                     prepend-inner-icon="email"
                     name="email"
-                    label="Email"
+                    :label="$t('registerClient.email')"
                     type="text"
                     solo
                     required
                     :rules="[rules.required, rules.email]"></v-text-field>
-                    <v-btn @click="register" :disabled="!valid">send</v-btn>
+                    <v-btn @click="register" :disabled="!valid">{{ $t("registerClient.sendButton") }}</v-btn>
                   </v-col>
                 </v-row>
               </v-form>
@@ -65,6 +65,9 @@
 </template>
 
 <script>
+
+import { i18n } from '../plugins/i18n.js'
+
 export default {
   name: 'RegisterClient',
   data () {
@@ -76,10 +79,10 @@ export default {
         email: null
       },
       rules: {
-        required: value => !!value || 'Required.',
+        required: value => !!value || i18n.t('registerClient.fieldRequired'),
         email: value => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          return pattern.test(value) || 'Invalid e-mail.'
+          return pattern.test(value) || i18n.t('registerClient.invalidEmail')
         }
       },
       valid: true
@@ -89,11 +92,11 @@ export default {
     register () {
       this.$store.dispatch('registerClient', this.client)
         .then(res => {
-          alert('User registered successfully')
+          alert(i18n.t('registerClient.registered'))
           this.clearForm()
         })
         .catch(err => {
-          console.log('register error: ' + err)
+          console.log(i18n.t('registerClient.registerError') + err)
         })
     },
     clearForm () {

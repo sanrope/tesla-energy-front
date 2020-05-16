@@ -11,23 +11,23 @@
               :color="user.rol === 'OP' ? 'indigo' : user.rol === 'GE' ? '#757de8' : 'white'"
             >
               <v-card-text >
-                <p class="display-1 text--primary">User registration</p>
+                <p class="display-1 text--primary">{{ $t("registerUser.title") }}</p>
               </v-card-text>
               <v-form ref="UserRegistrationForm" v-model="valid">
                 <v-row>
                   <v-col>
                     <v-select outlined
-                     label="User type"
+                     :label="$t('registerUser.userType.user')"
                      v-model="user.rol"
                      :rules="[rules.required]"
-                     :items="items_box"></v-select
-                    >
+                     :items="items_box">
+                    </v-select>
                     <v-divider></v-divider>
                     <v-text-field
                     v-model="user.first_name"
                     prepend-inner-icon="assignment_ind"
                     name="first_name"
-                    label="Name"
+                    :label="$t('registerUser.name')"
                     type="text"
                     solo
                     required
@@ -36,7 +36,7 @@
                     v-model="user.last_name"
                     prepend-inner-icon="assignment_ind"
                     name="last_name"
-                    label="Last Name"
+                    :label="$t('registerUser.lastName')"
                     type="text"
                     solo
                     required
@@ -45,7 +45,7 @@
                     v-model="user.username"
                     prepend-inner-icon="person"
                     name="username"
-                    label="Username"
+                    :label="$t('registerUser.userName')"
                     type="text"
                     solo
                     required
@@ -54,7 +54,7 @@
                     v-model="user.email"
                     prepend-inner-icon="email"
                     name="email"
-                    label="Email"
+                    :label="$t('registerUser.email')"
                     type="text"
                     solo
                     required
@@ -63,7 +63,7 @@
                     v-model="user.password"
                     prepend-inner-icon="https"
                     name="password"
-                    label="Password"
+                    :label="$t('registerUser.password')"
                     type="password"
                     solo
                     required
@@ -72,13 +72,13 @@
                     v-model="user.password2"
                     prepend-inner-icon="https"
                     name="password2"
-                    label="Password Again"
+                    :label="$t('registerUser.passwordConfirmation')"
                     type="password"
                     solo
-                    hint="Repeat your password"
+                    :hint="$t('registerUser.passwordHint')"
                     required
                     :rules="[rules.required, rules.password_val]"></v-text-field>
-                    <v-btn @click="register" :disabled="!valid">send</v-btn>
+                    <v-btn @click="register" :disabled="!valid">{{ $t("registerUser.sendButton") }}</v-btn>
                   </v-col>
                 </v-row>
               </v-form>
@@ -91,6 +91,9 @@
 </template>
 
 <script>
+
+import { i18n } from '../plugins/i18n.js'
+
 export default {
   name: 'RegisterUser',
   data () {
@@ -106,20 +109,20 @@ export default {
       },
       items_box: [
         {
-          text: 'Manager', value: 'GE'
+          text: i18n.t('registerUser.userType.manager'), value: 'GE'
         },
         {
-          text: 'Operator', value: 'OP'
+          text: i18n.t('registerUser.userType.operator'), value: 'OP'
         }
       ],
       rules: {
-        required: value => !!value || 'Required.',
+        required: value => !!value || i18n.t('registerUser.fieldRequired'),
         email: value => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          return pattern.test(value) || 'Invalid e-mail.'
+          return pattern.test(value) || i18n.t('registerUser.invalidEmail')
         },
-        password_val: value => this.user.password === value || 'Password not coincedence',
-        min_pass: value => !value ? '' : value.length >= 8 || 'Min 8 characters'
+        password_val: value => this.user.password === value || i18n.t('registerUser.passwordMatch'),
+        min_pass: value => !value ? '' : value.length >= 8 || i18n.t('registerUser.passwordCharacters')
       },
       valid: true
     }
@@ -128,11 +131,11 @@ export default {
     register () {
       this.$store.dispatch('registerUser', this.user)
         .then(res => {
-          alert('User registered successfully')
+          alert(i18n.t('registerUser.registered'))
           this.clearForm()
         })
         .catch(err => {
-          console.log('register error: ' + err)
+          console.log(i18n.t('registerUser.registerError') + err)
         })
     },
     clearForm () {
