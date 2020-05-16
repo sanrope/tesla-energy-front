@@ -3,7 +3,29 @@
     <v-app id="inspire">
 
       <!-- Navigation drawer (left column)-->
-      <v-navigation-drawer v-model="drawer" app fixed temporary>
+      <!-- v-model="drawer" -->
+      <v-navigation-drawer v-model="drawer" mobile-break-point="1000" app fixed>
+        <v-row>
+          <v-col cols="6">
+              <v-img
+              :src="require('./assets/tesla_coil.svg')"
+              contain
+              transition="scale-transition"
+              max-width="40"
+              min-width="40"
+              />
+          </v-col>
+          <v-col cols="6">
+            <v-img
+              :src="require('./assets/tesla_firm.png')"
+              contain
+              transition="scale-transition"
+              max-width="500"
+              min-width="100"
+              />
+          </v-col>
+        </v-row>
+        <v-divider></v-divider>
         <v-list dense>
           <v-list-item-group mandatory color="indigo">
           <v-list-item to="/" link ripple>
@@ -67,7 +89,7 @@
               <v-icon>map</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Actives</v-list-item-title>
+              <v-list-item-title>Assets</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null" @click="logout" link ripple>
