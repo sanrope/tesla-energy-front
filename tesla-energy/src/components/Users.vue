@@ -2,13 +2,13 @@
   <v-row>
     <v-col>
       <v-card>
-        <v-card-title>
-        System users:
+        <v-card-title class="display-2">
+          {{ $t("users.title") }}
         <v-spacer></v-spacer>
         <v-text-field
             v-model="search"
             append-icon="mdi-magnify"
-            label="Search"
+            :label="$t('users.search')"
             single-line
             hide-details
         ></v-text-field>
@@ -37,36 +37,36 @@
         <v-dialog v-model="dialog" max-width="500px">
             <v-card>
               <v-card-title>
-                <span class="headline">One Title</span>
+                <span class="headline">{{ $t("users.editUser") }}</span>
               </v-card-title>
               <v-card-text>
                 <v-container>
                   <v-row>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field v-model="editedItem.first_name" label="first name"></v-text-field>
+                      <v-text-field :disabled="true" v-model="editedItem.username" :label="$t('users.userName')"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field v-model="editedItem.last_name" label="last name"></v-text-field>
+                      <v-text-field v-model="editedItem.first_name" :label="$t('users.name')"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field :disabled="true" v-model="editedItem.username" label="username"></v-text-field>
+                      <v-text-field v-model="editedItem.last_name" :label="$t('users.lastName')"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field v-model="editedItem.email" label="email"></v-text-field>
+                      <v-text-field v-model="editedItem.email" :label="$t('users.email')"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-select :items="items_box" v-model="editedItem.is_active" label="active"></v-select>
+                      <v-select :items="items_box" v-model="editedItem.is_active" :label="$t('users.state')"></v-select>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field v-model="editedItem.rol" label="rol"></v-text-field>
+                      <v-text-field v-model="editedItem.rol" :label="$t('users.userType')"></v-text-field>
                     </v-col>
                   </v-row>
                 </v-container>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                <v-btn color="blue darken-1" text @click="close">{{ $t("users.cancel") }}</v-btn>
+                <v-btn color="blue darken-1" text @click="save">{{ $t("users.save") }}</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -76,6 +76,9 @@
 </template>
 
 <script>
+
+import { i18n } from '../plugins/i18n.js'
+
 export default {
   name: 'Users',
   data () {
@@ -83,28 +86,28 @@ export default {
       search: '',
       dialog: false,
       headers: [
-        { text: 'Username', value: 'username' },
-        { text: 'Name', value: 'first_name' },
-        { text: 'Last name', value: 'last_name' },
-        { text: 'E-mail', value: 'email' },
-        { text: 'State', value: 'is_active' },
-        { text: 'Ocupation', value: 'rol' },
-        { text: 'Edit user', value: 'actions' }
+        { text: i18n.t('users.userName'), value: 'username' },
+        { text: i18n.t('users.name'), value: 'first_name' },
+        { text: i18n.t('users.lastName'), value: 'last_name' },
+        { text: i18n.t('users.email'), value: 'email' },
+        { text: i18n.t('users.state'), value: 'is_active' },
+        { text: i18n.t('users.userType'), value: 'rol' },
+        { text: i18n.t('users.editUser'), value: 'actions' }
       ],
       editedItem: {
+        username: '',
         first_name: '',
         last_name: '',
-        username: '',
         email: '',
-        is_active: '',
-        rol: ''
+        rol: '',
+        is_active: ''
       },
       items_box: [
         {
-          text: 'activo', value: true
+          text: i18n.t('users.activeUser'), value: true
         },
         {
-          text: 'inactivo', value: false
+          text: i18n.t('users.inactiveUser'), value: false
         }]
     }
   },

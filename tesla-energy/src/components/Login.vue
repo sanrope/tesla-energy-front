@@ -5,7 +5,7 @@
       <v-flex xs12 sm10 md6>
         <v-card class="elevation-10" >
           <v-toolbar dark color="primary">
-            <v-toolbar-title>Login</v-toolbar-title>
+            <v-toolbar-title>{{ $t("login.title") }}</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-text>
@@ -15,7 +15,8 @@
               <v-text-field
                v-model="user.username"
                prepend-icon="person"
-               name="login" label="Username"
+               name="login"
+               :label="$t('login.userName')"
                :disabled="token ? true : false" type="text"
                :rules="[rules.required]"
                required></v-text-field>
@@ -23,7 +24,7 @@
                :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                v-model="user.password" prepend-icon="lock"
                :disabled="token ? true : false" name="password"
-               label="Password"
+               :label="$t('login.password')"
                id="password"
                :type="show ? 'text' : 'password'"
                required
@@ -31,7 +32,7 @@
                @click:append="show = !show"></v-text-field>
               <v-card-actions>
                 <Recaptcha @recaptchaToken="getRecaptchaToken"></Recaptcha>
-                <v-btn :disabled="!valid" type="submit" color="pink">Login</v-btn>
+                <v-btn :disabled="!valid" type="submit" color="pink">{{ $t("login.loginButton") }}</v-btn>
               </v-card-actions>
             </v-form>
           </v-card-text>
@@ -46,8 +47,11 @@
 </template>
 
 <script>
+
 import Recaptcha from './Recaptcha.vue'
 import axios from 'axios'
+import { i18n } from '../plugins/i18n.js'
+
 export default {
   name: 'Login',
   data () {
@@ -60,7 +64,7 @@ export default {
       valid: true,
       recaptcha: false,
       rules: {
-        required: val => !!val || 'This is required'
+        required: val => !!val || i18n.t('registerUser.fieldRequired')
       },
       error: null
     }
@@ -96,7 +100,7 @@ export default {
     }
   },
   computed: {
-    token () { // To validate if login
+    token () { // To validate if already logged in
       return this.$store.state.token
     }
   }

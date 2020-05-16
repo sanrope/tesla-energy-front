@@ -11,7 +11,7 @@
               <v-icon>mdi-home</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Home</v-list-item-title>
+              <v-list-item-title>{{ $t("menu.home") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token == null" to="/login" link ripple>
@@ -19,7 +19,7 @@
               <v-icon>portrait</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Login</v-list-item-title>
+              <v-list-item-title>{{ $t("home.login") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null" to="/register-user" link ripple>
@@ -27,7 +27,7 @@
               <v-icon>person_add</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>User Registration</v-list-item-title>
+              <v-list-item-title>{{ $t("menu.userRegistration") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null" to="/users" link ripple>
@@ -35,7 +35,7 @@
               <v-icon>group</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Users</v-list-item-title>
+              <v-list-item-title>{{ $t("menu.users") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null" to="/register-client" link ripple>
@@ -43,7 +43,7 @@
               <v-icon>person_add</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title> Client Registration</v-list-item-title>
+              <v-list-item-title>{{ $t("menu.clientRegistration") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null" to="/clients" link ripple>
@@ -51,7 +51,7 @@
               <v-icon>supervisor_account</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Clients</v-list-item-title>
+              <v-list-item-title>{{ $t("menu.clients") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null" to="/profile" link ripple>
@@ -59,7 +59,7 @@
               <v-icon>perm_identity</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Profile</v-list-item-title>
+              <v-list-item-title>{{ $t("menu.profile") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null" to="/map" link ripple>
@@ -67,7 +67,7 @@
               <v-icon>map</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Actives</v-list-item-title>
+              <v-list-item-title>{{ $t("menu.assets") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null" @click="logout" link ripple>
@@ -75,7 +75,7 @@
               <v-icon>eject</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Log out</v-list-item-title>
+              <v-list-item-title>{{ $t("menu.logout") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
