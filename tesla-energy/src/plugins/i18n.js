@@ -187,10 +187,17 @@ const messages = {
   pt_BR: {
     home: {
       welcome: 'Bem-vindo à Tesla Energy',
-      login: 'Faça seu login'
+      login: 'Faça seu Login'
     },
     recaptcha: {
-      reset: 'Reset reCAPTCHA'
+      reset: 'Redefinir reCAPTCHA'
+    },
+    login: {
+      title: 'Faça seu Login',
+      userName: 'Nome do usuário',
+      password: 'Senha',
+      loginButton: 'Faça seu Login',
+      fieldRequired: 'Requeridos.'
     },
     menu: {
       home: 'Início',
@@ -201,6 +208,70 @@ const messages = {
       profile: 'Perfil',
       assets: 'Ativos',
       logout: 'Sair'
+    },
+    registerUser: {
+      title: 'Registro de Usuário',
+      userType: {
+        user: 'Selecione o Tipo de Usuário',
+        manager: 'Gerente',
+        operator: 'Operador'
+      },
+      name: 'Nome',
+      lastName: 'Último nome',
+      userName: 'Nome do usuário',
+      email: 'O email',
+      password: 'Senha',
+      passwordConfirmation: 'ConfirmaÇão Da Senha',
+      sendButton: 'Enviar',
+      fieldRequired: 'Requeridos.',
+      invalidEmail: 'O email inválido.',
+      passwordMatch: 'A senha deve corresponder.',
+      passwordCharacters: 'Mínimo de 8 caracteres.',
+      passwordHint: 'Repita sua senha.',
+      registered: 'Usuário registrado com sucesso',
+      registerError: 'Erro de registro '
+    },
+    users: {
+      title: 'Usuários do sistema:',
+      search: 'Procurar',
+      userName: 'Nome do usuário',
+      name: 'Nome',
+      lastName: 'Último nome',
+      email: 'O email',
+      state: 'Estado',
+      userType: 'Tipo de Usuário',
+      editUser: 'Editar Usuário',
+      cancel: 'Cancelar',
+      save: 'Salve',
+      activeUser: 'Ativo',
+      inactiveUser: 'Inativo'
+    },
+    registerClient: {
+      title: 'Registro de Cliente',
+      name: 'Nome',
+      lastName: 'Último nome',
+      id: 'Número de Identificação',
+      email: 'O email',
+      fieldRequired: 'Requeridos.',
+      invalidEmail: 'O email inválido.',
+      sendButton: 'Enviar',
+      registered: 'Cliente Registrado com Sucesso',
+      registerError: 'Erro de registro '
+    },
+    clients: {
+      title: 'Clientes:',
+      search: 'Procurar',
+      name: 'Nome',
+      lastName: 'Último nome',
+      email: 'O email',
+      state: 'Estado',
+      clientType: 'Tipo de Cliente',
+      id: 'Número de Identificação',
+      editClient: 'Editar Cliente',
+      cancel: 'Cancelar',
+      save: 'Salve',
+      activeClient: 'Ativo',
+      inactiveClient: 'Inativo'
     }
   }
 }

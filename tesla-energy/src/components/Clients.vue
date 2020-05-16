@@ -55,7 +55,7 @@
                       <v-text-field v-model="editedItem.email" :label="$t('clients.email')"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field v-model="editedItem.clientType" label="Client Type"></v-text-field>
+                      <v-text-field v-model="editedItem.clientType" :label="$t('clients.clientType')"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-select :items="items_box" v-model="editedItem.is_active" :label="$t('clients.state')"></v-select>
