@@ -2,13 +2,13 @@
   <v-row>
     <v-col>
       <v-card>
-        <v-card-title class="display-3">
-        Clients:
+        <v-card-title class="display-2">
+          {{ $t("clients.title") }}
         <v-spacer></v-spacer>
         <v-text-field
             v-model="search"
             append-icon="mdi-magnify"
-            label="Search"
+            :label="$t('clients.search')"
             single-line
             hide-details
         ></v-text-field>
@@ -37,36 +37,40 @@
         <v-dialog v-model="dialog" max-width="500px">
             <v-card>
               <v-card-title>
-                <span class="headline">Edit Client</span>
+                <span class="headline">{{ $t("clients.editClient") }}</span>
               </v-card-title>
               <v-card-text>
                 <v-container>
                   <v-row>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field v-model="editedItem.first_name" label="first name"></v-text-field>
+                      <v-text-field :disabled="true" v-model="editedItem.cedula" label="ID"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field v-model="editedItem.last_name" label="last name"></v-text-field>
+                      <v-text-field v-model="editedItem.first_name" :label="$t('clients.name')"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field :disabled="true" type="number" v-model="editedItem.cedula" label="ID"></v-text-field>
+                      <v-text-field v-model="editedItem.last_name" :label="$t('clients.lastName')"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field v-model="editedItem.email" label="email"></v-text-field>
+                      <v-text-field v-model="editedItem.email" :label="$t('clients.email')"></v-text-field>
                     </v-col>
+                    <v-col>
+                      <v-select
+                      :label="$t('clients.clientType')"
+                      v-model="editedItem.type"
+                      :items="items_box1">
+                    </v-select>
+                  </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-select :items="items_box" v-model="editedItem.is_active" label="active"></v-select>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <!-- <v-text-field v-model="editedItem.rol" label="rol"></v-text-field> -->
+                      <v-select :items="items_box" v-model="editedItem.is_active" :label="$t('clients.state')"></v-select>
                     </v-col>
                   </v-row>
                 </v-container>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                <v-btn color="blue darken-1" text @click="close">{{ $t("clients.cancel") }}</v-btn>
+                <v-btn color="blue darken-1" text @click="save">{{ $t("clients.save") }}</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -76,6 +80,9 @@
 </template>
 
 <script>
+
+import { i18n } from '../plugins/i18n.js'
+
 export default {
   name: 'Clients',
   data () {
@@ -83,26 +90,37 @@ export default {
       search: '',
       dialog: false,
       headers: [
-        { text: 'Name', value: 'first_name' },
-        { text: 'Last name', value: 'last_name' },
-        { text: 'E-mail', value: 'email' },
-        { text: 'ID', value: 'cedula' },
-        { text: 'Edit user', value: 'actions' }
+        { text: i18n.t('clients.id'), value: 'cedula' },
+        { text: i18n.t('clients.name'), value: 'first_name' },
+        { text: i18n.t('clients.lastName'), value: 'last_name' },
+        { text: i18n.t('clients.email'), value: 'email' },
+        { text: i18n.t('clients.clientType'), value: 'type' },
+        { text: i18n.t('clients.state'), value: 'is_active' },
+        { text: i18n.t('clients.editClient'), value: 'actions' }
       ],
       editedItem: {
+        cedula: '',
         first_name: '',
         last_name: '',
         email: '',
-        is_active: '',
-        cedula: ''
+        type: '',
+        is_active: ''
       },
       items_box: [
         {
-          text: 'active', value: true
+          text: i18n.t('clients.activeClient'), value: true
         },
         {
-          text: 'deactive', value: false
-        }]
+          text: i18n.t('clients.inactiveClient'), value: false
+        }],
+      items_box1: [
+        {
+          text: 'Natural', value: 'NA'
+        },
+        {
+          text: 'Corporativo', value: 'CO'
+        }
+      ]
     }
   },
   watch: {
@@ -129,6 +147,7 @@ export default {
         first_name: this.editedItem.first_name,
         last_name: this.editedItem.last_name,
         email: this.editedItem.email,
+        type: this.editedItem.type,
         is_active: this.editedItem.is_active
       }
       await this.$store.dispatch('updateClients', newUser)

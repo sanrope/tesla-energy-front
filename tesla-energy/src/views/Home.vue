@@ -2,7 +2,7 @@
           <v-col cols="12">
           <v-row align="center" justify="center">
               <h1>
-                <v-responsive> Welcome to Tesla Energy</v-responsive> </h1>
+                <v-responsive> {{ $t("home.welcome") }}</v-responsive> </h1>
           </v-row>
             <v-row align="center" justify="center">
                 <!-- <img :src="require('../assets/tesla_coil.svg')"> -->
@@ -14,10 +14,9 @@
 </template>
 
 <script>
-// @ is an alias to /src
+
 export default {
   name: 'Home',
-  components: {},
   data: () => ({
     drawer: false
   })

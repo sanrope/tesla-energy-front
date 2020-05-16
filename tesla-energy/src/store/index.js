@@ -6,7 +6,8 @@ import jwtDecode from 'jwt-decode'
 
 Vue.use(Vuex)
 
-export const API_URL = 'http://34.221.98.21:8000/'
+// export const API_URL = 'http://34.221.98.21:8000/'
+export const API_URL = 'http://localhost:8000/'
 
 export default new Vuex.Store({
   state: {
@@ -170,7 +171,7 @@ export default new Vuex.Store({
     },
     updateClients (context, user) {
       return new Promise((resolve, reject) => {
-        axios.put(API_URL + 'api/v1/clietes/bycedula/' + user.cedula + '/', user, context.getters.getAuth)
+        axios.put(API_URL + 'api/v1/clientes/bycedula/' + user.cedula + '/', user, context.getters.getAuth)
           .then(res => {
             console.log('Cliente actualizado con éxito')
             resolve(res)

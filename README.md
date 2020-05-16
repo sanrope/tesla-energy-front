@@ -1,14 +1,9 @@
-# tesla-energy-front
-
 # Aplicaciones en el WEB y redes inalámbricas: Proyecto final
 
 ## Autores:
     - SANTIAGO RODRIGUEZ PENAGOS	1670706
     - JUAN CAMILO SÁNCHEZ BARREIRO	1527749
     - JUAN FELIPE OROZCO ESCOBAR	1426244
-    - VALENCIA VELASCO SAMIR FARID	1629607
-    - DAVID CRESPO MUÑOZ            1623100
-    - CRISTIAN MANOSALVA BELTRAN    1628397
 
 ## Asignatura:
     - Aplicaciones en el WEB y redes inalámbricas
@@ -25,7 +20,4 @@ npm install
 npm run serve
 ```
 
-
-Notas:
-
-    1. Se deben tener instaladas las siguientes dependencias: node.js, npm, vue-cli
+Nota: se debe tener instaladas las siguientes dependencias: node.js, npm, vue-cli
