@@ -60,6 +60,13 @@
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field v-model="editedItem.rol" :label="$t('users.userType')"></v-text-field>
                     </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-select
+                      :label="$t('users.userType')"
+                      v-model="editedItem.rol"
+                      :items="items_box1">
+                    </v-select>
+                  </v-col>
                   </v-row>
                 </v-container>
               </v-card-text>
@@ -108,7 +115,15 @@ export default {
         },
         {
           text: i18n.t('users.inactiveUser'), value: false
-        }]
+        }],
+      items_box1: [
+        {
+          text: 'Gerente', value: 'GE'
+        },
+        {
+          text: 'Operador', value: 'OP'
+        }
+      ]
     }
   },
   watch: {
