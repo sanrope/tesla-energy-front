@@ -95,6 +95,7 @@
               />
           </div>
         <v-toolbar-title>Tesla Energy</v-toolbar-title>
+        <lang-switcher></lang-switcher>
       </v-app-bar>
 
       <!-- Content (center content) -->
@@ -123,9 +124,12 @@
 </template>
 
 <script>
-
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 export default {
   name: 'App',
+  components: {
+    'lang-switcher': LanguageSwitcher
+  },
   data: () => ({
     drawer: null,
     message: null,
