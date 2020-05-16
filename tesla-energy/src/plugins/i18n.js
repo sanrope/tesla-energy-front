@@ -100,7 +100,14 @@ const messages = {
       login: 'Iniciar sesión'
     },
     recaptcha: {
-      reset: 'Reset reCAPTCHA'
+      reset: 'Reiniciar reCAPTCHA'
+    },
+    login: {
+      title: 'Iniciar sesión',
+      userName: 'Nombre de Usuario',
+      password: 'Contraseña',
+      loginButton: 'Iniciar Sesión',
+      fieldRequired: 'Requerido.'
     },
     menu: {
       home: 'Inicio',
@@ -111,6 +118,70 @@ const messages = {
       profile: 'Perfil',
       assets: 'Activos',
       logout: 'Cerrar Sesión'
+    },
+    registerUser: {
+      title: 'Registro de Usuario',
+      userType: {
+        user: 'Seleccionar Tipo de Ssuario',
+        manager: 'Administrador',
+        operator: 'Operador'
+      },
+      name: 'Nombre',
+      lastName: 'Apellido',
+      userName: 'Nombre de Usuario',
+      email: 'Correo electrónico',
+      password: 'Contraseña',
+      passwordConfirmation: 'Confirmar contraseña',
+      sendButton: 'Enviar',
+      fieldRequired: 'Requerido.',
+      invalidEmail: 'Correo electrónico invalido.',
+      passwordMatch: 'La contraseña debe coincidir.',
+      passwordCharacters: 'Mínimo 8 caracteres.',
+      passwordHint: 'Repite tu contraseña.',
+      registered: 'Usuario registrado satisfactoriamente',
+      registerError: 'Error al registrar '
+    },
+    users: {
+      title: 'Usuario del Sistema:',
+      search: 'Buscar',
+      userName: 'Nombre de Usuario',
+      name: 'Nombre',
+      lastName: 'Apellido',
+      email: 'Correo electrónico',
+      state: 'Estado',
+      userType: 'Tipo de Usuario',
+      editUser: 'Editar Usuario',
+      cancel: 'Cancelar',
+      save: 'Guardar',
+      activeUser: 'Activo',
+      inactiveUser: 'Inactivo'
+    },
+    registerClient: {
+      title: 'Registro de Cliente',
+      name: 'Nombre',
+      lastName: 'Apellido',
+      id: 'Identificación',
+      email: 'Correo electrónico',
+      fieldRequired: 'Requerido.',
+      invalidEmail: 'Correo electrónico invalido.',
+      sendButton: 'Enviar',
+      registered: 'Cliente registrado satisfactoriamente',
+      registerError: 'Error al registrar '
+    },
+    clients: {
+      title: 'Clientes:',
+      search: 'Buscar',
+      name: 'Nombre',
+      lastName: 'Apellido',
+      email: 'Correo electrónico',
+      state: 'Estado',
+      clientType: 'Tipo de Cliente',
+      id: 'Identificación',
+      editClient: 'Editar Cliente',
+      cancel: 'Cancelar',
+      save: 'Guardar',
+      activeClient: 'Activo',
+      inactiveClient: 'Inactivo'
     }
   },
   pt_BR: {

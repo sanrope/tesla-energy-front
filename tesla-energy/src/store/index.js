@@ -7,7 +7,7 @@ import jwtDecode from 'jwt-decode'
 Vue.use(Vuex)
 
 export const API_URL = 'http://34.221.98.21:8000/'
-//export const API_URL = 'http://localhost:8000/'
+// export const API_URL = 'http://localhost:8000/'
 
 export default new Vuex.Store({
   state: {
