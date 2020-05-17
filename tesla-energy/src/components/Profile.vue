@@ -15,56 +15,56 @@
     </v-snackbar>
     <v-tabs v-model="active" color="dark" slider-color="primary">
       <v-tab>
-        Profile
+        {{ $t("profile.title") }}
       </v-tab>
       <v-tab-item>
         <v-card flat>
           <v-container grid-list-xs,sm,md,lg,xl>
-            <h1>PROFILE</h1>
+            <h1>{{ $t("profile.title") }}</h1>
             <v-form>
               <v-text-field
                 v-model="profile.username" prepend-icon="person"
                 name="name"
-                label="Username"
+                :label="$t('profile.userName')"
                 type="text"
                 disabled></v-text-field>
               <v-text-field
                 v-model="profile.first_name"
                 prepend-icon="person"
                 name="first_name"
-                label="First Name"
+                :label="$t('profile.name')"
                 type="text"
                 required></v-text-field>
                 <v-text-field
                 v-model="profile.last_name"
                 prepend-icon="person"
                 name="last_name"
-                label="Last Name"
+                :label="$t('profile.lastName')"
                 type="text"
                 required></v-text-field>
                 <v-text-field
                 v-model="profile.password"
                 prepend-icon="person"
                 name="password"
-                label="Password"
+                :label="$t('profile.password')"
                 type="password"
                 disabled></v-text-field>
               <v-text-field
                 v-model="profile.email"
                 prepend-icon="email"
                 name="email"
-                label="email"
+                :label="$t('profile.email')"
                 type="email"
                 required></v-text-field>
                 <v-text-field
                 v-model="profile.rol"
                 prepend-icon="email"
                 name="rol"
-                label="Rol"
+                :label="$t('profile.position')"
                 type="text"
                 disabled></v-text-field>
             </v-form>
-            <v-btn color="pink" @click="updateProfile">Update</v-btn>
+            <v-btn color="pink" @click="updateProfile">{{ $t("profile.update") }}</v-btn>
           </v-container>
 
         </v-card>
@@ -73,6 +73,9 @@
   </v-container>
 </template>
 <script>
+
+import { i18n } from '../plugins/i18n.js'
+
 export default {
   name: 'Profile',
   data () {
@@ -95,10 +98,10 @@ export default {
       }
       this.$store.dispatch('updateUser', newUser)
         .then(res => {
-          alert('Usuario actualizado' + res)
+          alert(i18n.t('profile.updated'))
         })
         .catch(err => {
-          alert('Usuario actualizado' + err.detail)
+          alert(i18n.t('profile.updateError') + err.detail)
         })
     }
   },
