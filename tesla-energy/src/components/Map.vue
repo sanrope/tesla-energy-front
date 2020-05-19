@@ -1,199 +1,238 @@
 <template>
-  <v-row>
-    <v-col cols="12">
-      <v-card
-        raised
-        class="mx-auto"
-        outlined
-        relative
-        height="73vh"
-        width="100vw"
-        style="z-index: 1"
-      >
-        <l-map
-          ref="Map"
-          :zoom="zoom"
-          :center="center"
-          :options="mapOptions"
-          @update:center="centerUpdate"
-          @update:zoom="zoomUpdate"
-          @click="selectSite"
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="4">
+        <v-row>
+          <v-card max-width="280">
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title class="caption font-weight-black">Substation:</v-list-item-title>
+              </v-list-item-content>
+              <v-list-item-avatar tile size="45">
+                <v-img :src="require('@/assets/substation.png')"></v-img>
+              </v-list-item-avatar>
+            </v-list-item>
+          </v-card>
+          <v-card max-width="280">
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title class="caption font-weight-black">Transformer:</v-list-item-title>
+              </v-list-item-content>
+              <v-list-item-avatar tile size="45">
+                <v-img :src="require('@/assets/tranformer.png')"></v-img>
+              </v-list-item-avatar>
+            </v-list-item>
+          </v-card>
+          <v-card max-width="280">
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title class="caption font-weight-black">Electric Meter:</v-list-item-title>
+              </v-list-item-content>
+              <v-list-item-avatar tile size="45">
+                <v-img :src="require('@/assets/meter.png')"></v-img>
+              </v-list-item-avatar>
+            </v-list-item>
+          </v-card>
+        </v-row>
+      </v-col>
+    </v-row>
+
+    <v-row justify="center">
+      <v-col cols="10">
+        <v-card
+          raised
+          class="mx-auto"
+          outlined
+          relative
+          height="65vh"
+          width="100vw"
+          style="z-index: 1"
         >
-          <l-tile-layer :url="url" :attribution="attribution" />
-          <!-- Marker loop for substations -->
-          <l-marker
-            v-for="(substation,i) in substations"
-            :key="i"
-            :icon="iconSubstation"
-            :lat-lng="latLng2(substation.latitude, substation.longitude)"
-            @click="editSubstation(substation)"
+          <l-map
+            ref="Map"
+            :zoom="zoom"
+            :center="center"
+            :options="mapOptions"
+            @update:center="centerUpdate"
+            @update:zoom="zoomUpdate"
+            @click="selectSite"
           >
-            <l-tooltip>{{substation.name}}</l-tooltip>
-            <l-popup>
-              <v-card elevation="0" width="20vw">
-                <v-container>
-                  <v-form ref="updateSubstationForm" v-model="validtoupdate">
-                    <v-col cols="12">
-                      <v-row>
-                        <v-text-field v-model="editedSubstation.name" label="Name" />
-                      </v-row>
-                      <v-row>
-                        <v-switch v-model="editedSubstation.is_active" label="Avaible?" />
-                      </v-row>
-                      <v-row>
-                        <v-col cols="6s">
-                          <v-text-field v-model="editedSubstation.latitude" label="Latitude" type="number" />
-                        </v-col>
-                        <v-col cols="6">
-                          <v-text-field v-model="editedSubstation.longitude" label="Longitude" type="number" />
-                        </v-col>
-                      </v-row>
-                      <v-row justify="center">
-                        <v-btn outlined :disabled="!validtoupdate" @click="updateAssets('substation')">update</v-btn>
-                      </v-row>
-                    </v-col>
-                  </v-form>
-                </v-container>
-              </v-card>
-            </l-popup>
-          </l-marker>
-          <!-- Marker loop for transformers -->
-          <l-marker
-            v-for="(transformer,x) in transformers"
-            :key="'x'+ x"
-            :icon="iconTransformator"
-            :lat-lng="latLng2(transformer.latitude, transformer.longitude)"
-            @click="editTransformer(transformer)"
-          >
-            <l-tooltip>{{transformer.name}}</l-tooltip>
-            <l-popup>
-              <v-card elevation="0" width="20vw">
-                <v-container>
-                  <v-form ref="updateTransformerForm" v-model="validtoupdate">
-                    <v-col cols="12">
-                      <v-row>
-                        <v-text-field v-model="editedTransformer.name" label="Name" />
-                      </v-row>
-                      <v-row>
-                        <v-switch v-model="editedTransformer.is_active" label="Avaible?" />
-                      </v-row>
-                      <v-row>
-                        <v-select v-model="editedTransformer.substation" :items="substations.map(a => {return {text: a.name, value: a.id}})" label="Substation" />
-                      </v-row>
-                      <v-row>
-                        <v-col cols="6s">
-                          <v-text-field v-model="editTransformer.latitude" label="Latitude" type="number" />
-                        </v-col>
-                        <v-col cols="6">
-                          <v-text-field v-model="editTransformer.longitude" label="Longitude" type="number" />
-                        </v-col>
-                      </v-row>
-                      <v-row justify="center">
-                        <v-btn outlined :disabled="!validtoupdate" @click="updateAssets('transformer')">update</v-btn>
-                      </v-row>
-                    </v-col>
-                  </v-form>
-                </v-container>
-              </v-card>
-            </l-popup>
-          </l-marker>
-          <!-- Marker loop for meters -->
-          <l-marker
-            v-for="(meter,x) in meters"
-            :key="'e'+ x"
-            :icon="iconEMeter"
-            :lat-lng="latLng2(meter.latitude, meter.longitude)"
-            @click="editMeter(meter)"
-          >
-            <l-tooltip>{{meter.name}}</l-tooltip>
-            <l-popup>
-              <v-card elevation="0" width="20vw">
-                <v-container>
-                  <v-form ref="updateMeterForm" v-model="validtoupdate">
-                    <v-col cols="12">
-                      <v-row>
-                        <v-text-field :rules="[rules.required]" v-model="editedMeter.name" label="Name" />
-                      </v-row>
-                      <v-row>
-                        <v-switch v-model="editedMeter.is_active" label="Avaible?" />
-                      </v-row>
-                       <v-row>
-                        <v-select :rules="[rules.required]" v-model="editedMeter.transformer" :items="transformers.map(a => {return {text: a.name, value: a.id}})" label="Transformer" />
-                      </v-row>
-                      <v-row>
-                        <v-col cols="6s">
-                          <v-text-field :rules="[rules.required]" v-model="editedMeter.latitude" label="Latitude" type="number" />
-                        </v-col>
-                        <v-col cols="6">
-                          <v-text-field :rules="[rules.required]" v-model="editedMeter.longitude" label="Longitude" type="number" />
-                        </v-col>
-                      </v-row>
-                      <v-row justify="center">
-                        <v-btn outlined :disabled="!validtoupdate" @click="updateAssets('meter')">update</v-btn>
-                      </v-row>
-                    </v-col>
-                  </v-form>
-                </v-container>
-              </v-card>
-            </l-popup>
-          </l-marker>
-          <!-- Marker drawing when a point on map its selected -->
-          <l-marker
-            ref="ClickMarker"
-            :icon="ClickMarkerIcon"
-            width="30vw"
-            :visible="positionPopup ? true : false"
-            :lat-lng="positionPopup"
-          >
-          <l-tooltip>{{positionPopup}}</l-tooltip>
-            <l-popup width="30vw">
-              <v-card elevation="0" width="45vw">
-                <v-container width="55vw">
-                  Latitude: {{positionPopup.lat}}, <br /> Longitude: {{positionPopup.lng}}
-                  <v-form ref="ClickPopupForm" v-model="valid">
-                    <v-col cols="12">
-                      <v-row>
-                        <v-select
-                          outlined
-                          v-on:change="changeMarkerIcon"
-                          label="Active type"
-                          :items="assets"
-                          v-model="active_type"
-                          width="30vw"
-                          :rules="[rules.required]"
-                        ></v-select>
-                      </v-row>
-                      <v-row>
-                        <v-text-field
-                          :disabled="active_type ? false : true"
-                          label="NAME"
-                          v-model="active_name"
-                          :rules="[rules.required]"
-                        ></v-text-field>
-                      </v-row>
-                      <v-row>
-                        <v-select
-                          v-if="active_type === 'T' || active_type === 'E' "
-                          v-model="active_bind"
-                          :disabled="active_type === 'S' ? true : false"
-                          :items="active_type === 'T' ? substations.map(a => {return {text: a.name, value: a.id}}) : active_type === 'E' ? transformers.map(a => {return {text: a.name, value: a.id}}) : null "
-                          label="Select Active"
-                          :rules="[rules.required]"
-                        ></v-select>
-                      </v-row>
-                      <v-row justify="center">
-                        <v-btn outlined :disabled="!valid" @click="registerassets">register</v-btn>
-                      </v-row>
-                    </v-col>
-                  </v-form>
-                </v-container>
-              </v-card>
-            </l-popup>
-          </l-marker>
-        </l-map>
-      </v-card>
-    </v-col>
-  </v-row>
+            <l-tile-layer :url="url" :attribution="attribution" />
+            <!-- Marker loop for substations -->
+            <l-marker
+              v-for="(substation,i) in substations"
+              :key="i"
+              :icon="iconSubstation"
+              :lat-lng="latLng2(substation.latitude, substation.longitude)"
+              @click="editSubstation(substation)"
+            >
+              <l-tooltip>{{substation.name}}</l-tooltip>
+              <l-popup>
+                <v-card elevation="0" width="20vw">
+                  <v-container>
+                    <v-form ref="updateSubstationForm" v-model="validtoupdate">
+                      <v-col cols="12">
+                        <v-row>
+                          <v-text-field v-model="editedSubstation.name" label="Name" />
+                        </v-row>
+                        <v-row>
+                          <v-switch v-model="editedSubstation.is_active" label="Avaible?" />
+                        </v-row>
+                        <v-row>
+                          <v-col cols="6s">
+                            <v-text-field v-model="editedSubstation.latitude" label="Latitude" type="number" />
+                          </v-col>
+                          <v-col cols="6">
+                            <v-text-field v-model="editedSubstation.longitude" label="Longitude" type="number" />
+                          </v-col>
+                        </v-row>
+                        <v-row justify="center">
+                          <v-btn outlined :disabled="!validtoupdate" @click="updateAssets('substation')">update</v-btn>
+                        </v-row>
+                      </v-col>
+                    </v-form>
+                  </v-container>
+                </v-card>
+              </l-popup>
+            </l-marker>
+            <!-- Marker loop for transformers -->
+            <l-marker
+              v-for="(transformer,x) in transformers"
+              :key="'x'+ x"
+              :icon="iconTransformator"
+              :lat-lng="latLng2(transformer.latitude, transformer.longitude)"
+              @click="editTransformer(transformer)"
+            >
+              <l-tooltip>{{transformer.name}}</l-tooltip>
+              <l-popup>
+                <v-card elevation="0" width="20vw">
+                  <v-container>
+                    <v-form ref="updateTransformerForm" v-model="validtoupdate">
+                      <v-col cols="12">
+                        <v-row>
+                          <v-text-field v-model="editedTransformer.name" label="Name" />
+                        </v-row>
+                        <v-row>
+                          <v-switch v-model="editedTransformer.is_active" label="Avaible?" />
+                        </v-row>
+                        <v-row>
+                          <v-select v-model="editedTransformer.substation" :items="substations.map(a => {return {text: a.name, value: a.id}})" label="Substation" />
+                        </v-row>
+                        <v-row>
+                          <v-col cols="6s">
+                            <v-text-field v-model="editTransformer.latitude" label="Latitude" type="number" />
+                          </v-col>
+                          <v-col cols="6">
+                            <v-text-field v-model="editTransformer.longitude" label="Longitude" type="number" />
+                          </v-col>
+                        </v-row>
+                        <v-row justify="center">
+                          <v-btn outlined :disabled="!validtoupdate" @click="updateAssets('transformer')">update</v-btn>
+                        </v-row>
+                      </v-col>
+                    </v-form>
+                  </v-container>
+                </v-card>
+              </l-popup>
+            </l-marker>
+            <!-- Marker loop for meters -->
+            <l-marker
+              v-for="(meter,x) in meters"
+              :key="'e'+ x"
+              :icon="iconEMeter"
+              :lat-lng="latLng2(meter.latitude, meter.longitude)"
+              @click="editMeter(meter)"
+            >
+              <l-tooltip>{{meter.name}}</l-tooltip>
+              <l-popup>
+                <v-card elevation="0" width="20vw">
+                  <v-container>
+                    <v-form ref="updateMeterForm" v-model="validtoupdate">
+                      <v-col cols="12">
+                        <v-row>
+                          <v-text-field :rules="[rules.required]" v-model="editedMeter.name" label="Name" />
+                        </v-row>
+                        <v-row>
+                          <v-switch v-model="editedMeter.is_active" label="Avaible?" />
+                        </v-row>
+                         <v-row>
+                          <v-select :rules="[rules.required]" v-model="editedMeter.transformer" :items="transformers.map(a => {return {text: a.name, value: a.id}})" label="Transformer" />
+                        </v-row>
+                        <v-row>
+                          <v-col cols="6s">
+                            <v-text-field :rules="[rules.required]" v-model="editedMeter.latitude" label="Latitude" type="number" />
+                          </v-col>
+                          <v-col cols="6">
+                            <v-text-field :rules="[rules.required]" v-model="editedMeter.longitude" label="Longitude" type="number" />
+                          </v-col>
+                        </v-row>
+                        <v-row justify="center">
+                          <v-btn outlined :disabled="!validtoupdate" @click="updateAssets('meter')">update</v-btn>
+                        </v-row>
+                      </v-col>
+                    </v-form>
+                  </v-container>
+                </v-card>
+              </l-popup>
+            </l-marker>
+            <!-- Marker drawing when a point on map its selected -->
+            <l-marker
+              ref="ClickMarker"
+              :icon="ClickMarkerIcon"
+              width="30vw"
+              :visible="positionPopup ? true : false"
+              :lat-lng="positionPopup"
+            >
+            <l-tooltip>{{positionPopup}}</l-tooltip>
+              <l-popup width="30vw">
+                <v-card elevation="0" width="45vw">
+                  <v-container width="55vw">
+                    Latitude: {{positionPopup.lat}}, <br /> Longitude: {{positionPopup.lng}}
+                    <v-form ref="ClickPopupForm" v-model="valid">
+                      <v-col cols="12">
+                        <v-row>
+                          <v-select
+                            outlined
+                            v-on:change="changeMarkerIcon"
+                            label="Active type"
+                            :items="assets"
+                            v-model="active_type"
+                            width="30vw"
+                            :rules="[rules.required]"
+                          ></v-select>
+                        </v-row>
+                        <v-row>
+                          <v-text-field
+                            :disabled="active_type ? false : true"
+                            label="NAME"
+                            v-model="active_name"
+                            :rules="[rules.required]"
+                          ></v-text-field>
+                        </v-row>
+                        <v-row>
+                          <v-select
+                            v-if="active_type === 'T' || active_type === 'E' "
+                            v-model="active_bind"
+                            :disabled="active_type === 'S' ? true : false"
+                            :items="active_type === 'T' ? substations.map(a => {return {text: a.name, value: a.id}}) : active_type === 'E' ? transformers.map(a => {return {text: a.name, value: a.id}}) : null "
+                            label="Select Active"
+                            :rules="[rules.required]"
+                          ></v-select>
+                        </v-row>
+                        <v-row justify="center">
+                          <v-btn outlined :disabled="!valid" @click="registerassets">register</v-btn>
+                        </v-row>
+                      </v-col>
+                    </v-form>
+                  </v-container>
+                </v-card>
+              </l-popup>
+            </l-marker>
+          </l-map>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -226,8 +265,8 @@ export default {
   },
   data() {
     return {
-      zoom: 11,
-      center: L.latLng(3.4516, -76.532),
+      zoom: 14,
+      center: L.latLng(3.4249, -76.5179),
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',

@@ -84,6 +84,16 @@
               <v-list-item-title>{{ $t("menu.profile") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+
+          <v-list-item v-if="token != null && rol == 'AD'" to="/client" link ripple>
+            <v-list-item-action>
+              <v-icon>assignment</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Invoice</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
           <v-list-item v-if="token != null && rol== 'AD'" to="/map" link ripple>
             <v-list-item-action>
               <v-icon>map</v-icon>
@@ -112,8 +122,8 @@
               :src="require('./assets/tesla_coil.svg')"
               contain
               transition="scale-transition"
-              max-width="40"
-              min-width="40"
+              max-width="50"
+              min-width="50"
               />
           </div>
         <v-toolbar-title>Tesla Energy</v-toolbar-title>
