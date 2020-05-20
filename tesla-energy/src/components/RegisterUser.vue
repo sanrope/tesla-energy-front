@@ -8,7 +8,7 @@
             <v-card
               :elevation="hover ? 24 : 0"
               class="mx-auto pa-6"
-              :color="user.rol === 'OP' ? 'indigo' : user.rol === 'GE' ? '#757de8' : 'white'"
+              :color="user.rol === 'OP' ? '#CEEC9D' : user.rol === 'GE' ? '#F6B892' : 'white'"
             >
               <v-card-text >
                 <p class="display-1 text--primary">{{ $t("registerUser.title") }}</p>
