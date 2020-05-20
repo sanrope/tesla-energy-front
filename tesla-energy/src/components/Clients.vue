@@ -17,6 +17,7 @@
         :headers="headers"
         :items="clients"
         :search="search"
+        mobile-breakpoint="810"
         >
           <template v-slot:item.actions="{ item }">
             <v-icon

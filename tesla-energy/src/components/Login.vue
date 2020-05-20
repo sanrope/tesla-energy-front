@@ -31,8 +31,10 @@
                :rules="[rules.required]"
                @click:append="show = !show"></v-text-field>
               <v-card-actions>
-                <Recaptcha @recaptchaToken="getRecaptchaToken"></Recaptcha>
+                <v-col>
+                <Recaptcha @recaptchaToken="getRecaptchaToken"/>
                 <v-btn :disabled="!valid" type="submit" color="pink">{{ $t("login.loginButton") }}</v-btn>
+                </v-col>
               </v-card-actions>
             </v-form>
           </v-card-text>

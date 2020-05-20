@@ -76,7 +76,12 @@ const messages = {
       invalidEmail: 'Invalid e-mail.',
       sendButton: 'Send',
       registered: 'Client registered successfully',
-      registerError: 'Register error '
+      registerError: 'Register error ',
+      type: {
+        title: 'Type',
+        corporate: 'Corporate',
+        natural: 'Natural'
+      }
     },
     clients: {
       title: 'Clients:',
@@ -166,7 +171,12 @@ const messages = {
       invalidEmail: 'Correo electrónico invalido.',
       sendButton: 'Enviar',
       registered: 'Cliente registrado satisfactoriamente',
-      registerError: 'Error al registrar '
+      registerError: 'Error al registrar ',
+      type: {
+        title: 'Tipo',
+        corporate: 'Corporativo',
+        natural: 'Natural'
+      }
     },
     clients: {
       title: 'Clientes:',
@@ -256,7 +266,12 @@ const messages = {
       invalidEmail: 'O email inválido.',
       sendButton: 'Enviar',
       registered: 'Cliente Registrado com Sucesso',
-      registerError: 'Erro de registro '
+      registerError: 'Erro de registro ',
+      type: {
+        title: 'Tipo',
+        corporate: 'Corporativo',
+        natural: 'Natural'
+      }
     },
     clients: {
       title: 'Clientes:',

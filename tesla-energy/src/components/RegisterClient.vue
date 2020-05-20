@@ -43,6 +43,12 @@
                     solo
                     required
                     :rules="[rules.required]"></v-text-field>
+                    <v-select
+                    v-model="client.type"
+                    :label="$t('registerClient.type.title')"
+                    solo
+                    :rules="[rules.required]"
+                    :items="[{text: $t('registerClient.type.natural'), value:'NA' }, { text: $t('registerClient.type.corporate'), value: 'CO' }]" />
                     <v-text-field
                     v-model="client.email"
                     prepend-inner-icon="email"
@@ -51,7 +57,7 @@
                     type="text"
                     solo
                     required
-                    :rules="[rules.required, rules.email]"></v-text-field>
+                    :rules="[rules.required, rules.email]" />
                     <v-btn @click="register" :disabled="!valid">{{ $t("registerClient.sendButton") }}</v-btn>
                   </v-col>
                 </v-row>
@@ -76,7 +82,8 @@ export default {
         cedula: null,
         first_name: null,
         last_name: null,
-        email: null
+        email: null,
+        type: null
       },
       rules: {
         required: value => !!value || i18n.t('registerClient.fieldRequired'),

@@ -349,6 +349,7 @@ export default {
         this.ClickMarkerIcon = L.Marker.prototype.options.icon;
       }
     },
+    // deprecated, no used.
     getActiveNames() {
       var actnames;
       if (this.active_type === "T") {

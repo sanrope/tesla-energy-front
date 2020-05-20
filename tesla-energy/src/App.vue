@@ -6,7 +6,8 @@
       <!-- v-model="drawer" -->
       <v-navigation-drawer v-model="drawer" mobile-break-point="1000" app fixed>
         <v-row>
-          <v-col cols="6">
+          <v-list-item>
+            <v-list-item-action>
               <v-img
               :src="require('./assets/tesla_coil.svg')"
               contain
@@ -14,18 +15,13 @@
               max-width="40"
               min-width="40"
               />
-          </v-col>
-          <v-col cols="6">
-            <v-img
-              :src="require('./assets/tesla_firm.png')"
-              contain
-              transition="scale-transition"
-              max-width="500"
-              min-width="100"
-              />
-          </v-col>
+            </v-list-item-action>
+            <v-list-item-title>
+              Tesla Energy
+            </v-list-item-title>
+         </v-list-item>
         </v-row>
-        <v-divider></v-divider>
+        <v-divider inset></v-divider>
         <v-list dense>
           <v-list-item-group mandatory color="indigo">
           <v-list-item to="/" link ripple>
@@ -107,7 +103,7 @@
       <!-- App bar (top row bar) -->
       <v-app-bar app :color="color_app" dark>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-          <div class="d-flex align-center">
+         <!--  <div class="d-flex align-center">
               <v-img
               :src="require('./assets/tesla_coil.svg')"
               contain
@@ -116,7 +112,7 @@
               min-width="40"
               />
           </div>
-        <v-toolbar-title>Tesla Energy</v-toolbar-title>
+        <v-toolbar-title>Tesla Energy</v-toolbar-title> -->
         <lang-switcher></lang-switcher>
       </v-app-bar>
 
