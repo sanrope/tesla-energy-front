@@ -38,8 +38,8 @@ const messages = {
       email: 'Email',
       position: 'Position',
       update: 'Update',
-      upadated: 'User updated successfully ',
-      upadateError: 'User updated successfully'
+      updated: 'User updated successfully ',
+      updateError: 'User updated successfully'
     },
     registerUser: {
       title: 'User Registration',
@@ -140,8 +140,8 @@ const messages = {
       email: 'Correo Eléctronico',
       position: 'Rol',
       update: 'Actualizar',
-      upadated: 'Usuario actualizado satisfactoriamente',
-      upadateError: 'Error al actualizar '
+      updated: 'Usuario actualizado satisfactoriamente',
+      updateError: 'Error al actualizar '
     },
     registerUser: {
       title: 'Registro de Usuario',
@@ -242,8 +242,8 @@ const messages = {
       email: 'O email',
       position: 'Posição',
       update: 'Atualizar',
-      upadated: 'Usuário atualizado com sucesso',
-      upadateError: 'Falha ao atualizar '
+      updated: 'Usuário atualizado com sucesso',
+      updateError: 'Falha ao atualizar '
     },
     registerUser: {
       title: 'Registro de Usuário',
