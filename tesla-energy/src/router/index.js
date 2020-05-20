@@ -86,7 +86,11 @@ const router = new VueRouter({
     {
       path: '/map',
       name: 'Map',
-      component: Mapita
+      component: Mapita,
+      meta: {
+        requiresAuth: true,
+        requiresAD: true
+      }
     },
     { // Client's Invoice
       path: '/client',
