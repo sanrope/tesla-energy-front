@@ -10,6 +10,7 @@ import Users from '../components/Users.vue'
 import RegisterClient from '../components/RegisterClient.vue'
 import Clients from '../components/Clients.vue'
 import Mapita from '../components/Map.vue'
+import Invoice from '../components/Invoice.vue'
 
 Vue.use(VueRouter)
 
@@ -90,6 +91,11 @@ const router = new VueRouter({
         requiresAuth: true,
         requiresAD: true
       }
+    },
+    { // Client's Invoice
+      path: '/client',
+      name: 'Client',
+      component: Invoice
     },
     {
       path: '/about',

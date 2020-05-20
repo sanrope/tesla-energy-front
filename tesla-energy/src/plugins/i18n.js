@@ -29,6 +29,18 @@ const messages = {
       assets: 'Assets',
       logout: 'Logout'
     },
+    profile: {
+      title: 'Profile',
+      userName: 'Username',
+      name: 'Name',
+      lastName: 'Last Name',
+      password: 'Password',
+      email: 'Email',
+      position: 'Position',
+      update: 'Update',
+      upadated: 'User updated successfully ',
+      upadateError: 'User updated successfully'
+    },
     registerUser: {
       title: 'User Registration',
       userType: {
@@ -123,6 +135,18 @@ const messages = {
       profile: 'Perfil',
       assets: 'Activos',
       logout: 'Cerrar Sesión'
+    },
+    profile: {
+      title: 'Perfil',
+      userName: 'Nombre de Usuario',
+      name: 'Nombre',
+      lastName: 'Apellido',
+      password: 'Contraseña',
+      email: 'Correo Eléctronico',
+      position: 'Rol',
+      update: 'Actualizar',
+      upadated: 'Usuario actualizado satisfactoriamente',
+      upadateError: 'Error al actualizar '
     },
     registerUser: {
       title: 'Registro de Usuario',
@@ -219,6 +243,18 @@ const messages = {
       assets: 'Ativos',
       logout: 'Sair'
     },
+    profile: {
+      title: 'Perfil',
+      userName: 'Nome do usuário',
+      name: 'Nome',
+      lastName: 'Último nome',
+      password: 'Senha',
+      email: 'O email',
+      position: 'Posição',
+      update: 'Atualizar',
+      upadated: 'Usuário atualizado com sucesso',
+      upadateError: 'Falha ao atualizar '
+    },
     registerUser: {
       title: 'Registro de Usuário',
       userType: {
@@ -239,7 +275,7 @@ const messages = {
       passwordCharacters: 'Mínimo de 8 caracteres.',
       passwordHint: 'Repita sua senha.',
       registered: 'Usuário registrado com sucesso',
-      registerError: 'Erro de registro '
+      registerError: 'Registração falhou'
     },
     users: {
       title: 'Usuários do sistema:',
@@ -266,7 +302,7 @@ const messages = {
       invalidEmail: 'O email inválido.',
       sendButton: 'Enviar',
       registered: 'Cliente Registrado com Sucesso',
-      registerError: 'Erro de registro ',
+      registerError: 'Registração falhou' ,
       type: {
         title: 'Tipo',
         corporate: 'Corporativo',

@@ -3,7 +3,6 @@
     <v-app id="inspire">
 
       <!-- Navigation drawer (left column)-->
-      <!-- v-model="drawer" -->
       <v-navigation-drawer v-model="drawer" mobile-break-point="1000" app fixed>
         <v-row>
           <v-list-item>
@@ -80,6 +79,16 @@
               <v-list-item-title>{{ $t("menu.profile") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+
+          <v-list-item v-if="token != null && rol == 'AD'" to="/client" link ripple>
+            <v-list-item-action>
+              <v-icon>assignment</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Invoice</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
           <v-list-item v-if="token != null && rol== 'AD'" to="/map" link ripple>
             <v-list-item-action>
               <v-icon>map</v-icon>
@@ -103,17 +112,28 @@
       <!-- App bar (top row bar) -->
       <v-app-bar app :color="color_app" dark>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-         <!--  <div class="d-flex align-center">
-              <v-img
-              :src="require('./assets/tesla_coil.svg')"
-              contain
-              transition="scale-transition"
-              max-width="40"
-              min-width="40"
-              />
-          </div>
+        <!-- <div class="d-flex align-center">
+            <v-img
+            :src="require('./assets/tesla_coil.svg')"
+            contain
+            transition="scale-transition"
+            max-width="50"
+            min-width="50"
+            />
+        </div>
         <v-toolbar-title>Tesla Energy</v-toolbar-title> -->
-        <lang-switcher></lang-switcher>
+        <v-spacer></v-spacer>
+
+        <!-- Language Switcher -->
+        <v-btn class="mx-0" right large icon @click="changeLang('en_US')">
+          <country-flag country='us' size='normal'/>
+        </v-btn>
+        <v-btn class="mx-0" large icon @click="changeLang('es_ES')">
+          <country-flag country='es' size='normal' />
+        </v-btn>
+        <v-btn class="mx-0" large icon @click="changeLang('pt_BR')">
+          <country-flag country='br' size='normal'/>
+        </v-btn>
       </v-app-bar>
 
       <!-- Content (center content) -->
@@ -142,17 +162,20 @@
 </template>
 
 <script>
-import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
+
+import CountryFlag from 'vue-country-flag'
+
 export default {
   name: 'App',
   components: {
-    'lang-switcher': LanguageSwitcher
+    CountryFlag
   },
   data: () => ({
     drawer: null,
     message: null,
     time_snack: 5500,
-    color_app: '#002984'
+    color_app: '#002984',
+    languages: ['en_US', 'es_ES', 'pt_BR']
   }),
   methods: {
     logout () {
@@ -164,6 +187,9 @@ export default {
           console.log('logout error: ' + err)
           this.message = err
         })
+    },
+    changeLang (lang) {
+      this.$i18n.locale = lang
     }
   },
   computed: {
