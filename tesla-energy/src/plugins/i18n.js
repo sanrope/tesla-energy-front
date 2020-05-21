@@ -30,7 +30,7 @@ const messages = {
       profile: 'Profile',
       assets: 'Assets',
       logout: 'Logout',
-      payment: 'Payment'
+      payments: 'Payments'
     },
     profile: {
       title: 'My Profile',
@@ -116,8 +116,9 @@ const messages = {
       activeClient: 'Active',
       inactiveClient: 'Inactive'
     },
-    pagos: {
+    payments: {
       title: 'Payment',
+      subtitle: 'Make your payment',
       idfactura: 'Invoice ID',
       boton1: 'Pay',
       boton2: 'Confirm Pay',
@@ -155,7 +156,7 @@ const messages = {
       profile: 'Perfil',
       assets: 'Activos',
       logout: 'Cerrar Sesión',
-      payment: 'Pagos'
+      payments: 'Pagos'
     },
     profile: {
       title: 'Mi Perfil',
@@ -240,8 +241,9 @@ const messages = {
       activeClient: 'Activo',
       inactiveClient: 'Inactivo'
     },
-    pagos: {
+    payments: {
       title: 'Pagos',
+      subtitle: 'Realiza tu pago',
       idfactura: 'Número de Factura',
       boton1: 'Pagar',
       boton2: 'Confirmar Pago',
@@ -278,7 +280,8 @@ const messages = {
       reports: 'Relatórios',
       profile: 'Perfil',
       assets: 'Ativos',
-      logout: 'Sair'
+      logout: 'Sair',
+      payments: 'Pagamentos'
     },
     profile: {
       title: 'Meu Perfil',
@@ -362,6 +365,19 @@ const messages = {
       save: 'Salve',
       activeClient: 'Ativo',
       inactiveClient: 'Inativo'
+    },
+    payments: {
+      title: 'Pagamentos',
+      subtitle: 'Faça seu Pagamento',
+      idfactura: 'Número da Fatura',
+      boton1: 'Pagar',
+      boton2: 'Confirme o Pagamento',
+      titleForm: 'Gerar Pagamento',
+      dateGenerated: 'Data de Expedição',
+      expireDate: 'Data de Expiração',
+      totalConsumed: 'Consumo (KWh)',
+      amount: 'Valor à Pagar',
+      save: 'Pagar'
     }
   }
 }

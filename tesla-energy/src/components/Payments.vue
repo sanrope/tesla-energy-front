@@ -15,22 +15,23 @@
     </v-snackbar>
     <v-tabs v-model="active" color="dark" slider-color="primary">
       <v-tab>
-        {{ $t("pagos.title") }}
+        {{ $t("payments.title") }}
       </v-tab>
       <v-tab-item>
         <v-card flat>
           <v-container grid-list-xs,sm,md,lg,xl>
-            <h1>{{ $t("pagos.title") }}</h1>
+            <h1>{{ $t("payments.title") }}</h1>
+            <p>{{ $t("payments.subtitle") }}</p>
             <v-form>
               <v-text-field
                 v-model="idinvoice"
                 prepend-icon="person"
                 name="id_factura"
-                :label="$t('pagos.idfactura')"
+                :label="$t('payments.idfactura')"
                 type="number"
                 required></v-text-field>
             </v-form>
-            <v-btn color="pink" @click="getFactura">{{ $t("pagos.boton1") }}</v-btn>
+            <v-btn color="pink" @click="getFactura">{{ $t("payments.boton1") }}</v-btn>
           </v-container>
         </v-card>
       </v-tab-item>
@@ -38,25 +39,25 @@
     <v-dialog v-model="dialog" max-width="500px">
       <v-card>
         <v-card-title>
-          <span class="headline">{{ $t("pagos.titleForm") }}</span>
+          <span class="headline">{{ $t("payments.titleForm") }}</span>
         </v-card-title>
         <v-card-text>
           <v-container>
             <v-row>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field :disabled="true" v-model="invoicetopay.id" :label="$t('pagos.idfactura')"></v-text-field>
+                <v-text-field :disabled="true" v-model="invoicetopay.id" :label="$t('payments.idfactura')"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field :disabled="true" v-model="invoicetopay.dateGenerated" :label="$t('pagos.dateGenerated')"></v-text-field>
+                <v-text-field :disabled="true" v-model="invoicetopay.dateGenerated" :label="$t('payments.dateGenerated')"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field :disabled="true" v-model="invoicetopay.expireDate" :label="$t('pagos.expireDate')"></v-text-field>
+                <v-text-field :disabled="true" v-model="invoicetopay.expireDate" :label="$t('payments.expireDate')"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field :disabled="true" v-model="invoicetopay.totalConsumed" :label="$t('pagos.totalConsumed')"></v-text-field>
+                <v-text-field :disabled="true" v-model="invoicetopay.totalConsumed" :label="$t('payments.totalConsumed')"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field :disabled="true" v-model="invoicetopay.amount" :label="$t('pagos.amount')"></v-text-field>
+                <v-text-field :disabled="true" v-model="invoicetopay.amount" :label="$t('payments.amount')"></v-text-field>
               </v-col>
           </v-row>
         </v-container>
@@ -64,7 +65,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" text @click="close">{{ $t("users.cancel") }}</v-btn>
-        <v-btn color="blue darken-1" text @click="pay">{{ $t("pagos.save") }}</v-btn>
+        <v-btn color="blue darken-1" text @click="pay">{{ $t("payments.save") }}</v-btn>
       </v-card-actions>
       </v-card>
     </v-dialog>
@@ -75,7 +76,7 @@
 import { i18n } from '../plugins/i18n.js'
 
 export default {
-  name: 'Pagos',
+  name: 'Payments',
   data () {
     return {
       idinvoice: null,

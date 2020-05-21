@@ -12,7 +12,7 @@ import Clients from '../components/Clients.vue'
 import Mapita from '../components/Map.vue'
 import Invoice from '../components/Invoice.vue'
 import Reports from '../components/Reports.vue'
-import Pagos from '../components/Pagos.vue'
+import Payments from '../components/Payments.vue'
 
 Vue.use(VueRouter)
 
@@ -109,9 +109,9 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/pagos',
-      name: 'Pagos',
-      component: Pagos,
+      path: '/payments',
+      name: 'Payments',
+      component: Payments,
       meta: {
         requiresAuth: true,
         requiresOP: true

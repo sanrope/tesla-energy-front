@@ -96,7 +96,7 @@
               <v-list-item-title>{{ $t("menu.invoice") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-if="token != null && rol == 'OP'" to="/pagos" link ripple>
+          <v-list-item v-if="token != null && rol == 'OP'" to="/payments" link ripple>
             <v-list-item-action>
               <v-icon>payment</v-icon>
             </v-list-item-action>
