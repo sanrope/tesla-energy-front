@@ -32,7 +32,8 @@ const messages = {
       logout: 'Logout'
     },
     profile: {
-      title: 'Profile',
+      title: 'My Profile',
+      edit: 'Edit your profile',
       userName: 'Username',
       name: 'Name',
       lastName: 'Last Name',
@@ -45,6 +46,7 @@ const messages = {
     },
     registerUser: {
       title: 'User Registration',
+      create: 'Create a new user',
       userType: {
         user: 'Select User Type',
         manager: 'Manager',
@@ -82,6 +84,7 @@ const messages = {
     },
     registerClient: {
       title: 'Client Registration',
+      create: 'Create a new client',
       name: 'Name',
       lastName: 'Last Name',
       id: 'ID',
@@ -141,7 +144,8 @@ const messages = {
       logout: 'Cerrar Sesión'
     },
     profile: {
-      title: 'Perfil',
+      title: 'Mi Perfil',
+      edit: 'Edita tu perfil',
       userName: 'Nombre de Usuario',
       name: 'Nombre',
       lastName: 'Apellido',
@@ -191,6 +195,7 @@ const messages = {
     },
     registerClient: {
       title: 'Registro de Cliente',
+      create: 'Crea un nuevo cliente',
       name: 'Nombre',
       lastName: 'Apellido',
       id: 'Identificación',
@@ -250,7 +255,8 @@ const messages = {
       logout: 'Sair'
     },
     profile: {
-      title: 'Perfil',
+      title: 'Meu Perfil',
+      edit: 'Edite seu perfil',
       userName: 'Nome do usuário',
       name: 'Nome',
       lastName: 'Último nome',
@@ -300,6 +306,7 @@ const messages = {
     },
     registerClient: {
       title: 'Registro de Cliente',
+      create: 'Crie um novo cliente',
       name: 'Nome',
       lastName: 'Último nome',
       id: 'Número de Identificação',

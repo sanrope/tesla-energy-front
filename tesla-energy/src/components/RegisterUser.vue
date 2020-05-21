@@ -7,9 +7,8 @@
           class="mx-auto pa-6"
           :color="user.rol === 'OP' ? 'indigo' : user.rol === 'GE' ? '#757de8' : 'white'"
         >
-          <v-card-text >
-            <p class="display-1 text--primary">{{ $t("registerUser.title") }}</p>
-          </v-card-text>
+          <h1>{{ $t("registerUser.title") }}</h1>
+          <p>{{ $t("registerUser.create") }}</p>
           <v-form ref="UserRegistrationForm" v-model="valid">
             <v-row>
               <v-col>

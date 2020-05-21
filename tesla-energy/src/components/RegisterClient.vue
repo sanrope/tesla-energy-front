@@ -6,9 +6,8 @@
           hover
           class="mx-auto pa-6"
         >
-          <v-card-text >
-            <p class="display-1 text--primary">{{ $t("registerClient.title") }}</p>
-          </v-card-text>
+          <h1>{{ $t("registerClient.title") }}</h1>
+          <p>{{ $t("registerClient.create") }}</p>
           <v-form ref="ClientRegistrationForm" v-model="valid">
             <v-row>
               <v-col>
