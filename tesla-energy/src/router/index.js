@@ -101,7 +101,11 @@ const router = new VueRouter({
     {
       path: '/reports',
       name: 'Reports',
-      component: Reports
+      component: Reports,
+      meta: {
+        requiresAuth: true,
+        requiresAD: true
+      }
     },
     {
       path: '/about',
