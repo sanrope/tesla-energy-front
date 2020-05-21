@@ -1,93 +1,88 @@
 <template>
-  <div>
-    <v-container style="min-height: 100vh" >
-      <v-row align="center"
-      justify="center">
-        <v-col cols="12" sm="10" md="6">
-          <v-hover v-slot:default="{ hover }" open-delay="100" close-delay="250">
-            <v-card
-              :elevation="hover ? 24 : 0"
-              class="mx-auto pa-6"
-              :color="user.rol === 'OP' ? 'indigo' : user.rol === 'GE' ? '#757de8' : 'white'"
-            >
-              <v-card-text >
-                <p class="display-1 text--primary">{{ $t("registerUser.title") }}</p>
-              </v-card-text>
-              <v-form ref="UserRegistrationForm" v-model="valid">
-                <v-row>
-                  <v-col>
-                    <v-select outlined
-                     :label="$t('registerUser.userType.user')"
-                     v-model="user.rol"
-                     :rules="[rules.required]"
-                     :items="items_box">
-                    </v-select>
-                    <v-divider></v-divider>
-                    <v-text-field
-                    v-model="user.first_name"
-                    prepend-inner-icon="assignment_ind"
-                    name="first_name"
-                    :label="$t('registerUser.name')"
-                    type="text"
-                    solo
-                    required
-                    :rules="[rules.required]"></v-text-field>
-                    <v-text-field
-                    v-model="user.last_name"
-                    prepend-inner-icon="assignment_ind"
-                    name="last_name"
-                    :label="$t('registerUser.lastName')"
-                    type="text"
-                    solo
-                    required
-                    :rules="[rules.required]"></v-text-field>
-                    <v-text-field
-                    v-model="user.username"
-                    prepend-inner-icon="person"
-                    name="username"
-                    :label="$t('registerUser.userName')"
-                    type="text"
-                    solo
-                    required
-                    :rules="[rules.required]"></v-text-field>
-                    <v-text-field
-                    v-model="user.email"
-                    prepend-inner-icon="email"
-                    name="email"
-                    :label="$t('registerUser.email')"
-                    type="text"
-                    solo
-                    required
-                    :rules="[rules.required, rules.email]"></v-text-field>
-                    <v-text-field
-                    v-model="user.password"
-                    prepend-inner-icon="https"
-                    name="password"
-                    :label="$t('registerUser.password')"
-                    type="password"
-                    solo
-                    required
-                    :rules="[rules.required, rules.min_pass]"></v-text-field>
-                    <v-text-field
-                    v-model="user.password2"
-                    prepend-inner-icon="https"
-                    name="password2"
-                    :label="$t('registerUser.passwordConfirmation')"
-                    type="password"
-                    solo
-                    :hint="$t('registerUser.passwordHint')"
-                    required
-                    :rules="[rules.required, rules.password_val]"></v-text-field>
-                    <v-btn @click="register" :disabled="!valid">{{ $t("registerUser.sendButton") }}</v-btn>
-                  </v-col>
-                </v-row>
-              </v-form>
-            </v-card>
-          </v-hover>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+  <v-container style="min-height: 80vh" >
+    <v-row justify="center">
+      <v-col cols="12" sm="10" md="6">
+        <v-card
+          hover
+          class="mx-auto pa-6"
+          :color="user.rol === 'OP' ? 'indigo' : user.rol === 'GE' ? '#757de8' : 'white'"
+        >
+          <v-card-text >
+            <p class="display-1 text--primary">{{ $t("registerUser.title") }}</p>
+          </v-card-text>
+          <v-form ref="UserRegistrationForm" v-model="valid">
+            <v-row>
+              <v-col>
+                <v-select outlined
+                 :label="$t('registerUser.userType.user')"
+                 v-model="user.rol"
+                 :rules="[rules.required]"
+                 :items="items_box">
+                </v-select>
+                <v-divider></v-divider>
+                <v-text-field
+                v-model="user.first_name"
+                prepend-inner-icon="assignment_ind"
+                name="first_name"
+                :label="$t('registerUser.name')"
+                type="text"
+                solo
+                required
+                :rules="[rules.required]"></v-text-field>
+                <v-text-field
+                v-model="user.last_name"
+                prepend-inner-icon="assignment_ind"
+                name="last_name"
+                :label="$t('registerUser.lastName')"
+                type="text"
+                solo
+                required
+                :rules="[rules.required]"></v-text-field>
+                <v-text-field
+                v-model="user.username"
+                prepend-inner-icon="person"
+                name="username"
+                :label="$t('registerUser.userName')"
+                type="text"
+                solo
+                required
+                :rules="[rules.required]"></v-text-field>
+                <v-text-field
+                v-model="user.email"
+                prepend-inner-icon="email"
+                name="email"
+                :label="$t('registerUser.email')"
+                type="text"
+                solo
+                required
+                :rules="[rules.required, rules.email]"></v-text-field>
+                <v-text-field
+                v-model="user.password"
+                prepend-inner-icon="https"
+                name="password"
+                :label="$t('registerUser.password')"
+                type="password"
+                solo
+                required
+                :rules="[rules.required, rules.min_pass]"></v-text-field>
+                <v-text-field
+                v-model="user.password2"
+                prepend-inner-icon="https"
+                name="password2"
+                :label="$t('registerUser.passwordConfirmation')"
+                type="password"
+                solo
+                :hint="$t('registerUser.passwordHint')"
+                required
+                :rules="[rules.required, rules.password_val]"></v-text-field>
+                <v-btn @click="register" :disabled="!valid">{{ $t("registerUser.sendButton") }}</v-btn>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

@@ -1,6 +1,8 @@
 <template>
   <div class="example">
-    <apexchart width="500" height="350" type="bar" :options="chartOptions" :series="series"></apexchart>
+    <v-card hover>
+      <apexchart width="500" height="350" type="bar" :options="chartOptions" :series="series"></apexchart>
+    </v-card>
     <div>
        <button @click="updateChart">Update!</button>
     </div>

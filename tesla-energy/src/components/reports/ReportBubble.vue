@@ -1,6 +1,8 @@
 <template>
   <div class="example">
-    <apexchart width="500" height="350" type="bubble" :options="chartOptions" :series="series"></apexchart>
+    <v-card hover>
+      <apexchart width="500" height="350" type="bubble" :options="chartOptions" :series="series"></apexchart>
+    </v-card>
   </div>
 </template>
 

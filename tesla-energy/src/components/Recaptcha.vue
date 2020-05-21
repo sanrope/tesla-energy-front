@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="mx-auto"
-    max-width="344"
+    max-width="303"
     outlined
   >
     <vue-recaptcha
@@ -12,9 +12,7 @@
       @error="onError"
       sitekey="6Lewz-YUAAAAAA5_K5TwntsVncsJzm3XaUgDDadO">
     </vue-recaptcha>
-    <v-card-actions>
-      <v-btn text v-on:click="resetRecaptcha">{{ $t("recaptcha.reset") }}</v-btn>
-    </v-card-actions>
+    <v-btn text v-on:click="resetRecaptcha">{{ $t("recaptcha.reset") }}</v-btn>
   </v-card>
 </template>
 

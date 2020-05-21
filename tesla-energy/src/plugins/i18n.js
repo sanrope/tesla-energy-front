@@ -92,7 +92,7 @@ const messages = {
       registered: 'Client registered successfully',
       registerError: 'Register error ',
       type: {
-        title: 'Type',
+        title: 'Select Client Type',
         corporate: 'Corporate',
         natural: 'Natural'
       }
@@ -155,7 +155,7 @@ const messages = {
     registerUser: {
       title: 'Registro de Usuario',
       userType: {
-        user: 'Seleccionar Tipo de Ssuario',
+        user: 'Seleccionar Tipo de Usuário',
         manager: 'Administrador',
         operator: 'Operador'
       },
@@ -201,7 +201,7 @@ const messages = {
       registered: 'Cliente registrado satisfactoriamente',
       registerError: 'Error al registrar ',
       type: {
-        title: 'Tipo',
+        title: 'Seleccioar Tipo de Cliente',
         corporate: 'Corporativo',
         natural: 'Natural'
       }
@@ -310,7 +310,7 @@ const messages = {
       registered: 'Cliente Registrado com Sucesso',
       registerError: 'Registração falhou ',
       type: {
-        title: 'Tipo',
+        title: 'Selecione o Tipo de Cliente',
         corporate: 'Corporativo',
         natural: 'Natural'
       }
