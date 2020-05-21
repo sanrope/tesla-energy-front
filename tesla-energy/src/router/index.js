@@ -12,6 +12,7 @@ import Clients from '../components/Clients.vue'
 import Mapita from '../components/Map.vue'
 import Invoice from '../components/Invoice.vue'
 import Reports from '../components/Reports.vue'
+import Pagos from '../components/Pagos.vue'
 
 Vue.use(VueRouter)
 
@@ -105,6 +106,15 @@ const router = new VueRouter({
       meta: {
         requiresAuth: true,
         requiresAD: true
+      }
+    },
+    {
+      path: '/pagos',
+      name: 'Pagos',
+      component: Pagos,
+      meta: {
+        requiresAuth: true,
+        requiresOP: true
       }
     },
     {

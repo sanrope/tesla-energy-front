@@ -29,7 +29,8 @@ const messages = {
       reports: 'Reports',
       profile: 'Profile',
       assets: 'Assets',
-      logout: 'Logout'
+      logout: 'Logout',
+      payment: 'Payment'
     },
     profile: {
       title: 'Profile',
@@ -111,6 +112,18 @@ const messages = {
       save: 'Save',
       activeClient: 'Active',
       inactiveClient: 'Inactive'
+    },
+    pagos: {
+      title: 'Payment',
+      idfactura: 'Invoice ID',
+      boton1: 'Pay',
+      boton2: 'Confirm Pay',
+      titleForm: 'Payment',
+      dateGenerated: 'Expedition date',
+      expireDate: 'Due date',
+      totalConsumed: 'Consumption (KWh)',
+      amount: 'Amount to be paid',
+      save: 'Pay'
     }
   },
   es_ES: {
@@ -138,7 +151,8 @@ const messages = {
       reports: 'Reportes',
       profile: 'Perfil',
       assets: 'Activos',
-      logout: 'Cerrar Sesión'
+      logout: 'Cerrar Sesión',
+      payment: 'Pagos'
     },
     profile: {
       title: 'Perfil',
@@ -220,6 +234,18 @@ const messages = {
       save: 'Guardar',
       activeClient: 'Activo',
       inactiveClient: 'Inactivo'
+    },
+    pagos: {
+      title: 'Pagos',
+      idfactura: 'Número de Factura',
+      boton1: 'Pagar',
+      boton2: 'Confirmar Pago',
+      titleForm: 'Generar pago',
+      dateGenerated: 'Fecha de expedición',
+      expireDate: 'Fecha de expiración',
+      totalConsumed: 'Consumo (KWh)',
+      amount: 'Monto a pagar',
+      save: 'Pagar'
     }
   },
   pt_BR: {
