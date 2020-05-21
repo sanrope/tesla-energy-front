@@ -11,6 +11,7 @@ import RegisterClient from '../components/RegisterClient.vue'
 import Clients from '../components/Clients.vue'
 import Mapita from '../components/Map.vue'
 import Invoice from '../components/Invoice.vue'
+import Reports from '../components/Reports.vue'
 
 Vue.use(VueRouter)
 
@@ -96,6 +97,11 @@ const router = new VueRouter({
       path: '/client',
       name: 'Client',
       component: Invoice
+    },
+    {
+      path: '/reports',
+      name: 'Reports',
+      component: Reports
     },
     {
       path: '/about',

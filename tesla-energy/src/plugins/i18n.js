@@ -25,6 +25,8 @@ const messages = {
       users: 'Users',
       clientRegistration: 'Client Registration',
       clients: 'Clients',
+      invoice: 'Invoice',
+      reports: 'Reports',
       profile: 'Profile',
       assets: 'Assets',
       logout: 'Logout'
@@ -39,7 +41,7 @@ const messages = {
       position: 'Position',
       update: 'Update',
       updated: 'User updated successfully ',
-      updateError: 'User updated successfully'
+      updateError: 'Update error '
     },
     registerUser: {
       title: 'User Registration',
@@ -132,6 +134,8 @@ const messages = {
       users: 'Usuarios',
       clientRegistration: 'Registro de Cliente',
       clients: 'Clientes',
+      invoice: 'Factura',
+      reports: 'Reportes',
       profile: 'Perfil',
       assets: 'Activos',
       logout: 'Cerrar Sesión'
@@ -239,6 +243,8 @@ const messages = {
       users: 'Usuários',
       clientRegistration: 'Registro de Cliente',
       clients: 'Clientes',
+      invoice: 'Fatura',
+      reports: 'Relatórios',
       profile: 'Perfil',
       assets: 'Ativos',
       logout: 'Sair'
@@ -275,7 +281,7 @@ const messages = {
       passwordCharacters: 'Mínimo de 8 caracteres.',
       passwordHint: 'Repita sua senha.',
       registered: 'Usuário registrado com sucesso',
-      registerError: 'Registração falhou'
+      registerError: 'Registração falhou '
     },
     users: {
       title: 'Usuários do sistema:',
@@ -302,7 +308,7 @@ const messages = {
       invalidEmail: 'O email inválido.',
       sendButton: 'Enviar',
       registered: 'Cliente Registrado com Sucesso',
-      registerError: 'Registração falhou' ,
+      registerError: 'Registração falhou ',
       type: {
         title: 'Tipo',
         corporate: 'Corporativo',
