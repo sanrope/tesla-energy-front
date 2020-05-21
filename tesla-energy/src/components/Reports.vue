@@ -59,6 +59,39 @@
       </v-col>
     </v-row>
 
+    <v-row>
+      <v-col>
+        <ReportBar></ReportBar>
+      </v-col>
+      <v-col>
+        <ReportBubble></ReportBubble>
+      </v-col>
+      <v-col>
+        <ReportColumn></ReportColumn>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <ReportDonut></ReportDonut>
+      </v-col>
+      <v-col>
+        <ReportHeatmap></ReportHeatmap>
+      </v-col>
+      <v-col>
+        <ReportLine></ReportLine>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <ReportMixed></ReportMixed>
+      </v-col>
+      <v-col>
+        <ReportRadialBar></ReportRadialBar>
+      </v-col>
+      <v-col>
+        <ReportScatter></ReportScatter>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -66,10 +99,28 @@
 
 import * as JsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
+import ReportBar from './reports/ReportBar.vue'
+import ReportBubble from './reports/ReportBubble.vue'
+import ReportColumn from './reports/ReportColumn.vue'
+import ReportDonut from './reports/ReportDonut.vue'
+import ReportHeatmap from './reports/ReportHeatmap'
+import ReportLine from './reports/ReportLine'
+import ReportMixed from './reports/ReportMixed'
+import ReportRadialBar from './reports/ReportRadialBar'
+import ReportScatter from './reports/ReportScatter'
 
 export default {
   name: 'Reports',
   components: {
+    ReportBar,
+    ReportBubble,
+    ReportColumn,
+    ReportDonut,
+    ReportHeatmap,
+    ReportLine,
+    ReportMixed,
+    ReportRadialBar,
+    ReportScatter
   },
   data: () => ({
     search: '',
