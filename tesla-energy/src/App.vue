@@ -142,6 +142,9 @@
         <v-btn class="mx-0" large icon @click="changeLang('pt_BR')">
           <country-flag country='br' size='normal'/>
         </v-btn>
+        <v-btn class="mx-2" icon to="/about" link>
+          <v-icon>info</v-icon>
+        </v-btn>
       </v-app-bar>
 
       <!-- Content (center content) -->
