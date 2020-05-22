@@ -118,7 +118,7 @@
               <v-icon>map</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Electric meter</v-list-item-title>
+              <v-list-item-title>{{ $t("menu.electricMeter") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null && rol== 'OP'" to="/consume" link ripple>
@@ -126,7 +126,7 @@
               <v-icon>ballot</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Consume</v-list-item-title>
+              <v-list-item-title>{{ $t("menu.consumption") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null" @click="logout" link ripple>

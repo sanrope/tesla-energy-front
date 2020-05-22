@@ -30,7 +30,9 @@ const messages = {
       profile: 'Profile',
       assets: 'Assets',
       logout: 'Logout',
-      payments: 'Payments'
+      payments: 'Payments',
+      electricMeter: 'Electric Meter',
+      consumption: 'Consumption'
     },
     profile: {
       title: 'My Profile',
@@ -161,7 +163,9 @@ const messages = {
       profile: 'Perfil',
       assets: 'Activos',
       logout: 'Cerrar Sesión',
-      payments: 'Pagos'
+      payments: 'Pagos',
+      electricMeter: 'Medidor Eléctrico',
+      consumption: 'Consumo'
     },
     profile: {
       title: 'Mi Perfil',
@@ -291,7 +295,9 @@ const messages = {
       profile: 'Perfil',
       assets: 'Ativos',
       logout: 'Sair',
-      payments: 'Pagamentos'
+      payments: 'Pagamentos',
+      electricMeter: 'Medidor Elétrico',
+      consumption: 'Consumo'
     },
     profile: {
       title: 'Meu Perfil',
