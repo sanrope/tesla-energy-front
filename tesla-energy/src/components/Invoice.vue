@@ -143,9 +143,8 @@ export default {
   methods: {
     getInvoice () {
       this.$store.dispatch('getInvoice', this.Invoice.id)
-      this.Invoice = Object.assign({}, invoice)
-      therInvoice = true
-      
+      this.Invoice = Object.assign({}, this.invoice)
+      this.therInvoice = true
     },
     downloadInvoice () {
       html2canvas(document.querySelector('#invoice'), { imageTimeout: 5000, useCORS: true }).then(canvas => {
