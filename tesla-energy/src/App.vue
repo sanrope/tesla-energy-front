@@ -71,7 +71,7 @@
               <v-list-item-title>{{ $t("menu.clients") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-if="token != null && rol == 'AD'" to="/reports" link ripple>
+          <v-list-item v-if="token != null && rol == 'GE'" to="/reports" link ripple>
             <v-list-item-action>
               <v-icon>insert_chart</v-icon>
             </v-list-item-action>
@@ -111,6 +111,22 @@
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>{{ $t("menu.assets") }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item v-if="token != null && rol== 'OP'" to="/opmap" link ripple>
+            <v-list-item-action>
+              <v-icon>map</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Electric meter</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item v-if="token != null && rol== 'OP'" to="/consume" link ripple>
+            <v-list-item-action>
+              <v-icon>ballot</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Consume</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item v-if="token != null" @click="logout" link ripple>

@@ -21,9 +21,13 @@ export default new Vuex.Store({
     substations: [],
     transformers: [],
     meters: [],
+    invoice: null,
     idUser: localStorage.getItem('idUser') || null
   },
   mutations: {
+    set_invoice (state, invoice) {
+      state.invoice = invoice
+    },
     set_profile (state, profile) {
       state.profile = profile
     },
@@ -186,6 +190,20 @@ export default new Vuex.Store({
           })
       })
     },
+    getInvoice (context, idFactura) {
+      return new Promise((resolve, reject) => {
+        axios.put(API_URL + 'api/v1/consumo/facturabyid/' + idFactura + '/', context.getters.getAuth)
+          .then(res => {
+            context.commit('set_invoice', res.data.results)
+            console.log('Factura ' + idFactura + ' obtenida ')
+            resolve(res)
+          })
+          .catch(err => {
+            console.log('No se pudo obtener la factura')
+            reject(err)
+          })
+      })
+    },
     getSubstations (context) {
       return new Promise((resolve, reject) => {
         axios.get(API_URL + 'api/v1/assets/substation/', context.getters.getAuth)
@@ -325,16 +343,15 @@ export default new Vuex.Store({
           })
       })
     },
-    getInvoice (context, id) {
+    registerConsumo (context, consumo) {
       return new Promise((resolve, reject) => {
-        axios.get(API_URL + 'api/v1/consumos/facturabyid/' + id + '/', context.getters.getAuth)
+        axios.post(API_URL + 'api/v1/consumos/consumo/create/', consumo, context.getters.getAuth)
           .then(res => {
-            // context.commit('set_users', res.data.results)
+            console.log('register consumo sucess ')
             resolve(res)
-            return res
           })
           .catch(err => {
-            console.log(err)
+            console.log('register consumo error: ' + err)
             reject(err)
           })
       })
@@ -358,6 +375,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    getInvoice (state) {
+      return state.invoice
+    },
     isAuthenticated (state) {
       return state.token !== null
     },

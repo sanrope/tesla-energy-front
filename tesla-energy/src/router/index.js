@@ -11,6 +11,8 @@ import RegisterClient from '../components/RegisterClient.vue'
 import Clients from '../components/Clients.vue'
 import Mapita from '../components/Map.vue'
 import Invoice from '../components/Invoice.vue'
+import opMap from '../components/OpCreateMeterMap.vue'
+import consumo from '../components/Consumo.vue'
 import Reports from '../components/Reports.vue'
 import Payments from '../components/Payments.vue'
 
@@ -19,6 +21,16 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   // mode: 'history',
   routes: [
+    {
+      path: '/opmap',
+      name: 'OpMap',
+      component: opMap
+    },
+    {
+      path: '/consume',
+      name: 'consume',
+      component: consumo
+    },
     {
       path: '/',
       name: 'Home',
@@ -105,7 +117,7 @@ const router = new VueRouter({
       component: Reports,
       meta: {
         requiresAuth: true,
-        requiresAD: true
+        requiresGE: true
       }
     },
     {

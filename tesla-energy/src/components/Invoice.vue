@@ -1,112 +1,121 @@
 <template>
   <v-container>
-    <v-row>
+    <v-form v-if="!therInvoice">
       <v-col>
+        <v-row>
+          <v-text-field
+          :v-model="Invoice.id"
+          type="number"
+          label="INVOICE"> </v-text-field>
+        </v-row>
+        <v-row>
+          <v-btn @click="getInvoice">search</v-btn>
+        </v-row>
+      </v-col>
+    </v-form>
+    <v-row v-if="therInvoice">
+      <div class="invoice-box" id="invoice">
+        <table cellpadding="0" cellspacing="0">
+
+          <tr class="top">
+            <td colspan="2">
+              <table>
+                <tr>
+                  <td class="title">
+                    <img src="../assets/tesla_coil.png" style="width:100%; max-width:300px;">
+                  </td>
+                  <td>
+                    Invoice #: 123<br>
+                    Created: January 1, 2015<br>
+                    Due: February 1, 2015
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr class="information">
+            <td colspan="2">
+              <table>
+                <tr>
+                  <td>
+                    Generated on: {{dateGenerated}} <br>
+                    Valid until: {{expiraDate}} <br>
+                    Sunnyville, CA 12345
+                  </td>
+                  <td>
+                    Acme Corp.<br>
+                    John Doe<br>
+                    john@example.com
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr class="heading">
+            <td>
+              Payment Method
+            </td>
+            <td>
+              Check #
+            </td>
+          </tr>
+          <tr class="details">
+            <td>
+              Check
+            </td>
+            <td>
+              1000
+            </td>
+          </tr>
+
+          <tr class="heading">
+            <td>
+              Item
+            </td>
+            <td>
+              Price
+            </td>
+          </tr>
+          <tr class="item">
+            <td>
+              Consume
+            </td>
+            <td>
+             {{consume}}
+            </td>
+          </tr>
+          <!-- <tr class="item">
+            <td>
+              Hosting (3 months)
+            </td>
+            <td>
+              $75.00
+            </td>
+          </tr> -->
+          <tr class="item last">
+            <td>
+              Total Consume
+            </td>
+            <td>
+             {{totalConsumed}}
+            </td>
+          </tr>
+
+          <tr class="total">
+            <td></td>
+            <td>
+              Total: {{amount}}
+            </td>
+          </tr>
+        </table>
+        <v-row>
+      <v-col cols="12">
         <v-btn @click="downloadInvoice">Download Invoce as PDF</v-btn>
       </v-col>
     </v-row>
-    <v-row justify="center">
-      <v-col cols="5">
-        <v-card hover>
-          <div class="invoice-box" id="invoice">
-            <table cellpadding="0" cellspacing="0">
-
-              <tr class="top">
-                <td colspan="2">
-                  <table>
-                    <tr>
-                      <td class="title">
-                        <img src="../assets/tesla_coil.png" style="width:100%; max-width:300px;">
-                      </td>
-                      <td>
-                        Invoice #: 123<br>
-                        Created: January 1, 2015<br>
-                        Due: February 1, 2015
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-
-              <tr class="information">
-                <td colspan="2">
-                  <table>
-                    <tr>
-                      <td>
-                        Sparksuite, Inc.<br>
-                        12345 Sunny Road<br>
-                        Sunnyville, CA 12345
-                      </td>
-                      <td>
-                        Acme Corp.<br>
-                        John Doe<br>
-                        john@example.com
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-
-              <tr class="heading">
-                <td>
-                  Payment Method
-                </td>
-                <td>
-                  Check #
-                </td>
-              </tr>
-              <tr class="details">
-                <td>
-                  Check
-                </td>
-                <td>
-                  1000
-                </td>
-              </tr>
-
-              <tr class="heading">
-                <td>
-                  Item
-                </td>
-                <td>
-                  Price
-                </td>
-              </tr>
-              <tr class="item">
-                <td>
-                  Website design
-                </td>
-                <td>
-                  $300.00
-                </td>
-              </tr>
-              <tr class="item">
-                <td>
-                  Hosting (3 months)
-                </td>
-                <td>
-                  $75.00
-                </td>
-              </tr>
-              <tr class="item last">
-                <td>
-                  Domain name (1 year)
-                </td>
-                <td>
-                  $10.00
-                </td>
-              </tr>
-
-              <tr class="total">
-                <td></td>
-                <td>
-                  Total: $385.00
-                </td>
-              </tr>
-            </table>
-          </div>
-        </v-card>
-      </v-col>
+      </div>
     </v-row>
   </v-container>
 </template>
@@ -118,7 +127,23 @@ import * as JsPDF from 'jspdf'
 
 export default {
   name: 'Invoice',
+  data () {
+    return {
+      Invoice: {
+        id: null,
+        dateGenerated: null,
+        expiraDate: null,
+        amount: null,
+        totalConsumed: null,
+        consume: null
+      },
+      therInvoice: false
+    }
+  },
   methods: {
+    getInvoice () {
+      this.$store.dispatch('getInvoice', this.Invoice.id)
+    },
     downloadInvoice () {
       html2canvas(document.querySelector('#invoice'), { imageTimeout: 5000, useCORS: true }).then(canvas => {
         const img = canvas.toDataURL('image/png')
@@ -126,6 +151,11 @@ export default {
         pdf.addImage(img, 'PNG', 5, 5, 200, 287)
         pdf.save('Invoice.pdf')
       })
+    }
+  },
+  computed: {
+    invoice () {
+      return this.$store.getters.getInvoice
     }
   }
 }
