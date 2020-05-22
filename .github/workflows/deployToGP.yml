@@ -2,7 +2,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - dev-santiago
+      - master
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -23,3 +23,4 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: master # The branch the action should deploy to.
           FOLDER: tesla-energy/dist # The folder the action should deploy.
+          WORKSPACE: tesla-energy-front/tesla-energy/
