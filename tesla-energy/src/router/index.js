@@ -11,12 +11,18 @@ import RegisterClient from '../components/RegisterClient.vue'
 import Clients from '../components/Clients.vue'
 import Mapita from '../components/Map.vue'
 import Invoice from '../components/Invoice.vue'
+import opMap from '../components/OpCreateMeterMap.vue'
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
   // mode: 'history',
   routes: [
+    {
+      path: '/opmap',
+      name: 'OpMap',
+      component: opMap
+    },
     {
       path: '/',
       name: 'Home',

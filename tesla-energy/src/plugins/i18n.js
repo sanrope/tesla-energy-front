@@ -302,7 +302,7 @@ const messages = {
       invalidEmail: 'O email inválido.',
       sendButton: 'Enviar',
       registered: 'Cliente Registrado com Sucesso',
-      registerError: 'Registração falhou' ,
+      registerError: 'Registração falhou',
       type: {
         title: 'Tipo',
         corporate: 'Corporativo',

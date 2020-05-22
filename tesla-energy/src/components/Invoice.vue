@@ -1,11 +1,14 @@
 <template>
   <v-container>
-    <v-row>
+    <v-form>
       <v-col>
-        <v-btn @click="downloadInvoice">Download Invoce as PDF</v-btn>
+        <v-row>
+          <v-text-field
+          label="INVOICE"> </v-text-field>
+        </v-row>
       </v-col>
-    </v-row>
-    <v-row>
+    </v-form>
+    <v-row v-if="factura.id ? true : true">
       <div class="invoice-box" id="invoice">
         <table cellpadding="0" cellspacing="0">
 
@@ -31,8 +34,8 @@
               <table>
                 <tr>
                   <td>
-                    Sparksuite, Inc.<br>
-                    12345 Sunny Road<br>
+                    Generated on: {{dateGenerated}} <br>
+                    Valid until: {{expiraDate}} <br>
                     Sunnyville, CA 12345
                   </td>
                   <td>
@@ -72,36 +75,41 @@
           </tr>
           <tr class="item">
             <td>
-              Website design
+              Consume
             </td>
             <td>
-              $300.00
+             {{consume}}
             </td>
           </tr>
-          <tr class="item">
+          <!-- <tr class="item">
             <td>
               Hosting (3 months)
             </td>
             <td>
               $75.00
             </td>
-          </tr>
+          </tr> -->
           <tr class="item last">
             <td>
-              Domain name (1 year)
+              Total Consume
             </td>
             <td>
-              $10.00
+             {{totalConsumed}}
             </td>
           </tr>
 
           <tr class="total">
             <td></td>
             <td>
-              Total: $385.00
+              Total: {{amount}}
             </td>
           </tr>
         </table>
+        <v-row>
+      <v-col cols="12">
+        <v-btn @click="downloadInvoice">Download Invoce as PDF</v-btn>
+      </v-col>
+    </v-row>
       </div>
     </v-row>
   </v-container>
@@ -114,7 +122,22 @@ import * as JsPDF from 'jspdf'
 
 export default {
   name: 'Invoice',
+  data () {
+    return {
+      Invoice: {
+        id: null,
+        dateGenerated: null,
+        expiraDate: null,
+        amount: null,
+        totalConsumed: null,
+        consume: null
+      }
+    }
+  },
   methods: {
+    getInvoice () {
+
+    },
     downloadInvoice () {
       html2canvas(document.querySelector('#invoice'), { imageTimeout: 5000, useCORS: true }).then(canvas => {
         const img = canvas.toDataURL('image/png')
@@ -122,6 +145,11 @@ export default {
         pdf.addImage(img, 'PNG', 5, 5, 200, 287)
         pdf.save('Invoice.pdf')
       })
+    }
+  },
+  computed: {
+    invoice () {
+      return this.$store.getters.getInvoice
     }
   }
 }
