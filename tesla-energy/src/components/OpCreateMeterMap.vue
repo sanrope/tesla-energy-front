@@ -33,10 +33,13 @@
               <l-popup>
                 <v-card elevation="0" width="20vw">
                   <v-container>
+                    <v-row>
+                          id : {{meter.id}}
+                        </v-row>
                     <v-form ref="updateMeterForm" v-model="validtoupdate">
                       <v-col cols="12">
                         <v-row>
-                          <v-text-field :rules="[rules.required]" v-model="editedMeter.name" label="Name" />
+                          <v-text-field disabled="true" :rules="[rules.required]" v-model="editedMeter.name" label="Name" />
                         </v-row>
                         <v-row>
                           <v-switch disabled="true" v-model="editedMeter.is_active" label="Avaible?" />

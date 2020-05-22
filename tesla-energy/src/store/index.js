@@ -335,6 +335,19 @@ export default new Vuex.Store({
             reject(err)
           })
       })
+    },
+    registerConsumo (context, consumo) {
+      return new Promise((resolve, reject) => {
+        axios.post(API_URL + 'api/v1/consumos/consumo/create/', consumo, context.getters.getAuth)
+          .then(res => {
+            console.log('register consumo sucess ')
+            resolve(res)
+          })
+          .catch(err => {
+            console.log('register consumo error: ' + err)
+            reject(err)
+          })
+      })
     }
   },
   getters: {

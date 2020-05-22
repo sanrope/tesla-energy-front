@@ -502,7 +502,7 @@ export default {
           break;
         case 'transformer':
           this.$store
-            .dispatch("updateTransformer", editedTransformer)
+            .dispatch("updateTransformer", this.editedTransformer)
             .then(res => {
               alert("transformer registered successfully", this.editedTransformer.name);
             })

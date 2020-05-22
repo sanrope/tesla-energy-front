@@ -1,14 +1,19 @@
 <template>
   <v-container>
-    <v-form>
+    <v-form v-if="!therInvoice">
       <v-col>
         <v-row>
           <v-text-field
+          :v-model="Invoice.id"
+          type="number"
           label="INVOICE"> </v-text-field>
+        </v-row>
+        <v-row>
+          <v-btn @click="getInvoice">search</v-btn>
         </v-row>
       </v-col>
     </v-form>
-    <v-row v-if="factura.id ? true : true">
+    <v-row v-if="therInvoice">
       <div class="invoice-box" id="invoice">
         <table cellpadding="0" cellspacing="0">
 
@@ -131,12 +136,13 @@ export default {
         amount: null,
         totalConsumed: null,
         consume: null
-      }
+      },
+      therInvoice: false
     }
   },
   methods: {
     getInvoice () {
-
+      this.$store.dispatch('getInvoice', this.Invoice.id)
     },
     downloadInvoice () {
       html2canvas(document.querySelector('#invoice'), { imageTimeout: 5000, useCORS: true }).then(canvas => {

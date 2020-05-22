@@ -12,6 +12,7 @@ import Clients from '../components/Clients.vue'
 import Mapita from '../components/Map.vue'
 import Invoice from '../components/Invoice.vue'
 import opMap from '../components/OpCreateMeterMap.vue'
+import consumo from '../components/Consumo.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const router = new VueRouter({
       path: '/opmap',
       name: 'OpMap',
       component: opMap
+    },
+    {
+      path: '/consume',
+      name: 'consume',
+      component: consumo
     },
     {
       path: '/',
