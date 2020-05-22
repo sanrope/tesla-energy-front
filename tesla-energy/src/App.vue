@@ -101,7 +101,7 @@
               <v-icon>payment</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>{{ $t("menu.payment") }}</v-list-item-title>
+              <v-list-item-title>{{ $t("menu.payments") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
