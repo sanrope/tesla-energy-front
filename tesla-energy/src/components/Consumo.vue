@@ -7,10 +7,10 @@
           <span class="headline">Contrato</span>
         </v-card-title>
         <v-row>
-          <v-text-field :v-model="consumo.client" label="Client ID" />
+          <v-text-field v-model="consumo.idclient" label="Client ID" />
         </v-row>
         <v-row>
-          <v-text-field :v-model="consumo.meter" label="Electric Meter ID" />
+          <v-text-field v-model="consumo.idmeter" label="Electric Meter ID" />
         </v-row>
         <v-row>
           <v-btn @click="asignConsume" >save</v-btn>
@@ -45,8 +45,8 @@ export default {
   data () {
     return {
       consumo: {
-        client: null,
-        meter: null
+        idclient: null,
+        idmeter: null
       },
       invoice: {
         totalConsumed: null,
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     asignConsume () {
-      this.$store.dispatch('registerConsumo', this.consumo)
+      this.$store.dispatch('registerConsumo', { client: this.consumo.idclient.toString(), meter: this.consumo.idmeter.toString() })
         .then(res => {
           alert('Contrato creado')
           this.dialog = false
