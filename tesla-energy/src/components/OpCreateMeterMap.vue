@@ -100,7 +100,7 @@
                             v-if="active_type === 'E' "
                             v-model="active_bind"
                             :disabled="active_type === 'S' ? true : false"
-                            :items="active_type === 'T' ? substations.map(a => {return {text: a.name, value: a.id}}) : active_type === 'E' ? transformers.map(a => {return {text: a.name, value: a.id}}) : null "
+                            :items="active_type === 'E' ? transformers.map(a => {return {text: a.name, value: a.id}}) : null "
                             label="Select Active"
                             :rules="[rules.required]"
                           ></v-select>
