@@ -37,7 +37,7 @@
                 required
                 :rules="[rules.required]"></v-text-field>
                 <v-text-field
-                v-model="client.cedula"
+                v-model="client.id"
                 prepend-inner-icon="recent_actors"
                 name="cedula"
                 :label="$t('registerClient.id')"
@@ -73,7 +73,7 @@ export default {
   data () {
     return {
       client: {
-        cedula: null,
+        id: null,
         first_name: null,
         last_name: null,
         email: null,

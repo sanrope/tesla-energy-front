@@ -45,7 +45,7 @@
                 <v-container>
                   <v-row>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field :disabled="true" v-model="editedItem.cedula" label="ID"></v-text-field>
+                      <v-text-field :disabled="true" v-model="editedItem.id" label="ID"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field v-model="editedItem.first_name" :label="$t('clients.name')"></v-text-field>
@@ -93,7 +93,7 @@ export default {
       search: '',
       dialog: false,
       headers: [
-        { text: i18n.t('clients.id'), value: 'cedula' },
+        { text: i18n.t('clients.id'), value: 'id' },
         { text: i18n.t('clients.name'), value: 'first_name' },
         { text: i18n.t('clients.lastName'), value: 'last_name' },
         { text: i18n.t('clients.email'), value: 'email' },
@@ -102,7 +102,7 @@ export default {
         { text: i18n.t('clients.editClient'), value: 'actions' }
       ],
       editedItem: {
-        cedula: '',
+        id: '',
         first_name: '',
         last_name: '',
         email: '',
@@ -146,7 +146,7 @@ export default {
     },
     async save () {
       var newUser = {
-        cedula: this.editedItem.cedula,
+        id: this.editedItem.id,
         first_name: this.editedItem.first_name,
         last_name: this.editedItem.last_name,
         email: this.editedItem.email,

@@ -241,7 +241,7 @@ export default {
       var data = []
       var obj = {}
       for (var i = 0; i < clients.length; i++) {
-        obj.id = clients[i].cedula
+        obj.id = clients[i].id
         obj.name = clients[i].first_name
         obj.lastname = clients[i].last_name
         obj.email = clients[i].email
