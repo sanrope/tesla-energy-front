@@ -117,7 +117,7 @@ const router = new VueRouter({
       component: Reports,
       meta: {
         requiresAuth: true,
-        requiresAD: true
+        requiresGE: true
       }
     },
     {
