@@ -3,10 +3,10 @@
 
     <v-row justify="center">
       <v-col cols="4">
-        <ReportDonut></ReportDonut>
+        <ReportBar></ReportBar>
       </v-col>
       <v-col cols="4">
-        <ReportBar></ReportBar>
+        <ReportDonut></ReportDonut>
       </v-col>
     </v-row>
 

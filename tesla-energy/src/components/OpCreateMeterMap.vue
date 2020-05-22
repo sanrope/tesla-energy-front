@@ -1,43 +1,6 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="4">
-        <v-row>
-          <v-card max-width="280">
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="caption font-weight-black">{{ $t("assets.substation") }}</v-list-item-title>
-              </v-list-item-content>
-              <v-list-item-avatar tile size="45">
-                <v-img :src="require('@/assets/substation.png')"></v-img>
-              </v-list-item-avatar>
-            </v-list-item>
-          </v-card>
-          <v-card max-width="280">
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="caption font-weight-black">{{ $t("assets.transformer") }}</v-list-item-title>
-              </v-list-item-content>
-              <v-list-item-avatar tile size="45">
-                <v-img :src="require('@/assets/tranformer.png')"></v-img>
-              </v-list-item-avatar>
-            </v-list-item>
-          </v-card>
-          <v-card max-width="280">
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="caption font-weight-black">{{ $t("assets.electricMeter") }}</v-list-item-title>
-              </v-list-item-content>
-              <v-list-item-avatar tile size="45">
-                <v-img :src="require('@/assets/meter.png')"></v-img>
-              </v-list-item-avatar>
-            </v-list-item>
-          </v-card>
-        </v-row>
-      </v-col>
-    </v-row>
-
-    <v-row justify="center">
       <v-col cols="10">
         <v-card
           raised
@@ -58,83 +21,6 @@
             @click="selectSite"
           >
             <l-tile-layer :url="url" :attribution="attribution" />
-            <!-- Marker loop for substations -->
-            <l-marker
-              v-for="(substation,i) in substations"
-              :key="i"
-              :icon="iconSubstation"
-              :lat-lng="latLng2(substation.latitude, substation.longitude)"
-              @click="editSubstation(substation)"
-            >
-              <l-tooltip>{{substation.name}}</l-tooltip>
-              <l-popup>
-                <v-card elevation="0" width="20vw">
-                  <v-container>
-                    <v-form ref="updateSubstationForm" v-model="validtoupdate">
-                      <v-col cols="12">
-                        <v-row>
-                          <v-text-field v-model="editedSubstation.name" label="Name" />
-                        </v-row>
-                        <v-row>
-                          <v-switch v-model="editedSubstation.is_active" label="Avaible?" />
-                        </v-row>
-                        <v-row>
-                          <v-col cols="6s">
-                            <v-text-field v-model="editedSubstation.latitude" label="Latitude" type="number" />
-                          </v-col>
-                          <v-col cols="6">
-                            <v-text-field v-model="editedSubstation.longitude" label="Longitude" type="number" />
-                          </v-col>
-                        </v-row>
-                        <v-row justify="center">
-                          <v-btn outlined :disabled="!validtoupdate" @click="updateAssets('substation')">update</v-btn>
-                        </v-row>
-                      </v-col>
-                    </v-form>
-                  </v-container>
-                </v-card>
-              </l-popup>
-            </l-marker>
-            <!-- Marker loop for transformers -->
-            <l-marker
-              v-for="(transformer,x) in transformers"
-              :key="'x'+ x"
-              :icon="iconTransformator"
-              :lat-lng="latLng2(transformer.latitude, transformer.longitude)"
-              @click="editTransformer(transformer)"
-            >
-              <l-tooltip>{{transformer.name}}</l-tooltip>
-              <l-popup>
-                <v-card elevation="0" width="20vw">
-                  <v-container>
-                    <v-form ref="updateTransformerForm" v-model="validtoupdate">
-                      <v-col cols="12">
-                        <v-row>
-                          <v-text-field v-model="editedTransformer.name" label="Name" />
-                        </v-row>
-                        <v-row>
-                          <v-switch v-model="editedTransformer.is_active" label="Avaible?" />
-                        </v-row>
-                        <v-row>
-                          <v-select v-model="editedTransformer.substation" :items="substations.map(a => {return {text: a.name, value: a.id}})" label="Substation" />
-                        </v-row>
-                        <v-row>
-                          <v-col cols="6s">
-                            <v-text-field v-model="editTransformer.latitude" label="Latitude" type="number" />
-                          </v-col>
-                          <v-col cols="6">
-                            <v-text-field v-model="editTransformer.longitude" label="Longitude" type="number" />
-                          </v-col>
-                        </v-row>
-                        <v-row justify="center">
-                          <v-btn outlined :disabled="!validtoupdate" @click="updateAssets('transformer')">update</v-btn>
-                        </v-row>
-                      </v-col>
-                    </v-form>
-                  </v-container>
-                </v-card>
-              </l-popup>
-            </l-marker>
             <!-- Marker loop for meters -->
             <l-marker
               v-for="(meter,x) in meters"
@@ -147,27 +33,27 @@
               <l-popup>
                 <v-card elevation="0" width="20vw">
                   <v-container>
+                    <v-row>
+                          id : {{meter.id}}
+                        </v-row>
                     <v-form ref="updateMeterForm" v-model="validtoupdate">
                       <v-col cols="12">
                         <v-row>
-                          <v-text-field :rules="[rules.required]" v-model="editedMeter.name" label="Name" />
+                          <v-text-field disabled="true" :rules="[rules.required]" v-model="editedMeter.name" label="Name" />
                         </v-row>
                         <v-row>
-                          <v-switch v-model="editedMeter.is_active" label="Avaible?" />
+                          <v-switch disabled="true" v-model="editedMeter.is_active" label="Avaible?" />
                         </v-row>
                          <v-row>
-                          <v-select :rules="[rules.required]" v-model="editedMeter.transformer" :items="transformers.map(a => {return {text: a.name, value: a.id}})" label="Transformer" />
+                          <v-select disabled="true" :rules="[rules.required]" v-model="editedMeter.transformer" :items="transformers.map(a => {return {text: a.name, value: a.id}})" label="Transformer" />
                         </v-row>
                         <v-row>
                           <v-col cols="6s">
-                            <v-text-field :rules="[rules.required]" v-model="editedMeter.latitude" label="Latitude" type="number" />
+                            <v-text-field disabled="true" :rules="[rules.required]" v-model="editedMeter.latitude" label="Latitude" type="number" />
                           </v-col>
                           <v-col cols="6">
-                            <v-text-field :rules="[rules.required]" v-model="editedMeter.longitude" label="Longitude" type="number" />
+                            <v-text-field disabled="true" :rules="[rules.required]" v-model="editedMeter.longitude" label="Longitude" type="number" />
                           </v-col>
-                        </v-row>
-                        <v-row justify="center">
-                          <v-btn outlined :disabled="!validtoupdate" @click="updateAssets('meter')">update</v-btn>
                         </v-row>
                       </v-col>
                     </v-form>
@@ -211,7 +97,7 @@
                         </v-row>
                         <v-row>
                           <v-select
-                            v-if="active_type === 'T' || active_type === 'E' "
+                            v-if="active_type === 'E' "
                             v-model="active_bind"
                             :disabled="active_type === 'S' ? true : false"
                             :items="active_type === 'T' ? substations.map(a => {return {text: a.name, value: a.id}}) : active_type === 'E' ? transformers.map(a => {return {text: a.name, value: a.id}}) : null "
@@ -255,7 +141,7 @@ L.Icon.Default.mergeOptions({
 });
 /* eslint-disable no-new */
 export default {
-  name: "Map",
+  name: "CreateMeterMap",
   components: {
     LMap,
     LTileLayer,
@@ -278,32 +164,15 @@ export default {
       validtoupdate: null,
       active: null,
       assets: [
-        { text: "Substation", value: "S" },
-        { text: "Transformer", value: "T" },
-        { text: "Electric Meter", value: "E" }
+        { text: "Electric Meter", value: "E" },
+        { text: "None", value: "N" }
       ],
-      editedTransformer: {
-        id: '',
-        name: '',
-        latitude: '',
-        longitude: '',
-        is_active: '',
-        substation: ''
-      },
       editedMeter: {
         id: '',
         name: '',
         latitude: '',
         longitude: '',
         substation: '',
-        is_active: ''
-      },
-      editedSubstation: {
-        id: '',
-        name: '',
-        latitude: '',
-        longitude: '',
-        transformer: '',
         is_active: ''
       },
       active_type: null,
@@ -315,24 +184,6 @@ export default {
         iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
         iconUrl: require("leaflet/dist/images/marker-icon.png"),
         shadowUrl: require("leaflet/dist/images/marker-shadow.png")
-      }),
-      iconSubstation: L.icon({
-        iconUrl: require("../assets/substation.png"),
-        //  shadowUrl: require('../assets/substation_shadow.png'),
-        iconSize: [50, 45],
-        // iconAnchor: [40, 37],
-        // shadowSize: [50, 45],
-        // shadowAnchor: [29, 37],
-        tooltipAnchor: [10, 0]
-      }),
-      iconTransformator: L.icon({
-        iconUrl: require("../assets/tranformer.png"),
-        // shadowUrl: require('../assets/tranformer-shadow.png'),
-        iconSize: [50, 45],
-        //  iconAnchor: [20, 37],
-        //shadowSize: [50, 45],
-        // shadowAnchor: [20, 37],
-        tooltipAnchor: [7, 0]
       }),
       iconEMeter: L.icon({
         iconUrl: require("../assets/meter.png"),
@@ -388,54 +239,9 @@ export default {
         this.ClickMarkerIcon = L.Marker.prototype.options.icon;
       }
     },
-    // deprecated, no used.
-    getActiveNames() {
-      var actnames;
-      if (this.active_type === "T") {
-        actnames = substations;
-        actnames.map((a, index) => {
-          return { text: a.name, value: index };
-        });
-      } else if (this.active_type === "E") {
-      }
-    },
     registerassets() {
       console.log(this.active_bind);
       switch (this.active_type) {
-        case "S":
-          this.active = {
-            name: this.active_name,
-            latitude: this.positionPopup.lat,
-            longitude: this.positionPopup.lng,
-            is_active: true
-          };
-          this.$store
-            .dispatch("registerSubstation", this.active)
-            .then(res => {
-              alert("sub registered successfully", this.active.name);
-            })
-            .catch(err => {
-              console.log("register Substation error: " + err);
-            });
-          break;
-        case "T":
-          this.active = {
-            name: this.active_name,
-            latitude: this.positionPopup.lat,
-            longitude: this.positionPopup.lng,
-            substation: this.active_bind,
-            is_active: true
-          };
-          console.log(this.active);
-          this.$store
-            .dispatch("registerTransformer", this.active)
-            .then(res => {
-              alert("transformer registered successfully", this.active.name);
-            })
-            .catch(err => {
-              console.log("register Transformer error: " + err);
-            });
-          break;
         case "E":
           this.active = {
             name: this.active_name,
@@ -463,7 +269,6 @@ export default {
       this.$refs.ClickMarker.setVisible(false);
 
      //load the assets from the API and this in turn from the database
-      this.$store.dispatch("getSubstations");
       this.$store.dispatch("getTransformers");
       this.$store.dispatch("getMeters");
       //force update the component for solve some bugs.
@@ -473,23 +278,13 @@ export default {
       //set icon marker on click to default value
       this.ClickMarkerIcon = L.Marker.prototype.options.icon;
     },
-    editTransformer (transformer) {
-      console.log(transformer)
-      this.editedTransformer = Object.assign({}, transformer)
-      console
-    },
-    editSubstation (sub) {
-      console.log(sub)
-      this.editedSubstation = Object.assign({}, sub)
-      console
-    },
     editMeter (meter) {
       console.log(meter)
       this.editedMeter = Object.assign({}, meter)
       console
     },
     updateAssets (typeofAsset) {
-      switch (typeofAsset) {
+      /* switch (typeofAsset) {
         case 'meter':
           this.$store
             .dispatch("updateMeter", this.editedMeter)
@@ -500,28 +295,9 @@ export default {
               console.log("update ElectricMeter error: " + err);
             });
           break;
-        case 'transformer':
-          this.$store
-            .dispatch("updateTransformer", this.editedTransformer)
-            .then(res => {
-              alert("transformer registered successfully", this.editedTransformer.name);
-            })
-            .catch(err => {
-              console.log("update Transformer error: " + err);
-            });
-          break;
-        case 'substation':
-          this.$store
-            .dispatch("updateSubstation", this.editedSubstation)
-            .then(res => {
-              alert("sub registered successfully", this.editedSubstation.name);
-            })
-            .catch(err => {
-              console.log("update Substation error: " + err);
-            });
-          break;
         default:
-          break;
+          break; */
+
       }
     /* this.$refs.updateMeterForm.reset();
     this.$refs.updateMeterForm.resetValidation();
@@ -531,7 +307,7 @@ export default {
 
     this.$refs.updateTransformerForm.reset();
     this.$refs.updateTransformerForm.resetValidation(); */
-    }
+    
   },
   beforeCreate() {
      //load the assets from the API and this in turn from the database
@@ -540,9 +316,6 @@ export default {
       this.$store.dispatch("getMeters");
   },
   computed: {
-    substations() {
-      return this.$store.getters.getSubstations;
-    },
     transformers() {
       return this.$store.getters.getTransformers;
     },
