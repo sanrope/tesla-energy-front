@@ -1,73 +1,67 @@
 <template>
-  <div>
-    <v-container style="min-height: 100vh" >
-      <v-row align="center"
-      justify="center">
-        <v-col cols="12" sm="10" md="6">
-          <v-hover v-slot:default="{ hover }" open-delay="100" close-delay="250">
-            <v-card
-              :elevation="hover ? 24 : 0"
-              class="mx-auto pa-6"
-            >
-              <v-card-text >
-                <p class="display-1 text--primary">{{ $t("registerClient.title") }}</p>
-              </v-card-text>
-              <v-form ref="ClientRegistrationForm" v-model="valid">
-                <v-row>
-                  <v-col>
-                    <v-divider></v-divider>
-                    <v-text-field
-                    v-model="client.first_name"
-                    prepend-inner-icon="assignment_ind"
-                    name="first_name"
-                    :label="$t('registerClient.name')"
-                    type="text"
-                    solo
-                    required
-                    :rules="[rules.required]"></v-text-field>
-                    <v-text-field
-                    v-model="client.last_name"
-                    prepend-inner-icon="assignment_ind"
-                    name="last_name"
-                    :label="$t('registerClient.lastName')"
-                    type="text"
-                    solo
-                    required
-                    :rules="[rules.required]"></v-text-field>
-                    <v-text-field
-                    v-model="client.cedula"
-                    prepend-inner-icon="recent_actors"
-                    name="cedula"
-                    :label="$t('registerClient.id')"
-                    type="number"
-                    solo
-                    required
-                    :rules="[rules.required]"></v-text-field>
-                    <v-select
-                    v-model="client.type"
-                    :label="$t('registerClient.type.title')"
-                    solo
-                    :rules="[rules.required]"
-                    :items="[{text: $t('registerClient.type.natural'), value:'NA' }, { text: $t('registerClient.type.corporate'), value: 'CO' }]" />
-                    <v-text-field
-                    v-model="client.email"
-                    prepend-inner-icon="email"
-                    name="email"
-                    :label="$t('registerClient.email')"
-                    type="text"
-                    solo
-                    required
-                    :rules="[rules.required, rules.email]" />
-                    <v-btn @click="register" :disabled="!valid">{{ $t("registerClient.sendButton") }}</v-btn>
-                  </v-col>
-                </v-row>
-              </v-form>
-            </v-card>
-          </v-hover>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+  <v-container style="min-height: 80vh">
+    <v-row align="center" justify="center">
+      <v-col cols="12" sm="10" md="6">
+        <v-card
+          hover
+          class="mx-auto pa-6"
+        >
+          <h1>{{ $t("registerClient.title") }}</h1>
+          <p>{{ $t("registerClient.create") }}</p>
+          <v-form ref="ClientRegistrationForm" v-model="valid">
+            <v-row>
+              <v-col>
+                <v-divider></v-divider>
+                <v-select
+                v-model="client.type"
+                :label="$t('registerClient.type.title')"
+                solo
+                :rules="[rules.required]"
+                :items="[{text: $t('registerClient.type.natural'), value:'NA' }, { text: $t('registerClient.type.corporate'), value: 'CO' }]" />
+                <v-text-field
+                v-model="client.first_name"
+                prepend-inner-icon="assignment_ind"
+                name="first_name"
+                :label="$t('registerClient.name')"
+                type="text"
+                solo
+                required
+                :rules="[rules.required]"></v-text-field>
+                <v-text-field
+                v-model="client.last_name"
+                prepend-inner-icon="assignment_ind"
+                name="last_name"
+                :label="$t('registerClient.lastName')"
+                type="text"
+                solo
+                required
+                :rules="[rules.required]"></v-text-field>
+                <v-text-field
+                v-model="client.cedula"
+                prepend-inner-icon="recent_actors"
+                name="cedula"
+                :label="$t('registerClient.id')"
+                type="number"
+                solo
+                required
+                :rules="[rules.required]"></v-text-field>
+                <v-text-field
+                v-model="client.email"
+                prepend-inner-icon="email"
+                name="email"
+                :label="$t('registerClient.email')"
+                type="text"
+                solo
+                required
+                :rules="[rules.required, rules.email]" />
+                <v-btn @click="register" :disabled="!valid">{{ $t("registerClient.sendButton") }}</v-btn>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

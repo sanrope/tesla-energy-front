@@ -25,12 +25,16 @@ const messages = {
       users: 'Users',
       clientRegistration: 'Client Registration',
       clients: 'Clients',
+      invoice: 'Invoice',
+      reports: 'Reports',
       profile: 'Profile',
       assets: 'Assets',
-      logout: 'Logout'
+      logout: 'Logout',
+      payments: 'Payments'
     },
     profile: {
-      title: 'Profile',
+      title: 'My Profile',
+      edit: 'Edit your profile',
       userName: 'Username',
       name: 'Name',
       lastName: 'Last Name',
@@ -38,11 +42,12 @@ const messages = {
       email: 'Email',
       position: 'Position',
       update: 'Update',
-      upadated: 'User updated successfully ',
-      upadateError: 'User updated successfully'
+      updated: 'User updated successfully ',
+      updateError: 'Update error '
     },
     registerUser: {
       title: 'User Registration',
+      create: 'Create a new user',
       userType: {
         user: 'Select User Type',
         manager: 'Manager',
@@ -80,6 +85,7 @@ const messages = {
     },
     registerClient: {
       title: 'Client Registration',
+      create: 'Create a new client',
       name: 'Name',
       lastName: 'Last Name',
       id: 'ID',
@@ -90,7 +96,7 @@ const messages = {
       registered: 'Client registered successfully',
       registerError: 'Register error ',
       type: {
-        title: 'Type',
+        title: 'Select Client Type',
         corporate: 'Corporate',
         natural: 'Natural'
       }
@@ -109,6 +115,24 @@ const messages = {
       save: 'Save',
       activeClient: 'Active',
       inactiveClient: 'Inactive'
+    },
+    payments: {
+      title: 'Payment',
+      subtitle: 'Make your payment',
+      idfactura: 'Invoice ID',
+      boton1: 'Pay',
+      boton2: 'Confirm Pay',
+      titleForm: 'Payment',
+      dateGenerated: 'Expedition date',
+      expireDate: 'Due date',
+      totalConsumed: 'Consumption (KWh)',
+      amount: 'Amount to be paid',
+      save: 'Pay'
+    },
+    assets: {
+      substation: 'Substation:',
+      transformer: 'Transformer:',
+      electricMeter: 'Electric Meter:'
     }
   },
   es_ES: {
@@ -132,12 +156,16 @@ const messages = {
       users: 'Usuarios',
       clientRegistration: 'Registro de Cliente',
       clients: 'Clientes',
+      invoice: 'Factura',
+      reports: 'Reportes',
       profile: 'Perfil',
       assets: 'Activos',
-      logout: 'Cerrar Sesión'
+      logout: 'Cerrar Sesión',
+      payments: 'Pagos'
     },
     profile: {
-      title: 'Perfil',
+      title: 'Mi Perfil',
+      edit: 'Edita tu perfil',
       userName: 'Nombre de Usuario',
       name: 'Nombre',
       lastName: 'Apellido',
@@ -145,13 +173,13 @@ const messages = {
       email: 'Correo Eléctronico',
       position: 'Rol',
       update: 'Actualizar',
-      upadated: 'Usuario actualizado satisfactoriamente',
-      upadateError: 'Error al actualizar '
+      updated: 'Usuario actualizado satisfactoriamente',
+      updateError: 'Error al actualizar '
     },
     registerUser: {
       title: 'Registro de Usuario',
       userType: {
-        user: 'Seleccionar Tipo de Ssuario',
+        user: 'Seleccionar Tipo de Usuário',
         manager: 'Administrador',
         operator: 'Operador'
       },
@@ -187,6 +215,7 @@ const messages = {
     },
     registerClient: {
       title: 'Registro de Cliente',
+      create: 'Crea un nuevo cliente',
       name: 'Nombre',
       lastName: 'Apellido',
       id: 'Identificación',
@@ -197,7 +226,7 @@ const messages = {
       registered: 'Cliente registrado satisfactoriamente',
       registerError: 'Error al registrar ',
       type: {
-        title: 'Tipo',
+        title: 'Seleccioar Tipo de Cliente',
         corporate: 'Corporativo',
         natural: 'Natural'
       }
@@ -216,6 +245,24 @@ const messages = {
       save: 'Guardar',
       activeClient: 'Activo',
       inactiveClient: 'Inactivo'
+    },
+    payments: {
+      title: 'Pagos',
+      subtitle: 'Realiza tu pago',
+      idfactura: 'Número de Factura',
+      boton1: 'Pagar',
+      boton2: 'Confirmar Pago',
+      titleForm: 'Generar pago',
+      dateGenerated: 'Fecha de expedición',
+      expireDate: 'Fecha de expiración',
+      totalConsumed: 'Consumo (KWh)',
+      amount: 'Monto a pagar',
+      save: 'Pagar'
+    },
+    assets: {
+      substation: 'Substación:',
+      transformer: 'Transformador:',
+      electricMeter: 'Medidor Eléctrico:'
     }
   },
   pt_BR: {
@@ -239,12 +286,16 @@ const messages = {
       users: 'Usuários',
       clientRegistration: 'Registro de Cliente',
       clients: 'Clientes',
+      invoice: 'Fatura',
+      reports: 'Relatórios',
       profile: 'Perfil',
       assets: 'Ativos',
-      logout: 'Sair'
+      logout: 'Sair',
+      payments: 'Pagamentos'
     },
     profile: {
-      title: 'Perfil',
+      title: 'Meu Perfil',
+      edit: 'Edite seu perfil',
       userName: 'Nome do usuário',
       name: 'Nome',
       lastName: 'Último nome',
@@ -252,8 +303,8 @@ const messages = {
       email: 'O email',
       position: 'Posição',
       update: 'Atualizar',
-      upadated: 'Usuário atualizado com sucesso',
-      upadateError: 'Falha ao atualizar '
+      updated: 'Usuário atualizado com sucesso',
+      updateError: 'Falha ao atualizar '
     },
     registerUser: {
       title: 'Registro de Usuário',
@@ -275,7 +326,7 @@ const messages = {
       passwordCharacters: 'Mínimo de 8 caracteres.',
       passwordHint: 'Repita sua senha.',
       registered: 'Usuário registrado com sucesso',
-      registerError: 'Registração falhou'
+      registerError: 'Registração falhou '
     },
     users: {
       title: 'Usuários do sistema:',
@@ -294,6 +345,7 @@ const messages = {
     },
     registerClient: {
       title: 'Registro de Cliente',
+      create: 'Crie um novo cliente',
       name: 'Nome',
       lastName: 'Último nome',
       id: 'Número de Identificação',
@@ -302,9 +354,9 @@ const messages = {
       invalidEmail: 'O email inválido.',
       sendButton: 'Enviar',
       registered: 'Cliente Registrado com Sucesso',
-      registerError: 'Registração falhou',
+      registerError: 'Registração falhou ',
       type: {
-        title: 'Tipo',
+        title: 'Selecione o Tipo de Cliente',
         corporate: 'Corporativo',
         natural: 'Natural'
       }
@@ -323,6 +375,24 @@ const messages = {
       save: 'Salve',
       activeClient: 'Ativo',
       inactiveClient: 'Inativo'
+    },
+    payments: {
+      title: 'Pagamentos',
+      subtitle: 'Faça seu Pagamento',
+      idfactura: 'Número da Fatura',
+      boton1: 'Pagar',
+      boton2: 'Confirme o Pagamento',
+      titleForm: 'Gerar Pagamento',
+      dateGenerated: 'Data de Expedição',
+      expireDate: 'Data de Expiração',
+      totalConsumed: 'Consumo (KWh)',
+      amount: 'Valor à Pagar',
+      save: 'Pagar'
+    },
+    assets: {
+      substation: 'Subestação:',
+      transformer: 'Transformador:',
+      electricMeter: 'Medidor Elétrico:'
     }
   }
 }

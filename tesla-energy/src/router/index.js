@@ -13,6 +13,8 @@ import Mapita from '../components/Map.vue'
 import Invoice from '../components/Invoice.vue'
 import opMap from '../components/OpCreateMeterMap.vue'
 import consumo from '../components/Consumo.vue'
+import Reports from '../components/Reports.vue'
+import Payments from '../components/Payments.vue'
 
 Vue.use(VueRouter)
 
@@ -108,6 +110,24 @@ const router = new VueRouter({
       path: '/client',
       name: 'Client',
       component: Invoice
+    },
+    {
+      path: '/reports',
+      name: 'Reports',
+      component: Reports,
+      meta: {
+        requiresAuth: true,
+        requiresAD: true
+      }
+    },
+    {
+      path: '/payments',
+      name: 'Payments',
+      component: Payments,
+      meta: {
+        requiresAuth: true,
+        requiresOP: true
+      }
     },
     {
       path: '/about',

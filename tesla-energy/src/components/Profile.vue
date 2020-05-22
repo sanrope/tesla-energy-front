@@ -1,6 +1,6 @@
 <template lang="html">
 
-  <v-container grid-list-xs,sm,md,lg,xl>
+  <v-container style="min-height: 80vh">
     <v-snackbar v-model="snack" top right multi-line :timeout=6000 color="success">
       Updated!
       <v-btn color="white" flat @click="snack = false">
@@ -13,14 +13,12 @@
         Close
       </v-btn>
     </v-snackbar>
-    <v-tabs v-model="active" color="dark" slider-color="primary">
-      <v-tab>
-        {{ $t("profile.title") }}
-      </v-tab>
-      <v-tab-item>
-        <v-card flat>
+    <v-row justify="center">
+      <v-col cols="12" sm="10" md="6">
+        <v-card hover>
           <v-container grid-list-xs,sm,md,lg,xl>
             <h1>{{ $t("profile.title") }}</h1>
+            <p>{{ $t("profile.edit") }}</p>
             <v-form>
               <v-text-field
                 v-model="profile.username" prepend-icon="person"
@@ -66,10 +64,9 @@
             </v-form>
             <v-btn color="pink" @click="updateProfile">{{ $t("profile.update") }}</v-btn>
           </v-container>
-
         </v-card>
-      </v-tab-item>
-    </v-tabs>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <script>

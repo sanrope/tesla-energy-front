@@ -1,41 +1,42 @@
 <template>
-  <v-row>
-    <v-col>
-      <v-card>
-        <v-card-title class="display-2">
-          {{ $t("clients.title") }}
-        <v-spacer></v-spacer>
-        <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            :label="$t('clients.search')"
-            single-line
-            hide-details
-        ></v-text-field>
-        </v-card-title>
-        <v-data-table
-        :headers="headers"
-        :items="clients"
-        :search="search"
-        mobile-breakpoint="810"
-        >
-          <template v-slot:item.actions="{ item }">
-            <v-icon
-              small
-              class="mr-2"
-              @click="editClient(item)"
-            >
-              mdi-pencil
-            </v-icon>
-            <v-icon
-              small
-              @click="deleteClient(item)"
-            >
-              mdi-delete
-            </v-icon>
-          </template>
-        </v-data-table>
-        <v-dialog v-model="dialog" max-width="500px">
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="11">
+        <v-card hover>
+          <v-card-title class="display-2">
+            {{ $t("clients.title") }}
+          <v-spacer></v-spacer>
+          <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              :label="$t('clients.search')"
+              single-line
+              hide-details
+          ></v-text-field>
+          </v-card-title>
+          <v-data-table
+          :headers="headers"
+          :items="clients"
+          :search="search"
+          mobile-breakpoint="810"
+          >
+            <template v-slot:item.actions="{ item }">
+              <v-icon
+                small
+                class="mr-2"
+                @click="editClient(item)"
+              >
+                mdi-pencil
+              </v-icon>
+              <v-icon
+                small
+                @click="deleteClient(item)"
+              >
+                mdi-delete
+              </v-icon>
+            </template>
+          </v-data-table>
+          <v-dialog v-model="dialog" max-width="500px">
             <v-card>
               <v-card-title>
                 <span class="headline">{{ $t("clients.editClient") }}</span>
@@ -75,9 +76,10 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-      </v-card>
-    </v-col>
-  </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

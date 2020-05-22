@@ -7,7 +7,7 @@ import jwtDecode from 'jwt-decode'
 Vue.use(Vuex)
 
 export const API_URL = 'http://34.221.98.21:8000/'
-//  export const API_URL = 'http://localhost:8000/'
+// export const API_URL = 'http://localhost:8000/'
 
 export default new Vuex.Store({
   state: {
@@ -21,7 +21,8 @@ export default new Vuex.Store({
     substations: [],
     transformers: [],
     meters: [],
-    invoice: null
+    invoice: null,
+    idUser: localStorage.getItem('idUser') || null
   },
   mutations: {
     set_invoice (state, invoice) {
@@ -68,6 +69,9 @@ export default new Vuex.Store({
     },
     set_rol (state, rol) {
       state.rol = rol
+    },
+    set_iduser (state, id) {
+      state.idUser = id
     }
   },
   actions: {
@@ -322,10 +326,13 @@ export default new Vuex.Store({
         axios.get(API_URL + 'api/v1/usuarios/rolbyusername/' + username + '/')
           .then(res => {
             const rol = res.data.rol
+            const id = res.data.id
             if (rol) {
-              console.log('rol puesto')
+              console.log('id' + id)
               localStorage.setItem('rol', rol)
+              localStorage.setItem('idUser', id)
               context.commit('set_rol', rol)
+              context.commit('set_iduser', id)
             } else {
               console.log('login token null error' + res)
             }
@@ -345,6 +352,23 @@ export default new Vuex.Store({
           })
           .catch(err => {
             console.log('register consumo error: ' + err)
+            reject(err)
+          })
+      })
+    },
+    pay (context, id) {
+      const p = {
+        factura: id,
+        usuario: context.getters.getIduser
+      }
+      return new Promise((resolve, reject) => {
+        axios.post(API_URL + 'api/v1/pagos/create/', p, context.getters.getAuth)
+          .then(res => {
+            console.log(res)
+            resolve(res)
+          })
+          .catch(err => {
+            console.log(err)
             reject(err)
           })
       })
@@ -386,6 +410,9 @@ export default new Vuex.Store({
     },
     getMeters (state) {
       return state.meters
+    },
+    getIduser (state) {
+      return state.idUser
     }
   },
   plugins: [createPersistedState()]

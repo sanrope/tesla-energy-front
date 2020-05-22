@@ -71,6 +71,14 @@
               <v-list-item-title>{{ $t("menu.clients") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item v-if="token != null && rol == 'AD'" to="/reports" link ripple>
+            <v-list-item-action>
+              <v-icon>insert_chart</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{ $t("menu.reports") }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
           <v-list-item v-if="token != null" to="/profile" link ripple>
             <v-list-item-action>
               <v-icon>perm_identity</v-icon>
@@ -85,7 +93,15 @@
               <v-icon>assignment</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Invoice</v-list-item-title>
+              <v-list-item-title>{{ $t("menu.invoice") }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item v-if="token != null && rol == 'OP'" to="/payments" link ripple>
+            <v-list-item-action>
+              <v-icon>payment</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{ $t("menu.payments") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
@@ -149,6 +165,9 @@
         </v-btn>
         <v-btn class="mx-0" large icon @click="changeLang('pt_BR')">
           <country-flag country='br' size='normal'/>
+        </v-btn>
+        <v-btn class="mx-2" icon to="/about" link>
+          <v-icon>info</v-icon>
         </v-btn>
       </v-app-bar>
 
