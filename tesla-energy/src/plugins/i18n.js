@@ -128,6 +128,11 @@ const messages = {
       totalConsumed: 'Consumption (KWh)',
       amount: 'Amount to be paid',
       save: 'Pay'
+    },
+    assets: {
+      substation: 'Substation:',
+      transformer: 'Transformer:',
+      electricMeter: 'Electric Meter:'
     }
   },
   es_ES: {
@@ -253,6 +258,11 @@ const messages = {
       totalConsumed: 'Consumo (KWh)',
       amount: 'Monto a pagar',
       save: 'Pagar'
+    },
+    assets: {
+      substation: 'Substación:',
+      transformer: 'Transformador:',
+      electricMeter: 'Medidor Eléctrico:'
     }
   },
   pt_BR: {
@@ -378,6 +388,11 @@ const messages = {
       totalConsumed: 'Consumo (KWh)',
       amount: 'Valor à Pagar',
       save: 'Pagar'
+    },
+    assets: {
+      substation: 'Subestação:',
+      transformer: 'Transformador:',
+      electricMeter: 'Medidor Elétrico:'
     }
   }
 }

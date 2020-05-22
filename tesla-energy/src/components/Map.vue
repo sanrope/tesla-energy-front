@@ -6,7 +6,7 @@
           <v-card max-width="280">
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title class="caption font-weight-black">Substation:</v-list-item-title>
+                <v-list-item-title class="caption font-weight-black">{{ $t("assets.substation") }}</v-list-item-title>
               </v-list-item-content>
               <v-list-item-avatar tile size="45">
                 <v-img :src="require('@/assets/substation.png')"></v-img>
@@ -16,7 +16,7 @@
           <v-card max-width="280">
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title class="caption font-weight-black">Transformer:</v-list-item-title>
+                <v-list-item-title class="caption font-weight-black">{{ $t("assets.transformer") }}</v-list-item-title>
               </v-list-item-content>
               <v-list-item-avatar tile size="45">
                 <v-img :src="require('@/assets/tranformer.png')"></v-img>
@@ -26,7 +26,7 @@
           <v-card max-width="280">
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title class="caption font-weight-black">Electric Meter:</v-list-item-title>
+                <v-list-item-title class="caption font-weight-black">{{ $t("assets.electricMeter") }}</v-list-item-title>
               </v-list-item-content>
               <v-list-item-avatar tile size="45">
                 <v-img :src="require('@/assets/meter.png')"></v-img>

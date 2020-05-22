@@ -1,6 +1,15 @@
 <template>
   <v-container>
 
+    <v-row justify="center">
+      <v-col cols="4">
+        <ReportDonut></ReportDonut>
+      </v-col>
+      <v-col cols="4">
+        <ReportBar></ReportBar>
+      </v-col>
+    </v-row>
+
     <v-row>
       <v-col>
         <v-btn @click="downloadUserReport">Download Users Report as PDF</v-btn>
@@ -55,15 +64,6 @@
             :search="search"
           ></v-data-table>
         </v-card>
-      </v-col>
-    </v-row>
-
-    <v-row justify="center">
-      <v-col cols="4">
-        <ReportDonut></ReportDonut>
-      </v-col>
-      <v-col cols="4">
-        <ReportBar></ReportBar>
       </v-col>
     </v-row>
 
@@ -216,7 +216,7 @@ export default {
       }
 
       autoTable(pdf, { head: tableHead, body: tableBody })
-      pdf.save('random_report.pdf')
+      pdf.save('client_report.pdf')
     }
   },
   computed: {
