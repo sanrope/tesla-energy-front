@@ -6,8 +6,8 @@ import jwtDecode from 'jwt-decode'
 
 Vue.use(Vuex)
 
-export const API_URL = 'http://34.221.98.21:8000/'
-// export const API_URL = 'http://localhost:8000/'
+// export const API_URL = 'http://34.221.98.21:8000/'
+export const API_URL = 'http://localhost:8000/'
 
 export default new Vuex.Store({
   state: {
@@ -351,7 +351,20 @@ export default new Vuex.Store({
             resolve(res)
           })
           .catch(err => {
-            console.log('register consumo error: ' + err)
+            console.log('register consumo error: ' + err.details)
+            reject(err)
+          })
+      })
+    },
+    createInvoice (context, invoice) {
+      return new Promise((resolve, reject) => {
+        axios.post(API_URL + 'api/v1/consumos/factura/create/', invoice, context.getters.getAuth)
+          .then(res => {
+            console.log('Invoice created')
+            resolve(res)
+          })
+          .catch(err => {
+            console.log('creation invoice error: ' + err)
             reject(err)
           })
       })
