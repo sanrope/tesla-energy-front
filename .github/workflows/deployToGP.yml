@@ -2,7 +2,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - master
+      - dev-santiago
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
